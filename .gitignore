@@ -7,6 +7,14 @@ __pycache__/
 Thumbs.db
 .DS_Store
 
-# 下载的官方原始仓库和可重新生成的处理后数据留在本地
-data/raw/
-data/processed/
+# 数据与权重留在本地，仅保留目录说明
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/README.md
+!data/processed/ocnli/
+data/processed/ocnli/*
+!data/processed/ocnli/README.md
+!data/processed/bert-base-chinese-tokenizer/
+data/processed/bert-base-chinese-tokenizer/*
+!data/processed/bert-base-chinese-tokenizer/README.md
