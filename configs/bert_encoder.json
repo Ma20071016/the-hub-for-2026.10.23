@@ -1,0 +1,9 @@
+{
+  "asset_report": "reports/bert_assets.json",
+  "device": "cuda",
+  "batch_size": 4,
+  "max_length": 64,
+  "seed": 20261006,
+  "cpu_threads": 4,
+  "report_path": "reports/bert_encoder_check.json"
+}

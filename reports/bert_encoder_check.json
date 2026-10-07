@@ -1,0 +1,115 @@
+{
+  "recorded_at": "2026-10-06T21:58:34+08:00",
+  "timezone": "Asia/Shanghai",
+  "status": "passed",
+  "scope": "Shared frozen BERT dual encoding diagnostic only; no optimizer update or stance classifier training",
+  "config": {
+    "asset_report": "reports/bert_assets.json",
+    "device": "cuda",
+    "batch_size": 4,
+    "max_length": 64,
+    "seed": 20261006,
+    "cpu_threads": 4,
+    "report_path": "reports/bert_encoder_check.json"
+  },
+  "assets": {
+    "model_id": "google-bert/bert-base-chinese",
+    "revision": "8f23c25b06e129b6c986331a13d8d025a92cf0ea",
+    "report": "reports/bert_assets.json",
+    "report_sha256": "98d4690a0bced9917d04b1631eafc89f24940c099b527373a2c90cb5023cdd0d"
+  },
+  "environment": {
+    "python": "3.10.21",
+    "torch": "2.7.0+cu128",
+    "transformers": "4.37.2",
+    "torch_cuda_runtime": "12.8",
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true
+  },
+  "sample_ids": [
+    "ocnli:train.3k:16527",
+    "ocnli:train.3k:10804",
+    "ocnli:train.3k:2016",
+    "ocnli:train.3k:12019"
+  ],
+  "branches": {
+    "claim": {
+      "input_shape": [
+        4,
+        16
+      ],
+      "feature_shape": [
+        4,
+        16,
+        768
+      ],
+      "mask_shape": [
+        4,
+        16
+      ],
+      "valid_lengths": [
+        16,
+        13,
+        8,
+        12
+      ],
+      "dtype": "torch.float32",
+      "requires_grad": false
+    },
+    "evidence": {
+      "input_shape": [
+        4,
+        32
+      ],
+      "feature_shape": [
+        4,
+        32,
+        768
+      ],
+      "mask_shape": [
+        4,
+        32
+      ],
+      "valid_lengths": [
+        32,
+        25,
+        18,
+        12
+      ],
+      "dtype": "torch.float32",
+      "requires_grad": false
+    }
+  },
+  "frozen_parameters": 101677056,
+  "trainable_encoder_parameters": 0,
+  "checks": {
+    "asset_hashes": true,
+    "tokenizer_vocabulary_match": true,
+    "parent_train_keeps_bert_eval": true,
+    "repeat_outputs_identical": true,
+    "right_padding_preserves_valid_features": true,
+    "padding_features_zero": true,
+    "downstream_backward_succeeds": true,
+    "bert_gradients_absent": true
+  },
+  "performance": {
+    "first_forward_seconds": 3.354090800999984,
+    "peak_allocated_mib": 454.2880859375,
+    "peak_reserved_mib": 494.0,
+    "note": "Single diagnostic batch, including repeated/padded forwards and probe; excludes desktop VRAM and is not a full training benchmark"
+  },
+  "file_sha256": {
+    "models/bert_encoder.py": "c23dbb3367cca654ef43b8b0f887f23aa86ab2f5c88847dd988eea81bd9ac09c",
+    "scripts/model_data.py": "703a55db062c4fecc9dca4f4c5cec0af1f4ac378930436c02a36ca0638649d53",
+    "scripts/check_bert_encoder.py": "14ae6e62e52818176777fedc3cd93aeda04d65228056908537586c847e7d34d3"
+  },
+  "training_data_sha256": "f356f14c66914982c7099954c0cd4139f44e47e6ee45a26e5ef84f1a878bbc8b",
+  "saved_tokenizer_sha256": {
+    "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "tokenizer.json": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26",
+    "tokenizer_config.json": "214f78f6c5d034a8b405632d301ee3710eb6f075b3f5faf8241a273a13908746",
+    "vocab.txt": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+  }
+}

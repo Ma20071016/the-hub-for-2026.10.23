@@ -1,0 +1,100 @@
+{
+  "recorded_on": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "scope": "Static code review and existing diagnostic records",
+  "stage": "model_implemented_full_classification_unverified",
+  "data_loader_snapshot": "reports/data_loader_snapshot_2026-10-06.json",
+  "preprocessing_report": "reports/ocnli_preprocessing.json",
+  "model": {
+    "description": "Text three-class adaptation of the ESCNet shared-prototype stance module",
+    "reference_repository": "https://github.com/zfr00/ESCNet",
+    "reference_revision": "58523540977b1b532c44b59daf7b824bf35aeb15",
+    "encoder": {
+      "asset_report": "reports/bert_assets.json",
+      "shared": true,
+      "frozen": true,
+      "mode": "eval",
+      "hidden_size": 768,
+      "mask": "bool; True = valid token"
+    },
+    "projection": {
+      "branches": "independent",
+      "input_dim": 768,
+      "output_dim": 384,
+      "bias": true,
+      "activation": null
+    },
+    "stance": {
+      "prototypes": 40,
+      "dim": 384,
+      "heads": 6,
+      "depth": 1,
+      "shared_across_branches": true,
+      "query_context_layer_norm": "shared",
+      "feed_forward_dim": 768,
+      "feed_forward_activation": "ReLU",
+      "dropout": 0.3,
+      "residuals": "Pre-Norm cross-attention and feed-forward",
+      "self_attention": false
+    },
+    "fusion": {
+      "pooling": "mean over prototypes",
+      "shared_projection": "384 -> 40",
+      "bias": false,
+      "concatenated_dim": 80
+    },
+    "classifier": {
+      "dimensions": "80 -> 180 -> 3",
+      "activation": "LeakyReLU(0.01)",
+      "output": "raw logits",
+      "label_to_id": {
+        "supports": 0,
+        "refutes": 1,
+        "insufficient": 2
+      },
+      "loss": "CrossEntropyLoss; full model not yet checked"
+    }
+  },
+  "verification": {
+    "bert_encoder": {
+      "status": "passed",
+      "report": "reports/bert_encoder_check.json"
+    },
+    "projection": {
+      "status": "passed",
+      "recorded_on": "2026-10-07",
+      "evidence": "terminal_record",
+      "scope": "CPU/GPU shape, padding, gradient and frozen-BERT checks"
+    },
+    "stance_pipeline": {
+      "status": "passed_before_fusion_and_cleanup",
+      "recorded_on": "2026-10-07",
+      "evidence": "terminal_record",
+      "script": "scripts/check_stance_pipeline.py",
+      "scope": "BERT -> projection -> stance; diagnostic loss only",
+      "peak_allocated_mib": 431.49,
+      "code_sha256_at_check": {
+        "models/stance_transformer.py": "f8cac7cfd59832ee8631dd7924e2a53a050f6b3913f571048ef1f552ca537ae0",
+        "scripts/check_stance_pipeline.py": "103241cccc47e6178c66967467c9c278e25b1e38698f31f861cbcfc8b97d8a52"
+      }
+    },
+    "current_model_code": {
+      "syntax": "passed",
+      "runtime": "not_rerun_after_cleanup"
+    },
+    "full_classification_cross_entropy_backward": "not_run",
+    "optimizer_updates": 0
+  },
+  "not_implemented": [
+    "training_loop",
+    "checkpoint_save_restore",
+    "independent_inference"
+  ],
+  "code_sha256": {
+    "models/bert_encoder.py": "c23dbb3367cca654ef43b8b0f887f23aa86ab2f5c88847dd988eea81bd9ac09c",
+    "models/text_projection.py": "5b5e1cbadce1b1d3562a9493b239c09b2afc19e6559e8ab93859cb73eeb8120d",
+    "models/stance_transformer.py": "298a552f757c028daebf4af31ee9bdefdbe3bf58274d06d3661e6573554e91d4",
+    "models/text_verifier.py": "abe25f5ca0ae4f98f439d735765b6efb00c8ea67a1bc1e41a83df64833368c71",
+    "scripts/model_data.py": "703a55db062c4fecc9dca4f4c5cec0af1f4ac378930436c02a36ca0638649d53"
+  }
+}

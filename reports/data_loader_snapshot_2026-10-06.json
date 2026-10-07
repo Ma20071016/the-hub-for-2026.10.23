@@ -1,0 +1,157 @@
+{
+  "recorded_on": "2026-10-06",
+  "timezone": "Asia/Shanghai",
+  "record_scope": "historical",
+  "documentation_updated_on": "2026-10-07",
+  "stage": "data_loader_ready_model_not_implemented",
+  "purpose": "Historical settings; not read by model_data.py",
+  "environment": {
+    "runtime": "WSL Ubuntu / Conda escnet",
+    "python": "3.10.21",
+    "python_executable": "/home/egene-deng/miniconda3/envs/escnet/bin/python",
+    "packages": {
+      "torch": "2.7.0+cu128",
+      "transformers": "4.37.2",
+      "tokenizers": "0.15.2",
+      "huggingface-hub": "0.36.2",
+      "safetensors": "0.8.0"
+    },
+    "torch_cuda_runtime": "12.8",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "gpu_tensor_forward_test": "not performed in this record"
+  },
+  "data": {
+    "source": {
+      "repository": "https://github.com/CLUEbenchmark/OCNLI",
+      "revision": "b53efdee17257a5c33993cf6fcf8ffff0497ea0e",
+      "paper": "https://arxiv.org/abs/2010.05444",
+      "license": "CC BY-NC 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+      "locator_scope": "Official dataset row, not an original historical source citation"
+    },
+    "splits": {
+      "train": {
+        "path": "data/processed/ocnli/train.jsonl",
+        "count": 2993,
+        "groups": 2129,
+        "label_counts": {
+          "supports": 974,
+          "refutes": 966,
+          "insufficient": 1053
+        },
+        "sha256": "f356f14c66914982c7099954c0cd4139f44e47e6ee45a26e5ef84f1a878bbc8b"
+      },
+      "validation": {
+        "path": "data/processed/ocnli/validation.jsonl",
+        "count": 2950,
+        "groups": 2165,
+        "label_counts": {
+          "supports": 947,
+          "refutes": 900,
+          "insufficient": 1103
+        },
+        "sha256": "6a8f84d9d32a35b280f717d8aa6353c4e79ec96e633bf4fd98965a5f4ab52ffe"
+      }
+    },
+    "preprocessing_report": {
+      "path": "reports/ocnli_preprocessing.json",
+      "sha256": "5cb98cdcc4210f810c85f8534ee4d00bae8956860c98ea085efed0f1a67dc92d"
+    },
+    "test_used": false
+  },
+  "tokenizer": {
+    "repository": "google-bert/bert-base-chinese",
+    "revision": "8f23c25b06e129b6c986331a13d8d025a92cf0ea",
+    "path": "data/processed/bert-base-chinese-tokenizer",
+    "class": "BertTokenizerFast",
+    "is_fast": true,
+    "vocab_size": 21128,
+    "model_max_length": 512,
+    "local_files_only": true,
+    "vocabulary_matches_source_snapshot": true,
+    "source_snapshot_file_sha256": {
+      "config.json": "88af762cfb15fa9ce183c84dcbfdc9d635196ba635dfe81f265fdd21d67f4c4c",
+      "tokenizer.json": "55c5edcfb8936895e019b2d8f97dcb547734f25b29f95009155f4c8c15649aae",
+      "tokenizer_config.json": "0f6d13e6f4da6f9e24f22ada6bc3be571123d858d7c0c05a8a7cd55a9c23c2e8",
+      "vocab.txt": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+    },
+    "saved_file_sha256": {
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26",
+      "tokenizer_config.json": "214f78f6c5d034a8b405632d301ee3710eb6f075b3f5faf8241a273a13908746",
+      "vocab.txt": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+    }
+  },
+  "data_loader": {
+    "batch_size": 4,
+    "max_length": 64,
+    "seed": 20261006,
+    "label_to_id": {
+      "supports": 0,
+      "refutes": 1,
+      "insufficient": 2
+    },
+    "label_dtype": "torch.long (torch.int64)",
+    "padding": "dynamic per batch, independently for claim and evidence",
+    "truncation": true,
+    "return_tensors": "pt",
+    "train_shuffle": true,
+    "validation_shuffle": false,
+    "drop_last": false,
+    "num_workers": 0,
+    "seed_scope": "Independent DataLoader torch.Generator only; no global model/training seed or deterministic settings yet",
+    "batch_fields": [
+      "claim_inputs",
+      "evidence_inputs",
+      "labels",
+      "ids"
+    ],
+    "encoder_input_fields": [
+      "input_ids",
+      "attention_mask",
+      "token_type_ids"
+    ]
+  },
+  "code": {
+    "git_head": "451977f67e355a6d4f986d5282c5dd61c273e1e4",
+    "worktree_changes_are_uncommitted": true,
+    "files_sha256": {
+      "scripts/model_data.py": "703a55db062c4fecc9dca4f4c5cec0af1f4ac378930436c02a36ca0638649d53",
+      "scripts/prepare_ocnli.py": "638404d0ce973fc3dbb971ebc52cad8235cdef21ef141af1d546a36bdb32a77e"
+    },
+    "note": "Uncommitted implementation identified by file hashes"
+  },
+  "not_yet_implemented": [
+    "model body",
+    "training loop",
+    "checkpoint save and restore",
+    "independent inference"
+  ],
+  "completed_checks": {
+    "origin": "Terminal output: tokenizer length scan and scripts/model_data.py",
+    "max_tokens_including_special_tokens": {
+      "train": {
+        "claim": 52,
+        "evidence": 52
+      },
+      "validation": {
+        "claim": 57,
+        "evidence": 52
+      }
+    },
+    "samples_exceeding_64": 0,
+    "loader_pass": {
+      "train": {
+        "samples": 2993,
+        "batches": 749,
+        "last_batch_size": 1
+      },
+      "validation": {
+        "samples": 2950,
+        "batches": 738,
+        "last_batch_size": 2
+      }
+    }
+  }
+}

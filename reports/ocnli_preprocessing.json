@@ -1,0 +1,365 @@
+{
+  "format_version": 1,
+  "source": {
+    "repository": "https://github.com/CLUEbenchmark/OCNLI",
+    "revision": "b53efdee17257a5c33993cf6fcf8ffff0497ea0e",
+    "paper": "https://arxiv.org/abs/2010.05444",
+    "license": "CC BY-NC 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+    "locator_scope": "Official dataset row, not an original historical source citation"
+  },
+  "inputs": {
+    "train": {
+      "file": "data/ocnli/train.3k.json",
+      "sha256": "b6911d293ad88b4c053c5f847b6643c79de72bdf42f9061c5f61f43f8a79dca6",
+      "raw_count": 3000,
+      "valid_count": 2994,
+      "excluded_count": 6,
+      "excluded": [
+        {
+          "id": 11446,
+          "line": 1297,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 11609,
+          "line": 1890,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 23954,
+          "line": 1904,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 23955,
+          "line": 2187,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 10797,
+          "line": 2477,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 11510,
+          "line": 2969,
+          "reason": "no_consensus"
+        }
+      ]
+    },
+    "validation": {
+      "file": "data/ocnli/dev.json",
+      "sha256": "001ded235d73a18dac68a45a38cd5f9b3f9311fa4246df623e199422c073ddc5",
+      "raw_count": 3000,
+      "valid_count": 2950,
+      "excluded_count": 50,
+      "excluded": [
+        {
+          "id": 65,
+          "line": 66,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 251,
+          "line": 252,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 334,
+          "line": 335,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 453,
+          "line": 454,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 460,
+          "line": 461,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 525,
+          "line": 526,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 596,
+          "line": 597,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 599,
+          "line": 600,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 607,
+          "line": 608,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 732,
+          "line": 733,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 752,
+          "line": 753,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 757,
+          "line": 758,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 775,
+          "line": 776,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 807,
+          "line": 808,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 819,
+          "line": 820,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 830,
+          "line": 831,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 868,
+          "line": 869,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1006,
+          "line": 1007,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1168,
+          "line": 1169,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1169,
+          "line": 1170,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1187,
+          "line": 1188,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1387,
+          "line": 1388,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1509,
+          "line": 1510,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1536,
+          "line": 1537,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1545,
+          "line": 1546,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1546,
+          "line": 1547,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1573,
+          "line": 1574,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1776,
+          "line": 1777,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1919,
+          "line": 1920,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 1937,
+          "line": 1938,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2079,
+          "line": 2080,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2084,
+          "line": 2085,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2092,
+          "line": 2093,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2162,
+          "line": 2163,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2188,
+          "line": 2189,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2212,
+          "line": 2213,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2221,
+          "line": 2222,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2293,
+          "line": 2294,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2375,
+          "line": 2376,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2395,
+          "line": 2396,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2433,
+          "line": 2434,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2468,
+          "line": 2469,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2568,
+          "line": 2569,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2609,
+          "line": 2610,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2772,
+          "line": 2773,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2829,
+          "line": 2830,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2934,
+          "line": 2935,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2961,
+          "line": 2962,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2963,
+          "line": 2964,
+          "reason": "no_consensus"
+        },
+        {
+          "id": 2995,
+          "line": 2996,
+          "reason": "no_consensus"
+        }
+      ]
+    }
+  },
+  "label_map": {
+    "entailment": "supports",
+    "contradiction": "refutes",
+    "neutral": "insufficient"
+  },
+  "label_to_id_for_future_training": {
+    "supports": 0,
+    "refutes": 1,
+    "insufficient": 2
+  },
+  "grouping": "Connected components of shared nonempty prem_id OR NFKC/whitespace-normalized premise; retain official dev and exclude connected train groups",
+  "raw_id_overlap_before_namespacing": 310,
+  "excluded_train_overlap": [
+    {
+      "id": 39129,
+      "prem_id": "tv_257",
+      "group_id": "ocnli:group:prem:tv_257",
+      "file": "data/ocnli/train.3k.json",
+      "line": 1533,
+      "reason": "group_shared_with_validation"
+    }
+  ],
+  "outputs": {
+    "train": {
+      "path": "data/processed/ocnli/train.jsonl",
+      "count": 2993,
+      "groups": 2129,
+      "label_counts": {
+        "supports": 974,
+        "refutes": 966,
+        "insufficient": 1053
+      },
+      "sha256": "f356f14c66914982c7099954c0cd4139f44e47e6ee45a26e5ef84f1a878bbc8b"
+    },
+    "validation": {
+      "path": "data/processed/ocnli/validation.jsonl",
+      "count": 2950,
+      "groups": 2165,
+      "label_counts": {
+        "supports": 947,
+        "refutes": 900,
+        "insufficient": 1103
+      },
+      "sha256": "6a8f84d9d32a35b280f717d8aa6353c4e79ec96e633bf4fd98965a5f4ab52ffe"
+    }
+  },
+  "validation": {
+    "unique_ids": true,
+    "seven_field_schema": true,
+    "cross_split_group_overlap": 0,
+    "cross_split_evidence_overlap": 0
+  },
+  "script_sha256": "638404d0ce973fc3dbb971ebc52cad8235cdef21ef141af1d546a36bdb32a77e",
+  "scope": "OCNLI train.3k development data; test.json unused; not costume-domain validation or an official test score"
+}

@@ -6,3 +6,7 @@ __pycache__/
 .venv/
 Thumbs.db
 .DS_Store
+
+# 下载的官方原始仓库和可重新生成的处理后数据留在本地
+data/raw/
+data/processed/
