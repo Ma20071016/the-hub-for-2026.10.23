@@ -21,7 +21,7 @@ from torch.nn import functional as F
 
 from models.bert_encoder import FrozenBertDualEncoder
 from scripts.download_bert import sha256_file
-from scripts.model_data import build_loaders
+from scripts.model_data import DATA_DIR, build_loaders
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
@@ -68,9 +68,9 @@ def run_check(config: dict) -> dict:
     source_tokenizer = transformers.AutoTokenizer.from_pretrained(str(snapshot), local_files_only=True)
     require(tokenizer.get_vocab() == source_tokenizer.get_vocab(), "Tokenizer vocabulary differs from BERT")
 
+    encoder = FrozenBertDualEncoder.from_pretrained(snapshot).to(device)
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(device)
-    encoder = FrozenBertDualEncoder.from_pretrained(snapshot).to(device)
     encoder.train()  # The future parent classifier will call train() too.
     claim = move_inputs(batch["claim_inputs"], device)
     evidence = move_inputs(batch["evidence_inputs"], device)
@@ -149,10 +149,11 @@ def run_check(config: dict) -> dict:
             "first_forward_seconds": forward_seconds,
             "peak_allocated_mib": torch.cuda.max_memory_allocated(device) / 2**20 if device.type == "cuda" else None,
             "peak_reserved_mib": torch.cuda.max_memory_reserved(device) / 2**20 if device.type == "cuda" else None,
-            "note": "Single diagnostic batch, including repeated/padded forwards and probe; excludes desktop VRAM and is not a full training benchmark",
+            "note": "Reset after encoder.to(device); includes resident encoder, repeated/padded forwards and probe; excludes loading peaks and desktop VRAM",
         },
         "file_sha256": {name: sha256_file(PROJECT_DIR / name) for name in code_paths},
-        "training_data_sha256": sha256_file(PROJECT_DIR / "data/processed/ocnli/train.jsonl"),
+        "training_data_path": (DATA_DIR / "train.jsonl").relative_to(PROJECT_DIR).as_posix(),
+        "training_data_sha256": sha256_file(DATA_DIR / "train.jsonl"),
         "saved_tokenizer_sha256": {
             p.name: sha256_file(p)
             for p in sorted((PROJECT_DIR / "data/processed/bert-base-chinese-tokenizer").iterdir()) if p.is_file()

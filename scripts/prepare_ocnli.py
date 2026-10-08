@@ -8,8 +8,9 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 RAW_REPO = PROJECT_DIR / "data/raw/ocnli"
 DATA_DIR = RAW_REPO / "data/ocnli"
-OUTPUT_DIR = PROJECT_DIR / "data/processed/ocnli"
-REPORT_PATH = PROJECT_DIR / "reports/ocnli_preprocessing.json"
+TRAIN_FILE = "train.50k.json"
+OUTPUT_DIR = PROJECT_DIR / "data/processed/ocnli_50k"
+REPORT_PATH = PROJECT_DIR / "reports/ocnli_50k_preprocessing.json"
 SOURCE_URL = "https://github.com/CLUEbenchmark/OCNLI"
 
 LABEL_MAP = {
@@ -189,9 +190,9 @@ def main():
     ).strip()
     subprocess.run(
         ["git", "-C", str(RAW_REPO), "diff", "--exit-code", "HEAD", "--",
-         "data/ocnli/train.3k.json", "data/ocnli/dev.json"], check=True
+         f"data/ocnli/{TRAIN_FILE}", "data/ocnli/dev.json"], check=True
     )
-    train, train_stats = load_valid_rows(DATA_DIR / "train.3k.json")
+    train, train_stats = load_valid_rows(DATA_DIR / TRAIN_FILE)
     dev, dev_stats = load_valid_rows(DATA_DIR / "dev.json")
     shared_raw_ids = len({r["id"] for r in train} & {r["id"] for r in dev})
     clean_train, removed = isolate_train(train, dev)
@@ -235,7 +236,7 @@ def main():
         "validation": {"unique_ids": True, "seven_field_schema": True,
                        "cross_split_group_overlap": 0, "cross_split_evidence_overlap": 0},
         "script_sha256": sha256(Path(__file__)),
-        "scope": "OCNLI train.3k development data; test.json unused; not costume-domain validation or an official test score",
+        "scope": f"OCNLI {Path(TRAIN_FILE).stem} development data; test.json unused; not costume-domain validation or an official test score",
     }
     write_json(REPORT_PATH, report)
     print(f"训练原始 {train_stats['raw_count']} 条，过滤无效 {train_stats['excluded_count']} 条，排除重合 {len(removed)} 条")

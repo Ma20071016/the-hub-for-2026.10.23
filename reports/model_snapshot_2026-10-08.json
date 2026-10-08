@@ -1,0 +1,179 @@
+{
+  "recorded_on": "2026-10-08",
+  "timezone": "Asia/Shanghai",
+  "record_scope": "Current code and completed training records; no new training run.",
+  "stage": "ocnli_3k_and_50k_training_completed",
+  "model": {
+    "description": "Text three-class adaptation of the ESCNet shared-prototype stance module",
+    "reference_repository": "https://github.com/zfr00/ESCNet",
+    "reference_revision": "58523540977b1b532c44b59daf7b824bf35aeb15",
+    "encoder": {
+      "asset_report": "reports/bert_assets.json",
+      "shared": true,
+      "frozen": true,
+      "mode": "eval",
+      "hidden_size": 768,
+      "mask": "bool; True = valid token"
+    },
+    "projection": {
+      "branches": "independent",
+      "input_dim": 768,
+      "output_dim": 384,
+      "bias": true,
+      "activation": null
+    },
+    "stance": {
+      "prototypes": 40,
+      "dim": 384,
+      "heads": 6,
+      "depth": 1,
+      "shared_across_branches": true,
+      "query_context_layer_norm": "shared",
+      "feed_forward_dim": 768,
+      "feed_forward_activation": "ReLU",
+      "dropout": 0.3,
+      "residuals": "Pre-Norm cross-attention and feed-forward",
+      "self_attention": false
+    },
+    "fusion": {
+      "pooling": "mean over prototypes",
+      "shared_projection": "384 -> 40",
+      "bias": false,
+      "concatenated_dim": 80
+    },
+    "classifier": {
+      "dimensions": "80 -> 180 -> 3",
+      "activation": "LeakyReLU(0.01)",
+      "output": "raw logits",
+      "label_to_id": {
+        "supports": 0,
+        "refutes": 1,
+        "insufficient": 2
+      },
+      "loss": "CrossEntropyLoss"
+    },
+    "trainable_parameters": 1819155
+  },
+  "current_data": {
+    "directory": "data/processed/ocnli_50k",
+    "source_file": "train.50k.json",
+    "preprocessing_report": "reports/ocnli_50k_preprocessing.json",
+    "splits": {
+      "train": {
+        "path": "data/processed/ocnli_50k/train.jsonl",
+        "count": 37072,
+        "groups": 5792,
+        "label_counts": {
+          "supports": 12337,
+          "refutes": 12096,
+          "insufficient": 12639
+        },
+        "sha256": "05eda39bc579ec659ab78b6308414f1dca99cf8a49a094dc5eec0f0c35bb4fe6"
+      },
+      "validation": {
+        "path": "data/processed/ocnli_50k/validation.jsonl",
+        "count": 2950,
+        "groups": 2165,
+        "label_counts": {
+          "supports": 947,
+          "refutes": 900,
+          "insufficient": 1103
+        },
+        "sha256": "8d74365899a834fb9ddb2c95826f0da46abdaafe2ed46656bb2b1c9c36266a05"
+      }
+    },
+    "max_length": 64,
+    "token_length_scope": "The no-truncation scan in the 2026-10-06 snapshot applies to 3k only; 50k length distribution has not been audited."
+  },
+  "training_report": "reports/training_results_2026-10-07.json",
+  "completed_experiments": [
+    {
+      "completed_epochs": 6,
+      "global_steps": 1128,
+      "best_epoch": 3,
+      "status": "completed",
+      "stop_reason": "early_stopping",
+      "restore_check": {
+        "passed": true,
+        "exact_logits_match": true,
+        "best_epoch": 3
+      },
+      "run_id": "ocnli_3k_20261007_01",
+      "train_samples": 2993,
+      "best_validation_macro_f1": 0.5296060379218358
+    },
+    {
+      "completed_epochs": 9,
+      "global_steps": 20853,
+      "best_epoch": 6,
+      "status": "completed",
+      "stop_reason": "early_stopping",
+      "restore_check": {
+        "passed": true,
+        "exact_logits_match": true,
+        "best_epoch": 6
+      },
+      "run_id": "ocnli_50k_20261007_01",
+      "train_samples": 37072,
+      "best_validation_macro_f1": 0.6494628714885523
+    }
+  ],
+  "verification": {
+    "recorded_on": "2026-10-08",
+    "python_syntax": "passed",
+    "cpu_encoder_unit_tests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "cpu_real_batch_encoder_diagnostic": {
+      "status": "passed",
+      "training_data_path": "data/processed/ocnli_50k/train.jsonl",
+      "training_data_sha256": "05eda39bc579ec659ab78b6308414f1dca99cf8a49a094dc5eec0f0c35bb4fe6",
+      "historical_report_overwritten": false
+    },
+    "model_and_training_entry_hashes_match_both_runs": true,
+    "original_50k_source_files_match_pinned_revision_and_report_hashes": true,
+    "processed_data_hashes_match_both_run_records": true,
+    "training_best_checkpoint_reload": "Both completed runs report exact fixed-batch logits match; not rerun during documentation refresh.",
+    "historical_gpu_diagnostics": "reports/model_snapshot_2026-10-07.json",
+    "cuda_stats_fix": "Encoder diagnostic resets counters after encoder.to(device); GPU path not rerun in this refresh."
+  },
+  "changes_after_training": [
+    "Use one TRAIN_FILE constant for preprocessing input validation, loading and scope metadata.",
+    "Correct 50k preprocessing scope metadata while retaining original measurements and script hash.",
+    "Record the active DataLoader data path/hash in encoder diagnostics; reset CUDA statistics after moving the encoder to the device."
+  ],
+  "not_implemented": [
+    "entity_extraction_and_linking",
+    "knowledge_graph_entity_pair_comparison",
+    "external_evidence_retrieval",
+    "resume_training_cli",
+    "independent_inference_cli"
+  ],
+  "limitations": [
+    "Text branch adaptation rather than full multimodal ESCNet.",
+    "OCNLI validation only; no costume-domain evaluation or official test score.",
+    "Two single-seed experiments; no multi-seed uncertainty estimate."
+  ],
+  "code_sha256": {
+    "models/__init__.py": "ad4b57f701bd057ba1740313a63e6378dcb1e720f2f4304c24cdcfdff82e8580",
+    "models/bert_encoder.py": "c23dbb3367cca654ef43b8b0f887f23aa86ab2f5c88847dd988eea81bd9ac09c",
+    "models/stance_transformer.py": "298a552f757c028daebf4af31ee9bdefdbe3bf58274d06d3661e6573554e91d4",
+    "models/text_projection.py": "5b5e1cbadce1b1d3562a9493b239c09b2afc19e6559e8ab93859cb73eeb8120d",
+    "models/text_verifier.py": "abe25f5ca0ae4f98f439d735765b6efb00c8ea67a1bc1e41a83df64833368c71",
+    "scripts/check_bert_encoder.py": "1298f4882294b80b02b7a9093f62c6dc8170dcc09feec6d2588eb15ba2a0c1f6",
+    "scripts/check_stance_pipeline.py": "c6161f0c2b77304aaaa14e777510c97e425f08b75dd950741c738f26d7a6d0c1",
+    "scripts/download_bert.py": "3a3bf7bed1fe09eca720cfe5d9dd6c30b34999a60c39f25843df27dca24be54c",
+    "scripts/model_data.py": "7aa3b2530444f1e6af6c916a70296b5d24edc9975a4026f215bbf964e239400b",
+    "scripts/prepare_ocnli.py": "9497879e5332a7b3de4a1da23fcc822e268f5fa3b120c4587497bc61182ee259",
+    "scripts/train.py": "a8709b6374b16d7d021e022da82f06aa2e2fb8f913d1bef95e56e1e563918284"
+  },
+  "hash_scope": "SHA-256 of local file bytes, including line endings; run-time source hashes retained separately in the training report.",
+  "report_sha256": {
+    "reports/training_results_2026-10-07.json": "c26105162c4c6de9a570fe175ce3bb90809687072ed50b40fe863797c4d275f2",
+    "reports/ocnli_preprocessing.json": "5cb98cdcc4210f810c85f8534ee4d00bae8956860c98ea085efed0f1a67dc92d",
+    "reports/ocnli_50k_preprocessing.json": "21ad95bc2907b3ed6d519cc46deb55e3799e7833ac361860646989ec5fef2053",
+    "reports/bert_assets.json": "98d4690a0bced9917d04b1631eafc89f24940c099b527373a2c90cb5023cdd0d",
+    "reports/bert_encoder_check.json": "a7fc9044da605ea3b8d92b34419d80fc0699cb5fe66448815c3702f55e7c932f"
+  }
+}

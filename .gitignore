@@ -15,6 +15,13 @@ data/processed/*
 !data/processed/ocnli/
 data/processed/ocnli/*
 !data/processed/ocnli/README.md
+!data/processed/ocnli_50k/
+data/processed/ocnli_50k/*
+!data/processed/ocnli_50k/README.md
 !data/processed/bert-base-chinese-tokenizer/
 data/processed/bert-base-chinese-tokenizer/*
 !data/processed/bert-base-chinese-tokenizer/README.md
+
+# 每次训练的权重、优化器状态与 TensorBoard 日志留在本地
+runs/*
+!runs/README.md

@@ -1,8 +1,8 @@
 {
   "recorded_on": "2026-10-07",
   "timezone": "Asia/Shanghai",
-  "scope": "Static code review and existing diagnostic records",
-  "stage": "model_implemented_full_classification_unverified",
+  "scope": "Code review and recorded single-batch GPU diagnostics",
+  "stage": "full_model_single_batch_forward_backward_passed",
   "data_loader_snapshot": "reports/data_loader_snapshot_2026-10-06.json",
   "preprocessing_report": "reports/ocnli_preprocessing.json",
   "model": {
@@ -52,7 +52,7 @@
         "refutes": 1,
         "insufficient": 2
       },
-      "loss": "CrossEntropyLoss; full model not yet checked"
+      "loss": "CrossEntropyLoss"
     }
   },
   "verification": {
@@ -80,14 +80,69 @@
     },
     "current_model_code": {
       "syntax": "passed",
-      "runtime": "not_rerun_after_cleanup"
+      "runtime": "full_model_single_batch_gpu_passed"
     },
-    "full_classification_cross_entropy_backward": "not_run",
-    "optimizer_updates": 0
+    "full_classification_cross_entropy_backward": {
+      "status": "passed",
+      "recorded_on": "2026-10-07",
+      "evidence": "terminal_screenshot",
+      "script": "scripts/check_stance_pipeline.py",
+      "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "batch_size": 4,
+      "max_length": 64,
+      "seed": 20261006,
+      "sample_ids": [
+        "ocnli:train.3k:16527",
+        "ocnli:train.3k:10804",
+        "ocnli:train.3k:2016",
+        "ocnli:train.3k:12019"
+      ],
+      "labels": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "fusion_shape": [
+        4,
+        80
+      ],
+      "logits_shape": [
+        4,
+        3
+      ],
+      "cross_entropy": 1.075862,
+      "checks": {
+        "trainable_modules_have_finite_gradients": true,
+        "each_trainable_module_has_nonzero_total_gradient": true,
+        "shared_prototypes_have_nonzero_gradient": true,
+        "bert_frozen_without_gradients_and_in_eval": true
+      },
+      "peak_allocated_mib": 431.07,
+      "memory_scope": "Reset after model.to(device); includes resident model and subsequent batch computation, excludes loading peaks",
+      "scope": "Single-batch diagnostic; no optimizer step or classification evaluation"
+    },
+    "optimizer_updates": 0,
+    "training_entry": {
+      "status": "cpu_checks_passed_training_not_started",
+      "script": "scripts/train.py",
+      "tensorboard_version": "2.21.0",
+      "checks": [
+        "sample_weighted_metrics",
+        "fixed_three_class_macro_f1",
+        "weights_only_checkpoint_round_trip",
+        "head_parameter_restore",
+        "tensorboard_event_round_trip"
+      ],
+      "short_gpu_benchmark": {
+        "batch_size": 16,
+        "estimated_epoch_seconds": 38.85,
+        "parameters_discarded": true
+      }
+    }
   },
   "not_implemented": [
-    "training_loop",
-    "checkpoint_save_restore",
+    "resume_training_cli",
     "independent_inference"
   ],
   "code_sha256": {
@@ -95,6 +150,11 @@
     "models/text_projection.py": "5b5e1cbadce1b1d3562a9493b239c09b2afc19e6559e8ab93859cb73eeb8120d",
     "models/stance_transformer.py": "298a552f757c028daebf4af31ee9bdefdbe3bf58274d06d3661e6573554e91d4",
     "models/text_verifier.py": "abe25f5ca0ae4f98f439d735765b6efb00c8ea67a1bc1e41a83df64833368c71",
-    "scripts/model_data.py": "703a55db062c4fecc9dca4f4c5cec0af1f4ac378930436c02a36ca0638649d53"
-  }
+    "scripts/model_data.py": "703a55db062c4fecc9dca4f4c5cec0af1f4ac378930436c02a36ca0638649d53",
+    "scripts/check_stance_pipeline.py": "c6161f0c2b77304aaaa14e777510c97e425f08b75dd950741c738f26d7a6d0c1",
+    "scripts/train.py": "a8709b6374b16d7d021e022da82f06aa2e2fb8f913d1bef95e56e1e563918284"
+  },
+  "record_scope": "historical_before_training",
+  "documentation_updated_on": "2026-10-08",
+  "superseded_by": "reports/model_snapshot_2026-10-08.json"
 }

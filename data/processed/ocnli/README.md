@@ -1,6 +1,6 @@
-# ocnli：三分类训练与验证数据
+# ocnli：3k 实验数据
 
-保存 `scripts/prepare_ocnli.py` 生成的 UTF-8 JSONL。
+保留首次预处理生成的 UTF-8 JSONL，对应已完成的 `ocnli_3k_20261007_01` 实验；当前加载器使用相邻的 `ocnli_50k/`。
 
 - `train.jsonl`：2,993 条训练样本。
 - `validation.jsonl`：2,950 条验证样本。

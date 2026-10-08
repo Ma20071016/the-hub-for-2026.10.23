@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_DIR / "data/processed/ocnli"
+DATA_DIR = PROJECT_DIR / "data/processed/ocnli_50k"
 TOKENIZER_DIR = PROJECT_DIR / "data/processed/bert-base-chinese-tokenizer"
 
 LABEL_TO_ID = {"supports": 0, "refutes": 1, "insufficient": 2}
