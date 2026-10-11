@@ -4,4 +4,5 @@
 
 - [data_preparation.md](data_preparation.md)：OCNLI 3k/50k 来源、清洗与划分、字段标签、当前加载路径。
 - [bert_encoder.md](bert_encoder.md)：冻结 BERT 双路编码接口、mask 约定、诊断命令与已有结果。
-- [development_log.md](development_log.md)：模型检查、两次训练结果、验证范围和后续工作。
+- [development_log.md](development_log.md)：模型检查、两次训练结果、2026-10-11 网站/数据库/模型接入进度、验证范围和下次工作。
+- [experiment_log_2026-10-10.md](experiment_log_2026-10-10.md)：服饰原句、单事实及原句复制三轮评估，主要错例与后续排查。

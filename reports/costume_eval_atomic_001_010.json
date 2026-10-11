@@ -1,0 +1,215 @@
+{
+  "checkpoint": "/mnt/d/cmit-2026-costume-verifier/runs/ocnli_50k_20261007_01/best.pt",
+  "max_length": 160,
+  "label_order": [
+    "supports",
+    "refutes",
+    "insufficient"
+  ],
+  "reference_label_status": "AI初拟，尚待人工复核",
+  "metrics": {
+    "count": 20,
+    "loss": 1.1486875295639039,
+    "accuracy": 0.5,
+    "macro_f1": 0.2222222222222222,
+    "per_class": {
+      "supports": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "support": 20
+      },
+      "refutes": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "insufficient": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        10,
+        2,
+        8
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "predictions": [
+    {
+      "id": "costume_identity_001_01",
+      "claim": "此件棉袍质地为棉质色织布。",
+      "evidence": "此件棉袍质地为棉质色织布。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_001_02",
+      "claim": "此件棉袍为对襟。",
+      "evidence": "此件棉袍为对襟。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_002_01",
+      "claim": "维吾尔族花帽又称“朵帕”。",
+      "evidence": "维吾尔族花帽又称“朵帕”。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_002_02",
+      "claim": "维吾尔族花帽常作为馈赠亲友的礼物。",
+      "evidence": "维吾尔族花帽常作为馈赠亲友的礼物。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_003_01",
+      "claim": "此件帽子使用羔羊皮制作。",
+      "evidence": "此件帽子使用羔羊皮制作。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_003_02",
+      "claim": "戴帽具有防寒或防暑的功能。",
+      "evidence": "戴帽具有防寒或防暑的功能。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_004_01",
+      "claim": "此件艾德莱斯绸头巾收集于新疆库尔勒地区。",
+      "evidence": "此件艾德莱斯绸头巾收集于新疆库尔勒地区。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_004_02",
+      "claim": "此件艾德莱斯绸头巾整体色调为红色。",
+      "evidence": "此件艾德莱斯绸头巾整体色调为红色。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_005_01",
+      "claim": "新疆印花布上的龛形纹样一般连续排列。",
+      "evidence": "新疆印花布上的龛形纹样一般连续排列。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_005_02",
+      "claim": "新疆印花布的主体图案包含花卉。",
+      "evidence": "新疆印花布的主体图案包含花卉。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_006_01",
+      "claim": "此件维吾尔族黑羔皮帽高20厘米。",
+      "evidence": "此件维吾尔族黑羔皮帽高20厘米。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_006_02",
+      "claim": "维吾尔族帽子的一大类是花帽。",
+      "evidence": "维吾尔族帽子的一大类是花帽。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_007_01",
+      "claim": "此件维族女靴收购于新疆喀什。",
+      "evidence": "此件维族女靴收购于新疆喀什。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_007_02",
+      "claim": "此件维族女靴为圆头。",
+      "evidence": "此件维族女靴为圆头。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_008_01",
+      "claim": "文中将艾特莱丝裙归为特色民族服饰。",
+      "evidence": "文中将艾特莱丝裙归为特色民族服饰。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_008_02",
+      "claim": "这条艾特莱丝裙质地柔软。",
+      "evidence": "这条艾特莱丝裙质地柔软。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_009_01",
+      "claim": "此件小帽的维吾尔语名称为“太力拜克”。",
+      "evidence": "此件小帽的维吾尔语名称为“太力拜克”。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_identity_009_02",
+      "claim": "文中所述佩戴小帽时使用的围巾为白色。",
+      "evidence": "文中所述佩戴小帽时使用的围巾为白色。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_010_01",
+      "claim": "这件服装为长袖。",
+      "evidence": "这件服装为长袖。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_identity_010_02",
+      "claim": "此件长外衣的前身为古代的一种箭服。",
+      "evidence": "此件长外衣的前身为古代的一种箭服。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    }
+  ]
+}

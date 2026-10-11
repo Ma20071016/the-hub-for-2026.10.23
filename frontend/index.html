@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="输入传统服饰说明，从已审核资料中查找相关证据。" />
+    <title>传统服饰说明核验</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页">
+        <span class="brand-mark" aria-hidden="true">衣</span>
+        <span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span>
+      </a>
+      <span class="version"><span class="status-dot"></span>证据核验版</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">从一段说明，到一份依据</p>
+          <h1 id="page-title">让服饰说明，有据可循。</h1>
+          <p class="intro-copy">输入一条服饰说明，从已审核的资料原文中查找相关证据。</p>
+        </div>
+        <ol class="steps" aria-label="核验流程">
+          <li><span>01</span>输入说明</li>
+          <li><span>02</span>查找资料</li>
+          <li><span>03</span>查看证据</li>
+        </ol>
+      </section>
+
+      <div class="notice"><span aria-hidden="true">i</span><p>模型已接入，结果按证据逐条展示。请结合资料原文判断。</p></div>
+
+      <div class="workspace">
+        <section class="panel input-panel" aria-labelledby="input-title">
+          <div class="panel-heading">
+            <div><p class="eyebrow">01 / 输入</p><h2 id="input-title">开始核验</h2></div>
+            <button id="clear-button" class="text-button" type="button">清空内容</button>
+          </div>
+          <p class="panel-description">请选择对应馆藏资料，每次输入一条需要核验的说明。</p>
+
+          <form id="verify-form">
+            <div class="field">
+              <div class="field-heading"><label for="claim">待核验说明 <span class="required">*</span></label><span id="claim-count" class="counter">0 / 500</span></div>
+              <textarea id="claim" name="claim" rows="4" maxlength="500" required aria-describedby="claim-help" placeholder="例如：新疆喀什维吾尔族绿棉袍采用对襟设计。"></textarea>
+              <p id="claim-help" class="field-help">尽量只描述一个可核实的特征，如领型、材质或年代。</p>
+            </div>
+            <div class="field source-field">
+              <label for="source-select">
+                限定资料 <span class="required">*</span>
+              </label>
+              <select id="source-select" name="source_id"
+                      aria-describedby="source-help" required disabled>
+                <option value="">请选择本次核验的资料</option>
+              </select>
+              <p id="source-help" class="field-help" role="status">正在读取可用资料…</p>
+            </div>
+            <div id="form-error" class="error-message" role="alert" hidden></div>
+            <div class="form-actions">
+              <button id="submit-button" class="primary-button" type="submit"><span>查找证据</span><span aria-hidden="true">→</span></button>
+            </div>
+          </form>
+
+          <details class="demo-details">
+            <summary>结果样式示例（非真实核验）</summary>
+            <p class="field-help">以下是自拟文本和预先设定的结果，仅用于演示结果样式。</p>
+            <div class="example-picker">
+              <div class="example-buttons" role="group" aria-label="预览示例结果">
+                <button type="button" data-example="supports" aria-pressed="false">同义表述</button>
+                <button type="button" data-example="refutes" aria-pressed="false">描述冲突</button>
+                <button type="button" data-example="insufficient" aria-pressed="false">缺少依据</button>
+              </div>
+            </div>
+            <div id="demo-result" aria-live="polite"></div>
+          </details>
+        </section>
+
+        <section class="panel result-panel" aria-labelledby="result-title" aria-busy="false">
+          <div class="panel-heading">
+            <div><p class="eyebrow">02 / 资料</p><h2 id="result-title">核验结果与证据</h2></div>
+            <span id="result-state" class="quiet-badge">等待输入</span>
+          </div>
+          <div id="result-content" aria-live="polite" aria-atomic="true"></div>
+          <div class="result-guide">
+            <h3>如何使用这些证据</h3>
+            <div class="guide-note">先核对资料描述的对象是否与说明一致，再阅读原文。检索可能找到相符或相矛盾的描述；没有找到证据也不代表说明错误。</div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer><span>传统服饰说明核验</span><span>以资料为依据，让文化表达更准确。</span></footer>
+    <noscript><p class="noscript">请启用浏览器 JavaScript 以查找证据。</p></noscript>
+  </body>
+</html>

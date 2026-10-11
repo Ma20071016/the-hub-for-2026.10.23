@@ -1,0 +1,2047 @@
+{
+  "checkpoint": "/mnt/d/cmit-2026-costume-verifier/runs/ocnli_50k_20261007_01/best.pt",
+  "max_length": 160,
+  "label_order": [
+    "supports",
+    "refutes",
+    "insufficient"
+  ],
+  "reference_label_status": "AI初拟，尚待人工复核",
+  "metrics": {
+    "count": 249,
+    "loss": 0.7622798486167647,
+    "accuracy": 0.6746987951807228,
+    "macro_f1": 0.6664893548724363,
+    "per_class": {
+      "supports": {
+        "precision": 0.6862745098039216,
+        "recall": 0.42168674698795183,
+        "f1": 0.5223880597014925,
+        "support": 83
+      },
+      "refutes": {
+        "precision": 0.84,
+        "recall": 0.7590361445783133,
+        "f1": 0.7974683544303797,
+        "support": 83
+      },
+      "insufficient": {
+        "precision": 0.5691056910569106,
+        "recall": 0.8433734939759037,
+        "f1": 0.6796116504854369,
+        "support": 83
+      }
+    },
+    "confusion_matrix": [
+      [
+        35,
+        8,
+        40
+      ],
+      [
+        7,
+        63,
+        13
+      ],
+      [
+        9,
+        4,
+        70
+      ]
+    ]
+  },
+  "predictions": [
+    {
+      "id": "costume_001_01_01",
+      "claim": "制作土棉布使用的是新疆长绒棉。",
+      "evidence": "土棉布是维吾尔族民间一种古老的手工制品，又称大布、大白布或白大布，原料为新疆长绒棉。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_01_02",
+      "claim": "土棉布的原料并非新疆长绒棉。",
+      "evidence": "土棉布是维吾尔族民间一种古老的手工制品，又称大布、大白布或白大布，原料为新疆长绒棉。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_001_01_03",
+      "claim": "土棉布的制作工艺起源于唐代。",
+      "evidence": "土棉布是维吾尔族民间一种古老的手工制品，又称大布、大白布或白大布，原料为新疆长绒棉。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_001_02_01",
+      "claim": "新疆的纬度条件有利于棉花生长。",
+      "evidence": "新疆纬度上的优势，非常适宜棉花的生长，棉花丰产高质。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_001_02_02",
+      "claim": "新疆的纬度条件不适宜棉花生长。",
+      "evidence": "新疆纬度上的优势，非常适宜棉花的生长，棉花丰产高质。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_02_03",
+      "claim": "新疆棉花每年在九月开始采收。",
+      "evidence": "新疆纬度上的优势，非常适宜棉花的生长，棉花丰产高质。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_03_01",
+      "claim": "这件棉袍的面料属于棉质色织布。",
+      "evidence": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_03_02",
+      "claim": "这件棉袍的衣身只有蓝绿色一种颜色。",
+      "evidence": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_03_03",
+      "claim": "这件棉袍衣身的黄色纱线采用植物染料染色。",
+      "evidence": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_04_01",
+      "claim": "这件服装的里子衣襟贴边使用了黄绿色艾德莱斯绸。",
+      "evidence": "衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_04_02",
+      "claim": "这件服装的里子衣襟贴边使用了纯黑色艾德莱斯绸。",
+      "evidence": "衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_001_04_03",
+      "claim": "这件服装衣里的碎花棉布由喀什的一家作坊印制。",
+      "evidence": "衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_05_01",
+      "claim": "这件服装的两侧缝处都开有短衩。",
+      "evidence": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_001_05_02",
+      "claim": "这件服装的门襟处完全没有褶皱。",
+      "evidence": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_05_03",
+      "claim": "这件服装两侧的短衩长五厘米。",
+      "evidence": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_06_01",
+      "claim": "这件服装的底摆带有毛线编结的窄线条装饰。",
+      "evidence": "袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_001_06_02",
+      "claim": "这件服装的门襟没有毛线编结的窄线条装饰。",
+      "evidence": "袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_06_03",
+      "claim": "这件服装袖口的窄线条装饰宽一厘米。",
+      "evidence": "袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_07_01",
+      "claim": "这件维吾尔族棉袍的内里布料使用了传统印花技艺。",
+      "evidence": "此件维吾尔族棉袍内里布料，采用了维吾尔族传统的印花技艺印染。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_07_02",
+      "claim": "这件维吾尔族棉袍的内里布料未经印花处理。",
+      "evidence": "此件维吾尔族棉袍内里布料，采用了维吾尔族传统的印花技艺印染。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_07_03",
+      "claim": "这件维吾尔族棉袍的内里布料经过三次印花。",
+      "evidence": "此件维吾尔族棉袍内里布料，采用了维吾尔族传统的印花技艺印染。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_08_01",
+      "claim": "维吾尔族木戳印花布的印制运用了凸版印花技术。",
+      "evidence": "维吾尔族木戳印花布属于传统印染工艺凸版印花技术，有平板和木滚两种方式，就是在平整光洁的木板或是在木滚上刻好花纹图案，然后在图案凸起的部分涂刷色彩，以压印的方式把花纹印在织物上，或者以滚动的方式连续的印出图案。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_08_02",
+      "claim": "维吾尔族木戳印花只有平板这一种印制方式。",
+      "evidence": "维吾尔族木戳印花布属于传统印染工艺凸版印花技术，有平板和木滚两种方式，就是在平整光洁的木板或是在木滚上刻好花纹图案，然后在图案凸起的部分涂刷色彩，以压印的方式把花纹印在织物上，或者以滚动的方式连续的印出图案。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_08_03",
+      "claim": "维吾尔族木戳印花所用的印版通常由核桃木制作。",
+      "evidence": "维吾尔族木戳印花布属于传统印染工艺凸版印花技术，有平板和木滚两种方式，就是在平整光洁的木板或是在木滚上刻好花纹图案，然后在图案凸起的部分涂刷色彩，以压印的方式把花纹印在织物上，或者以滚动的方式连续的印出图案。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_001_09_01",
+      "claim": "这件棉袍内里的蓝色底布带有植物花卉纹饰。",
+      "evidence": "此件棉袍内里，蓝色底布上印有黄、白、红色植物花卉纹饰，红色印染有错位，浮于表层，虽为技艺上的疏忽，但也呈现出一种独特的视觉效果。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_001_09_02",
+      "claim": "这件棉袍内里的红色印染完全没有错位。",
+      "evidence": "此件棉袍内里，蓝色底布上印有黄、白、红色植物花卉纹饰，红色印染有错位，浮于表层，虽为技艺上的疏忽，但也呈现出一种独特的视觉效果。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_001_09_03",
+      "claim": "这件棉袍内里的植物花卉纹饰描绘的是石榴花。",
+      "evidence": "此件棉袍内里，蓝色底布上印有黄、白、红色植物花卉纹饰，红色印染有错位，浮于表层，虽为技艺上的疏忽，但也呈现出一种独特的视觉效果。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_002_01_01",
+      "claim": "“朵帕”是维吾尔族花帽的另一种名称。",
+      "evidence": "维吾尔族花帽又称“朵帕”，是当地日常佩戴的主要帽饰之一，也常作为馈赠亲友的贵重礼物。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_002_01_02",
+      "claim": "维吾尔族花帽从不作为礼物赠送给亲友。",
+      "evidence": "维吾尔族花帽又称“朵帕”，是当地日常佩戴的主要帽饰之一，也常作为馈赠亲友的贵重礼物。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_002_01_03",
+      "claim": "维吾尔族花帽的价格通常高于皮帽。",
+      "evidence": "维吾尔族花帽又称“朵帕”，是当地日常佩戴的主要帽饰之一，也常作为馈赠亲友的贵重礼物。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_002_02_01",
+      "claim": "文中所述的维族戴帽习俗也包括女性。",
+      "evidence": "按照伊斯兰教礼节，在室外头部不加任何遮盖而对天空是一种亵渎行为，因此维族不论男女老幼均有戴帽习俗。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_002_02_02",
+      "claim": "文中所述的维族戴帽习俗仅限成年男性。",
+      "evidence": "按照伊斯兰教礼节，在室外头部不加任何遮盖而对天空是一种亵渎行为，因此维族不论男女老幼均有戴帽习俗。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_002_02_03",
+      "claim": "文中所述的维族戴帽习俗要求帽子采用白色。",
+      "evidence": "按照伊斯兰教礼节，在室外头部不加任何遮盖而对天空是一种亵渎行为，因此维族不论男女老幼均有戴帽习俗。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_002_03_01",
+      "claim": "这件花帽的图案以米字形作为骨架。",
+      "evidence": "此件花帽以米字为骨架，花枝叶交错，花纹以枝杆连结或线条分隔，成多个正反三角、菱形格局，帽面图案似地毯排列，也称奇曼塔什干朵帕。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_002_03_02",
+      "claim": "这件花帽的花纹格局完全不含菱形。",
+      "evidence": "此件花帽以米字为骨架，花枝叶交错，花纹以枝杆连结或线条分隔，成多个正反三角、菱形格局，帽面图案似地毯排列，也称奇曼塔什干朵帕。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_002_03_03",
+      "claim": "这件花帽图案中共有八个菱形区域。",
+      "evidence": "此件花帽以米字为骨架，花枝叶交错，花纹以枝杆连结或线条分隔，成多个正反三角、菱形格局，帽面图案似地毯排列，也称奇曼塔什干朵帕。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_002_04_01",
+      "claim": "这件花帽的纹样装饰运用了手工平绣。",
+      "evidence": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_002_04_02",
+      "claim": "这件花帽分为六瓣。",
+      "evidence": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_002_04_03",
+      "claim": "这件花帽的手工平绣由同一位绣工完成。",
+      "evidence": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_002_05_01",
+      "claim": "文中认为这件帽饰的色彩搭配和谐。",
+      "evidence": "整件帽饰用色和谐、造型精致、装饰富有层次，显得庄重典雅，美丽大方。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_002_05_02",
+      "claim": "文中认为这件帽饰的装饰缺乏层次。",
+      "evidence": "整件帽饰用色和谐、造型精致、装饰富有层次，显得庄重典雅，美丽大方。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_002_05_03",
+      "claim": "文中这件帽饰曾在展览中获得设计奖。",
+      "evidence": "整件帽饰用色和谐、造型精致、装饰富有层次，显得庄重典雅，美丽大方。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_002_06_01",
+      "claim": "绣制花帽时通常还会采用平绣以外的装饰工艺。",
+      "evidence": "绣制花帽除了简单的平绣，通常还会应用多种工艺手法装饰，如：十字花绣、丝线结绣、串珠片绣、格子架绣、盘金银绣、钩花刺绣、扎绒刺绣以及刺、扎、串、盘综合绣等，通常情况，花帽装饰越繁盛，主人的社会地位越高。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_002_06_02",
+      "claim": "绣制花帽时只使用平绣这一种装饰工艺。",
+      "evidence": "绣制花帽除了简单的平绣，通常还会应用多种工艺手法装饰，如：十字花绣、丝线结绣、串珠片绣、格子架绣、盘金银绣、钩花刺绣、扎绒刺绣以及刺、扎、串、盘综合绣等，通常情况，花帽装饰越繁盛，主人的社会地位越高。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_002_06_03",
+      "claim": "盘金银绣是绣制花帽时耗时最长的装饰工艺。",
+      "evidence": "绣制花帽除了简单的平绣，通常还会应用多种工艺手法装饰，如：十字花绣、丝线结绣、串珠片绣、格子架绣、盘金银绣、钩花刺绣、扎绒刺绣以及刺、扎、串、盘综合绣等，通常情况，花帽装饰越繁盛，主人的社会地位越高。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_01_01",
+      "claim": "文中所述的维吾尔族戴帽习俗具有生活礼仪方面的意义。",
+      "evidence": "维吾尔族帽类及头饰种类很多，在维吾尔族服饰中最有特色维吾尔族男女都喜欢戴帽子，因为戴帽不仅具有防寒或防暑的功能，更重要的是作为生活礼仪中的需要，社交、探亲、访友以及节日聚会等场合均需佩带。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_003_01_02",
+      "claim": "文中所述的维吾尔族戴帽习俗只具有防寒或防暑的用途。",
+      "evidence": "维吾尔族帽类及头饰种类很多，在维吾尔族服饰中最有特色维吾尔族男女都喜欢戴帽子，因为戴帽不仅具有防寒或防暑的功能，更重要的是作为生活礼仪中的需要，社交、探亲、访友以及节日聚会等场合均需佩带。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_003_01_03",
+      "claim": "文中所述的维吾尔族节日聚会要求佩戴红色帽子。",
+      "evidence": "维吾尔族帽类及头饰种类很多，在维吾尔族服饰中最有特色维吾尔族男女都喜欢戴帽子，因为戴帽不仅具有防寒或防暑的功能，更重要的是作为生活礼仪中的需要，社交、探亲、访友以及节日聚会等场合均需佩带。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_003_02_01",
+      "claim": "皮帽是维吾尔族传统帽子的主要类别之一。",
+      "evidence": "维吾尔族的传统帽子主要有皮帽和花帽两大类。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_003_02_02",
+      "claim": "花帽不属于维吾尔族传统帽子的主要类别。",
+      "evidence": "维吾尔族的传统帽子主要有皮帽和花帽两大类。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_003_02_03",
+      "claim": "维吾尔族传统花帽的出现时间早于皮帽。",
+      "evidence": "维吾尔族的传统帽子主要有皮帽和花帽两大类。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_03_01",
+      "claim": "文中介绍的皮帽大部分以羊皮为制作材料。",
+      "evidence": "皮帽主要用于御寒，大多用羊皮制作，也有狐皮、狸皮、兔皮、旱獭皮、海獭皮、貂皮等。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_003_03_02",
+      "claim": "文中介绍的皮帽全部以羊皮为制作材料。",
+      "evidence": "皮帽主要用于御寒，大多用羊皮制作，也有狐皮、狸皮、兔皮、旱獭皮、海獭皮、貂皮等。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_003_03_03",
+      "claim": "文中介绍的貂皮帽比羊皮帽保暖效果更好。",
+      "evidence": "皮帽主要用于御寒，大多用羊皮制作，也有狐皮、狸皮、兔皮、旱獭皮、海獭皮、貂皮等。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_04_01",
+      "claim": "这件阿图什吐马克的下沿使用皮毛作饰边。",
+      "evidence": "该藏品为阿图什吐马克，即帽面由黑色平绒或丝绒制成，形似钵形，下沿以皮毛饰边。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_003_04_02",
+      "claim": "这件阿图什吐马克的下沿没有皮毛饰边。",
+      "evidence": "该藏品为阿图什吐马克，即帽面由黑色平绒或丝绒制成，形似钵形，下沿以皮毛饰边。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_003_04_03",
+      "claim": "这件阿图什吐马克的皮毛饰边宽四厘米。",
+      "evidence": "该藏品为阿图什吐马克，即帽面由黑色平绒或丝绒制成，形似钵形，下沿以皮毛饰边。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_05_01",
+      "claim": "这顶冬帽采用羔羊皮制作。",
+      "evidence": "此为维族男子喜戴的一种冬帽，羔羊皮制成，轻便柔软，保暖性好。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_003_05_02",
+      "claim": "这顶冬帽没有使用羔羊皮制作。",
+      "evidence": "此为维族男子喜戴的一种冬帽，羔羊皮制成，轻便柔软，保暖性好。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_003_05_03",
+      "claim": "这顶冬帽的重量低于一百克。",
+      "evidence": "此为维族男子喜戴的一种冬帽，羔羊皮制成，轻便柔软，保暖性好。",
+      "reference_label": "insufficient",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_003_06_01",
+      "claim": "这顶帽子的帽身外径为26厘米。",
+      "evidence": "帽高16厘米，帽身内径16厘米，外径26厘米。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_003_06_02",
+      "claim": "这顶帽子的帽身内径为26厘米。",
+      "evidence": "帽高16厘米，帽身内径16厘米，外径26厘米。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_003_06_03",
+      "claim": "这顶帽子的尺寸是用软尺测量的。",
+      "evidence": "帽高16厘米，帽身内径16厘米，外径26厘米。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_07_01",
+      "claim": "这顶帽子的帽身采用四片式结构。",
+      "evidence": "帽身材质为黑色丝绒，四片式结构；帽里及帽檐为厚实的黑色羔皮，帽檐厚6厘米，呈圆柱状。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_003_07_02",
+      "claim": "这顶帽子的帽檐厚度为16厘米。",
+      "evidence": "帽身材质为黑色丝绒，四片式结构；帽里及帽檐为厚实的黑色羔皮，帽檐厚6厘米，呈圆柱状。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_003_07_03",
+      "claim": "这顶帽子的帽身四片丝绒用机器缝合。",
+      "evidence": "帽身材质为黑色丝绒，四片式结构；帽里及帽檐为厚实的黑色羔皮，帽檐厚6厘米，呈圆柱状。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_003_08_01",
+      "claim": "这顶帽子的帽里羔皮主要呈黑色。",
+      "evidence": "帽里羔皮以黑色为主，间以白色毛絮。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_003_08_02",
+      "claim": "这顶帽子的帽里羔皮主要呈白色。",
+      "evidence": "帽里羔皮以黑色为主，间以白色毛絮。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_003_08_03",
+      "claim": "这顶帽子内里的白色毛絮经过漂白处理。",
+      "evidence": "帽里羔皮以黑色为主，间以白色毛絮。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_01_01",
+      "claim": "艾得莱丝绸的图案采用对称布局。",
+      "evidence": "艾得莱丝绸是新疆极富民族特色的绸料，其扎染技术独特，质地柔软，轻盈飘逸，图案层次分明，布局对称，组合严谨，色彩艳丽，有着极高的艺术魅力。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_004_01_02",
+      "claim": "艾得莱丝绸的图案采用不对称布局。",
+      "evidence": "艾得莱丝绸是新疆极富民族特色的绸料，其扎染技术独特，质地柔软，轻盈飘逸，图案层次分明，布局对称，组合严谨，色彩艳丽，有着极高的艺术魅力。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_004_01_03",
+      "claim": "艾得莱丝绸的图案以动物纹样为主。",
+      "evidence": "艾得莱丝绸是新疆极富民族特色的绸料，其扎染技术独特，质地柔软，轻盈飘逸，图案层次分明，布局对称，组合严谨，色彩艳丽，有着极高的艺术魅力。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_02_01",
+      "claim": "这件艾德莱斯绸的整体色调是红色。",
+      "evidence": "此件艾德莱斯绸收集于新疆库尔勒地区，整体色调为红色，点缀有象征维吾尔族生存环境的黄色，以及伊斯兰教中崇尚的绿色，以及象征着蓝天的蓝色。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_004_02_02",
+      "claim": "这件艾德莱斯绸的整体色调是黄色。",
+      "evidence": "此件艾德莱斯绸收集于新疆库尔勒地区，整体色调为红色，点缀有象征维吾尔族生存环境的黄色，以及伊斯兰教中崇尚的绿色，以及象征着蓝天的蓝色。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_004_02_03",
+      "claim": "这件艾德莱斯绸的红色由植物染料染成。",
+      "evidence": "此件艾德莱斯绸收集于新疆库尔勒地区，整体色调为红色，点缀有象征维吾尔族生存环境的黄色，以及伊斯兰教中崇尚的绿色，以及象征着蓝天的蓝色。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_03_01",
+      "claim": "文中描述的配色传达了喜庆的寓意。",
+      "evidence": "用色纯度较高,多种色彩拼合出艳丽华贵的视觉效果,传递出热情和强烈的色彩情调,表达了维吾尔族人纯洁、神圣、热情、喜庆、神秘、高贵等抽象性寓意。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_004_03_02",
+      "claim": "文中描述的配色没有传达喜庆的寓意。",
+      "evidence": "用色纯度较高,多种色彩拼合出艳丽华贵的视觉效果,传递出热情和强烈的色彩情调,表达了维吾尔族人纯洁、神圣、热情、喜庆、神秘、高贵等抽象性寓意。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_004_03_03",
+      "claim": "文中描述的配色主要用于婚礼服饰。",
+      "evidence": "用色纯度较高,多种色彩拼合出艳丽华贵的视觉效果,传递出热情和强烈的色彩情调,表达了维吾尔族人纯洁、神圣、热情、喜庆、神秘、高贵等抽象性寓意。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_04_01",
+      "claim": "这里的纹样按条状有规律地重复排列。",
+      "evidence": "纹样有带把的木梳纹、石榴纹、龛座纹，成条状有规则地重复排列，形成一种有间隔的多色组合彩条式样、呈现出跳荡韵律，宛如熊熊燃烧的火焰。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_004_04_02",
+      "claim": "这里的纹样只出现一次。",
+      "evidence": "纹样有带把的木梳纹、石榴纹、龛座纹，成条状有规则地重复排列，形成一种有间隔的多色组合彩条式样、呈现出跳荡韵律，宛如熊熊燃烧的火焰。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_004_04_03",
+      "claim": "这里的纹样在每条色带上重复五次。",
+      "evidence": "纹样有带把的木梳纹、石榴纹、龛座纹，成条状有规则地重复排列，形成一种有间隔的多色组合彩条式样、呈现出跳荡韵律，宛如熊熊燃烧的火焰。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_05_01",
+      "claim": "这件头巾所用工艺先将经纱扎结，再进行分层染色。",
+      "evidence": "此件艾得莱丝绸头巾工艺采用古老的扎经染色法，即在经纱上扎结染色，先按图案要求，于经纱上加以布局、配色、扎结，然后分层染色、整经、织绸。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_004_05_02",
+      "claim": "这件头巾所用工艺先分层染色，再将经纱扎结。",
+      "evidence": "此件艾得莱丝绸头巾工艺采用古老的扎经染色法，即在经纱上扎结染色，先按图案要求，于经纱上加以布局、配色、扎结，然后分层染色、整经、织绸。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_004_05_03",
+      "claim": "这件头巾所用工艺需要将经纱染色三次。",
+      "evidence": "此件艾得莱丝绸头巾工艺采用古老的扎经染色法，即在经纱上扎结染色，先按图案要求，于经纱上加以布局、配色、扎结，然后分层染色、整经、织绸。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_004_06_01",
+      "claim": "这种染色形成的色晕有深浅差别。",
+      "evidence": "此种染色，由于丝的拉力不同,花纹在织造过程中,自然形成参差不齐的轮廓线,使花纹显得十分生动活泼;也因扎的手法不同,扎紧扎松,或受毛细管效应,或受染液的渗透力不一,出现了深浅不同的色晕,各种颜色呈现出参差错落，疏散而不杂乱，既增强图案的层次感，又形成纹样富有变化的特色。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_004_06_02",
+      "claim": "这种染色形成的色晕深浅完全一致。",
+      "evidence": "此种染色，由于丝的拉力不同,花纹在织造过程中,自然形成参差不齐的轮廓线,使花纹显得十分生动活泼;也因扎的手法不同,扎紧扎松,或受毛细管效应,或受染液的渗透力不一,出现了深浅不同的色晕,各种颜色呈现出参差错落，疏散而不杂乱，既增强图案的层次感，又形成纹样富有变化的特色。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_004_06_03",
+      "claim": "这种染色形成的色晕会在洗涤后消失。",
+      "evidence": "此种染色，由于丝的拉力不同,花纹在织造过程中,自然形成参差不齐的轮廓线,使花纹显得十分生动活泼;也因扎的手法不同,扎紧扎松,或受毛细管效应,或受染液的渗透力不一,出现了深浅不同的色晕,各种颜色呈现出参差错落，疏散而不杂乱，既增强图案的层次感，又形成纹样富有变化的特色。",
+      "reference_label": "insufficient",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_005_01_01",
+      "claim": "新疆印花布的主体图案包含壶、盆、罐等纹样。",
+      "evidence": "新疆印花布具有强烈的维吾尔民族风格和特点，一般为宗教色彩的多组龛形纹样连续排列，并把各种花卉、长寿树、壶、盆、罐等组成主体图案，另外在上方左右还印有新月、五星等图案，色彩对比强烈、绚丽夺目。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_01_02",
+      "claim": "新疆印花布一般不将龛形纹样连续排列。",
+      "evidence": "新疆印花布具有强烈的维吾尔民族风格和特点，一般为宗教色彩的多组龛形纹样连续排列，并把各种花卉、长寿树、壶、盆、罐等组成主体图案，另外在上方左右还印有新月、五星等图案，色彩对比强烈、绚丽夺目。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_01_03",
+      "claim": "新疆印花布一般将龛形纹样排成七组。",
+      "evidence": "新疆印花布具有强烈的维吾尔民族风格和特点，一般为宗教色彩的多组龛形纹样连续排列，并把各种花卉、长寿树、壶、盆、罐等组成主体图案，另外在上方左右还印有新月、五星等图案，色彩对比强烈、绚丽夺目。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_02_01",
+      "claim": "这件模戳专门用于印制新疆印花布。",
+      "evidence": "此件模戳为印制新疆印花布的专用器具。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_02_02",
+      "claim": "这件模戳无法用于印制新疆印花布。",
+      "evidence": "此件模戳为印制新疆印花布的专用器具。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_02_03",
+      "claim": "这件模戳专门用于印制黑色花纹。",
+      "evidence": "此件模戳为印制新疆印花布的专用器具。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_03_01",
+      "claim": "按这里描述的工序，模戳蘸黑色染液印出黑色纹样。",
+      "evidence": "将纹样覆画于梨木或核桃木上，以木模立槎制纹，雕刻成凹凸分明的图案，然后用此模戳蘸黑色染液(面汤浸泡铁锈着液)印出黑色纹样。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_005_03_02",
+      "claim": "按这里描述的工序，模戳蘸黑色染液印出白色纹样。",
+      "evidence": "将纹样覆画于梨木或核桃木上，以木模立槎制纹，雕刻成凹凸分明的图案，然后用此模戳蘸黑色染液(面汤浸泡铁锈着液)印出黑色纹样。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_03_03",
+      "claim": "按这里描述的工序，模戳每次蘸染液后连续印制十次。",
+      "evidence": "将纹样覆画于梨木或核桃木上，以木模立槎制纹，雕刻成凹凸分明的图案，然后用此模戳蘸黑色染液(面汤浸泡铁锈着液)印出黑色纹样。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_04_01",
+      "claim": "每个模戳各对应一个单独的纹样。",
+      "evidence": "一个模戳就是一个单独纹样。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_005_04_02",
+      "claim": "每个模戳各对应两个单独的纹样。",
+      "evidence": "一个模戳就是一个单独纹样。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_04_03",
+      "claim": "每个模戳都对应一种植物花卉纹样。",
+      "evidence": "一个模戳就是一个单独纹样。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_05_01",
+      "claim": "使用一个单独纹样的模戳可以拓印二方连续纹样。",
+      "evidence": "用一个单独纹样模戳可以拓印形式多样的适合纹样、二方连续和四方连续纹样，形成一个组合的整体图案。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_005_05_02",
+      "claim": "使用一个单独纹样的模戳无法拓印四方连续纹样。",
+      "evidence": "用一个单独纹样模戳可以拓印形式多样的适合纹样、二方连续和四方连续纹样，形成一个组合的整体图案。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_05_03",
+      "claim": "使用一个单独纹样的模戳拓印四方连续纹样需要两人配合。",
+      "evidence": "用一个单独纹样模戳可以拓印形式多样的适合纹样、二方连续和四方连续纹样，形成一个组合的整体图案。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_06_01",
+      "claim": "这里提到用毛笔、毛刷蘸取其他各种染液。",
+      "evidence": "然后，再用不同的填色模戳和用毛笔、毛刷蘸上其他各种染液。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_06_02",
+      "claim": "这里提到的毛笔、毛刷不蘸取任何染液。",
+      "evidence": "然后，再用不同的填色模戳和用毛笔、毛刷蘸上其他各种染液。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_06_03",
+      "claim": "这里提到的毛笔、毛刷用来填涂石榴纹样。",
+      "evidence": "然后，再用不同的填色模戳和用毛笔、毛刷蘸上其他各种染液。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_07_01",
+      "claim": "这里介绍的传统染料采用土法制染。",
+      "evidence": "传统的染料为植物质和矿物质染料，均用土法制染。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_07_02",
+      "claim": "这里介绍的传统染料中没有矿物质染料。",
+      "evidence": "传统的染料为植物质和矿物质染料，均用土法制染。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_07_03",
+      "claim": "这里介绍的传统染料中以矿物质染料用量最大。",
+      "evidence": "传统的染料为植物质和矿物质染料，均用土法制染。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_08_01",
+      "claim": "印花布通常可以用作衣里。",
+      "evidence": "印花布用途广泛，通常可做衣里、墙围、壁挂、窗帘、桌单、餐巾、包单、腰巾、褥垫等。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_005_08_02",
+      "claim": "印花布不能用来制作窗帘。",
+      "evidence": "印花布用途广泛，通常可做衣里、墙围、壁挂、窗帘、桌单、餐巾、包单、腰巾、褥垫等。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_08_03",
+      "claim": "制作窗帘是印花布最主要的用途。",
+      "evidence": "印花布用途广泛，通常可做衣里、墙围、壁挂、窗帘、桌单、餐巾、包单、腰巾、褥垫等。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_09_01",
+      "claim": "制作新疆维吾尔族印花模戳时，先将坯料刨平打光，再雕刻。",
+      "evidence": "新疆维吾尔族印花模戳，一般选用梨木作为材料，将坯料刨平打光然后雕刻。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_09_02",
+      "claim": "制作新疆维吾尔族印花模戳时，先雕刻，再将坯料刨平打光。",
+      "evidence": "新疆维吾尔族印花模戳，一般选用梨木作为材料，将坯料刨平打光然后雕刻。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_005_09_03",
+      "claim": "制作新疆维吾尔族印花模戳时，雕刻一件通常需要三天。",
+      "evidence": "新疆维吾尔族印花模戳，一般选用梨木作为材料，将坯料刨平打光然后雕刻。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_10_01",
+      "claim": "文中介绍的篆刻图案由匠人即兴创作。",
+      "evidence": "篆刻图案并没有严格的规范，都是匠人们的即兴之作，但都离不开几何图案和花卉图形，各地都有自己独特的纹样。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_10_02",
+      "claim": "文中介绍的篆刻图案由匠人严格按统一规范制作。",
+      "evidence": "篆刻图案并没有严格的规范，都是匠人们的即兴之作，但都离不开几何图案和花卉图形，各地都有自己独特的纹样。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_005_10_03",
+      "claim": "文中介绍的篆刻图案通常先绘制在纸上。",
+      "evidence": "篆刻图案并没有严格的规范，都是匠人们的即兴之作，但都离不开几何图案和花卉图形，各地都有自己独特的纹样。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_005_11_01",
+      "claim": "印制时可以将图案拼合成一个组合整体。",
+      "evidence": "图案在印制过程可拼合布排，形成组合整体图案。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_005_11_02",
+      "claim": "印制时无法将图案拼合成一个组合整体。",
+      "evidence": "图案在印制过程可拼合布排，形成组合整体图案。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_005_11_03",
+      "claim": "印制时需要把四个图案拼合成一个组合整体。",
+      "evidence": "图案在印制过程可拼合布排，形成组合整体图案。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_01_01",
+      "claim": "维吾尔族花帽被称为“朵帕”。",
+      "evidence": "维吾尔族有戴帽子的习俗，其帽子类型主要有两大类，一类是花帽“朵帕”，另一类则是皮帽。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_006_01_02",
+      "claim": "维吾尔族帽子的主要类型只有花帽一类。",
+      "evidence": "维吾尔族有戴帽子的习俗，其帽子类型主要有两大类，一类是花帽“朵帕”，另一类则是皮帽。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_006_01_03",
+      "claim": "维吾尔族花帽主要在夏季佩戴。",
+      "evidence": "维吾尔族有戴帽子的习俗，其帽子类型主要有两大类，一类是花帽“朵帕”，另一类则是皮帽。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_02_01",
+      "claim": "花帽在用途上侧重礼仪。",
+      "evidence": "与侧重礼仪的花帽相比，皮帽具有防寒抵御寒冷的功用。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_006_02_02",
+      "claim": "皮帽不具备抵御寒冷的作用。",
+      "evidence": "与侧重礼仪的花帽相比，皮帽具有防寒抵御寒冷的功用。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_006_02_03",
+      "claim": "皮帽能在零下三十度时保持头部温暖。",
+      "evidence": "与侧重礼仪的花帽相比，皮帽具有防寒抵御寒冷的功用。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_03_01",
+      "claim": "维吾尔人冬天佩戴的皮帽存在高度上的差异。",
+      "evidence": "维吾尔人冬天戴的皮帽子种类也很庞杂，大小高低，变化多端，统称“吐马克”。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_006_03_02",
+      "claim": "维吾尔人冬天佩戴的皮帽高度完全一致。",
+      "evidence": "维吾尔人冬天戴的皮帽子种类也很庞杂，大小高低，变化多端，统称“吐马克”。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_006_03_03",
+      "claim": "维吾尔人冬天佩戴的皮帽通常由羔皮制成。",
+      "evidence": "维吾尔人冬天戴的皮帽子种类也很庞杂，大小高低，变化多端，统称“吐马克”。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_04_01",
+      "claim": "维吾尔族群众中存在夏天佩戴皮帽的习俗。",
+      "evidence": "皮帽本来是冬天戴的，具有保暖和御寒的作用；但是维吾尔族群众中有夏天戴皮帽的习俗，是因为它还具有保持头部皮肤湿润和防暑的作用。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_006_04_02",
+      "claim": "维吾尔族群众中不存在夏天佩戴皮帽的习俗。",
+      "evidence": "皮帽本来是冬天戴的，具有保暖和御寒的作用；但是维吾尔族群众中有夏天戴皮帽的习俗，是因为它还具有保持头部皮肤湿润和防暑的作用。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_006_04_03",
+      "claim": "维吾尔族群众夏天佩戴的皮帽都比冬季皮帽轻。",
+      "evidence": "皮帽本来是冬天戴的，具有保暖和御寒的作用；但是维吾尔族群众中有夏天戴皮帽的习俗，是因为它还具有保持头部皮肤湿润和防暑的作用。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_05_01",
+      "claim": "这顶帽子的高度是二十厘米。",
+      "evidence": "该帽高20厘米，形状类梯形、柱形，帽顶为黑丝绒，分里外两层，羊毛皮为里子，黑色卷毛羔皮作面。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_006_05_02",
+      "claim": "这顶帽子的高度是十五厘米。",
+      "evidence": "该帽高20厘米，形状类梯形、柱形，帽顶为黑丝绒，分里外两层，羊毛皮为里子，黑色卷毛羔皮作面。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_006_05_03",
+      "claim": "这顶帽子的底部周长是二十厘米。",
+      "evidence": "该帽高20厘米，形状类梯形、柱形，帽顶为黑丝绒，分里外两层，羊毛皮为里子，黑色卷毛羔皮作面。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_006_06_01",
+      "claim": "这件皮帽的毫毛呈浓密紧凑的状态。",
+      "evidence": "此件皮帽皮胎浓厚、毫毛闪亮浓密紧凑、浓黑如墨、色泽温润。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_006_06_02",
+      "claim": "这件皮帽的毫毛呈稀疏松散的状态。",
+      "evidence": "此件皮帽皮胎浓厚、毫毛闪亮浓密紧凑、浓黑如墨、色泽温润。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_006_06_03",
+      "claim": "这件皮帽的毫毛长度达到三厘米。",
+      "evidence": "此件皮帽皮胎浓厚、毫毛闪亮浓密紧凑、浓黑如墨、色泽温润。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_007_01_01",
+      "claim": "维吾尔人穿靴的传统已有数千年的历史。",
+      "evidence": "维吾尔人有穿靴的传统习惯，上可追溯几千年。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_007_01_02",
+      "claim": "维吾尔人穿靴的传统至今只有几十年的历史。",
+      "evidence": "维吾尔人有穿靴的传统习惯，上可追溯几千年。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_007_01_03",
+      "claim": "维吾尔人最早穿用的靴子以马皮制作。",
+      "evidence": "维吾尔人有穿靴的传统习惯，上可追溯几千年。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_007_02_01",
+      "claim": "对文中所述的维吾尔族先民而言，穿靴有助于保暖御寒。",
+      "evidence": "维吾尔族的先民为纵横驰骋在广阔西陲边塞上的游牧民族，穿靴便于骑射，也能保暖耐寒，维吾尔人通常会在靴上扦一把”英吉沙”小刀。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_007_02_02",
+      "claim": "对文中所述的维吾尔族先民而言，穿靴无法起到保暖御寒的作用。",
+      "evidence": "维吾尔族的先民为纵横驰骋在广阔西陲边塞上的游牧民族，穿靴便于骑射，也能保暖耐寒，维吾尔人通常会在靴上扦一把”英吉沙”小刀。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_007_02_03",
+      "claim": "文中所述维吾尔人靴上的英吉沙小刀刀柄使用了银质装饰。",
+      "evidence": "维吾尔族的先民为纵横驰骋在广阔西陲边塞上的游牧民族，穿靴便于骑射，也能保暖耐寒，维吾尔人通常会在靴上扦一把”英吉沙”小刀。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_007_03_01",
+      "claim": "维吾尔人的鞋通常以牛皮制作鞋面。",
+      "evidence": "维吾尔人的鞋多为牛皮面制作。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_007_03_02",
+      "claim": "维吾尔人的鞋从不使用牛皮制作鞋面。",
+      "evidence": "维吾尔人的鞋多为牛皮面制作。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_007_03_03",
+      "claim": "维吾尔人的鞋通常以木材制作鞋底。",
+      "evidence": "维吾尔人的鞋多为牛皮面制作。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_007_04_01",
+      "claim": "这件维族女靴的靴面与靴筒连接处有明显的接缝。",
+      "evidence": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_007_04_02",
+      "claim": "这件维族女靴的靴面与靴筒之间完全没有接缝。",
+      "evidence": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_007_04_03",
+      "claim": "这件维族女靴的靴筒高度为二十五厘米。",
+      "evidence": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_007_05_01",
+      "claim": "维吾尔族鞋类中，皮靴被称为玉吐克。",
+      "evidence": "维吾尔族的鞋类主要有“玉吐克”（皮靴），“去如克”（皮窝子），“买赛”（软靴），“开西”（皮鞋，类似套鞋，多在夏季穿），“喀拉西”（套鞋）。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_007_05_02",
+      "claim": "维吾尔族鞋类中，玉吐克指的是皮窝子。",
+      "evidence": "维吾尔族的鞋类主要有“玉吐克”（皮靴），“去如克”（皮窝子），“买赛”（软靴），“开西”（皮鞋，类似套鞋，多在夏季穿），“喀拉西”（套鞋）。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_007_05_03",
+      "claim": "维吾尔族鞋类中的玉吐克通常为黑色。",
+      "evidence": "维吾尔族的鞋类主要有“玉吐克”（皮靴），“去如克”（皮窝子），“买赛”（软靴），“开西”（皮鞋，类似套鞋，多在夏季穿），“喀拉西”（套鞋）。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_007_06_01",
+      "claim": "生活在农牧区的劳动者多数会自行制作鞋子。",
+      "evidence": "在农牧区生活的劳动者大都自己制鞋，也有专门制作鞋、靴的民间工匠。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_007_06_02",
+      "claim": "生活在农牧区的劳动者无一会自行制作鞋子。",
+      "evidence": "在农牧区生活的劳动者大都自己制鞋，也有专门制作鞋、靴的民间工匠。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_007_06_03",
+      "claim": "生活在农牧区的劳动者制作一双鞋平均需要三天。",
+      "evidence": "在农牧区生活的劳动者大都自己制鞋，也有专门制作鞋、靴的民间工匠。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_007_07_01",
+      "claim": "文中所说的这些人掌握了鞣革技术。",
+      "evidence": "他们掌握了从制作木楦头到选皮、鞣革到靴成品的一整套传统绝技，技术熟练、手艺精湛。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_007_07_02",
+      "claim": "文中所说的这些人没有掌握鞣革技术。",
+      "evidence": "他们掌握了从制作木楦头到选皮、鞣革到靴成品的一整套传统绝技，技术熟练、手艺精湛。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_007_07_03",
+      "claim": "文中所说的这些人使用柳木制作木楦头。",
+      "evidence": "他们掌握了从制作木楦头到选皮、鞣革到靴成品的一整套传统绝技，技术熟练、手艺精湛。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_008_01_01",
+      "claim": "新疆维吾尔族妇女喜欢穿艾特莱丝裙。",
+      "evidence": "艾特莱丝裙是新疆维吾尔族妇女喜爱穿着的一种特色民族服饰。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_01_02",
+      "claim": "新疆维吾尔族妇女并不喜欢穿艾特莱丝裙。",
+      "evidence": "艾特莱丝裙是新疆维吾尔族妇女喜爱穿着的一种特色民族服饰。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_01_03",
+      "claim": "新疆维吾尔族妇女通常在婚礼上穿艾特莱丝裙。",
+      "evidence": "艾特莱丝裙是新疆维吾尔族妇女喜爱穿着的一种特色民族服饰。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_02_01",
+      "claim": "这条艾特莱丝裙的质地柔软。",
+      "evidence": "这条艾特莱丝裙，质地柔软，轻盈飘逸，尤其适合夏天穿着。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_008_02_02",
+      "claim": "这条艾特莱丝裙的质地僵硬。",
+      "evidence": "这条艾特莱丝裙，质地柔软，轻盈飘逸，尤其适合夏天穿着。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_02_03",
+      "claim": "这条艾特莱丝裙的面料厚度为一毫米。",
+      "evidence": "这条艾特莱丝裙，质地柔软，轻盈飘逸，尤其适合夏天穿着。",
+      "reference_label": "insufficient",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_008_03_01",
+      "claim": "这条裙子的图案具有长条形的形状。",
+      "evidence": "裙子图案呈长条形，色泽十分艳丽，把各种基色有规则地进行排列。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_03_02",
+      "claim": "这条裙子的图案均为圆形。",
+      "evidence": "裙子图案呈长条形，色泽十分艳丽，把各种基色有规则地进行排列。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_03_03",
+      "claim": "这条裙子的每条图案宽度都是三厘米。",
+      "evidence": "裙子图案呈长条形，色泽十分艳丽，把各种基色有规则地进行排列。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_04_01",
+      "claim": "文中认为，这种对比体现了维吾尔族人民对未来生活的追求。",
+      "evidence": "与沙漠边缘单调的环境色彩形成强烈对比，突出了维吾尔族人民对现实和未来生活的热恋和追求。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_04_02",
+      "claim": "文中认为，这种对比未能体现维吾尔族人民对未来生活的追求。",
+      "evidence": "与沙漠边缘单调的环境色彩形成强烈对比，突出了维吾尔族人民对现实和未来生活的热恋和追求。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_04_03",
+      "claim": "文中所述的沙漠边缘环境主要呈现黄色。",
+      "evidence": "与沙漠边缘单调的环境色彩形成强烈对比，突出了维吾尔族人民对现实和未来生活的热恋和追求。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_05_01",
+      "claim": "新疆和田市是艾特莱斯绸的主要产地。",
+      "evidence": "艾特莱斯绸主要产于新疆维吾尔自治区和田市，艾特莱斯绸质地柔软，轻盈飘逸，尤其适于夏装。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_05_02",
+      "claim": "新疆和田市不生产艾特莱斯绸。",
+      "evidence": "艾特莱斯绸主要产于新疆维吾尔自治区和田市，艾特莱斯绸质地柔软，轻盈飘逸，尤其适于夏装。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_05_03",
+      "claim": "新疆和田市每年生产十万米艾特莱斯绸。",
+      "evidence": "艾特莱斯绸主要产于新疆维吾尔自治区和田市，艾特莱斯绸质地柔软，轻盈飘逸，尤其适于夏装。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_06_01",
+      "claim": "制作这种艾特莱丝绸需要手工参与。",
+      "evidence": "这样的艾特莱丝绸需要手工操作完成。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_06_02",
+      "claim": "制作这种艾特莱丝绸完全不需要手工参与。",
+      "evidence": "这样的艾特莱丝绸需要手工操作完成。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_06_03",
+      "claim": "制作这种艾特莱丝绸需要两名工匠配合。",
+      "evidence": "这样的艾特莱丝绸需要手工操作完成。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_07_01",
+      "claim": "文中描述的第一步是将蚕茧放入滚热的水中。",
+      "evidence": "首先，将蚕茧放入滚热的水中，然后直接赤手将蚕丝从沸水中抽出来。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_07_02",
+      "claim": "文中描述的第一步是将蚕茧放入冰冷的水中。",
+      "evidence": "首先，将蚕茧放入滚热的水中，然后直接赤手将蚕丝从沸水中抽出来。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_07_03",
+      "claim": "文中所述的蚕茧在抽丝前需要浸泡十分钟。",
+      "evidence": "首先，将蚕茧放入滚热的水中，然后直接赤手将蚕丝从沸水中抽出来。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_08_01",
+      "claim": "在这一步操作中，蚕丝被纺成线圈。",
+      "evidence": "接着将蚕丝纺成线圈。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_08_02",
+      "claim": "在这一步操作中，蚕丝没有被纺成线圈。",
+      "evidence": "接着将蚕丝纺成线圈。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_08_03",
+      "claim": "在这一步操作中，每个蚕丝线圈重五十克。",
+      "evidence": "接着将蚕丝纺成线圈。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_09_01",
+      "claim": "文中将扎染分为两种方式。",
+      "evidence": "然后是扎染上色，扎染分为两种，一种是直接整体染，另一种是局部染。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_09_02",
+      "claim": "文中将扎染分为三种方式。",
+      "evidence": "然后是扎染上色，扎染分为两种，一种是直接整体染，另一种是局部染。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_008_09_03",
+      "claim": "文中所述的局部染使用植物染料。",
+      "evidence": "然后是扎染上色，扎染分为两种，一种是直接整体染，另一种是局部染。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_10_01",
+      "claim": "染色完成以后，需要进行分线。",
+      "evidence": "染完之后，要进行分线。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_10_02",
+      "claim": "染色完成以后，整个后续过程不进行分线。",
+      "evidence": "染完之后，要进行分线。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_10_03",
+      "claim": "染色完成以后的分线操作需要一小时。",
+      "evidence": "染完之后，要进行分线。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_008_11_01",
+      "claim": "在文中描述的上织机步骤中，工匠按照图案需要排列丝线。",
+      "evidence": "最后一步上织机，工匠们根据图案的需要，将丝线排列在织机上绷紧，这样浸染出的丝线具有由深至浅的色晕，制作者手拿织梭飞快地在经线上穿来穿去。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_11_02",
+      "claim": "在文中描述的上织机步骤中，工匠排列丝线时完全不考虑图案需要。",
+      "evidence": "最后一步上织机，工匠们根据图案的需要，将丝线排列在织机上绷紧，这样浸染出的丝线具有由深至浅的色晕，制作者手拿织梭飞快地在经线上穿来穿去。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_11_03",
+      "claim": "在文中描述的上织机步骤中，工匠使用的织梭由枣木制成。",
+      "evidence": "最后一步上织机，工匠们根据图案的需要，将丝线排列在织机上绷紧，这样浸染出的丝线具有由深至浅的色晕，制作者手拿织梭飞快地在经线上穿来穿去。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_008_12_01",
+      "claim": "文中所述的这条艾特莱斯丝绸色彩鲜艳。",
+      "evidence": "一条色彩艳丽的艾特莱斯丝绸就这样诞生了。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_008_12_02",
+      "claim": "文中所述的这条艾特莱斯丝绸色彩暗淡。",
+      "evidence": "一条色彩艳丽的艾特莱斯丝绸就这样诞生了。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_008_12_03",
+      "claim": "文中所述的这条艾特莱斯丝绸长四米。",
+      "evidence": "一条色彩艳丽的艾特莱斯丝绸就这样诞生了。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_01_01",
+      "claim": "这件小帽的维吾尔语名称是太力拜克。",
+      "evidence": "此件小帽维吾尔语叫做“太力拜克”，是新疆和田、于田、民丰、且末一带，维族人独有的一种帽子。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_01_02",
+      "claim": "这件小帽的维吾尔语名称并非太力拜克。",
+      "evidence": "此件小帽维吾尔语叫做“太力拜克”，是新疆和田、于田、民丰、且末一带，维族人独有的一种帽子。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_009_01_03",
+      "claim": "这件太力拜克小帽由一位于田工匠制作。",
+      "evidence": "此件小帽维吾尔语叫做“太力拜克”，是新疆和田、于田、民丰、且末一带，维族人独有的一种帽子。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_02_01",
+      "claim": "文中所述帽子的直径约为九厘米。",
+      "evidence": "外形如小茶碗，直径约9厘米，作为世界上最小的帽子,被收入《吉尼斯世界纪录》。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_009_02_02",
+      "claim": "文中所述帽子的直径约为三十厘米。",
+      "evidence": "外形如小茶碗，直径约9厘米，作为世界上最小的帽子,被收入《吉尼斯世界纪录》。",
+      "reference_label": "refutes",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_009_02_03",
+      "claim": "文中所述帽子在一九九八年被收入吉尼斯世界纪录。",
+      "evidence": "外形如小茶碗，直径约9厘米，作为世界上最小的帽子,被收入《吉尼斯世界纪录》。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_03_01",
+      "claim": "这顶帽子的帽顶使用金黄色织锦缎制作。",
+      "evidence": "帽子分里外两层，里层是手工针线缝制的软质羔皮，外层用黑色羊羔皮做成，帽顶为金黄色织锦缎制成。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_03_02",
+      "claim": "这顶帽子的帽顶使用蓝色织锦缎制作。",
+      "evidence": "帽子分里外两层，里层是手工针线缝制的软质羔皮，外层用黑色羊羔皮做成，帽顶为金黄色织锦缎制成。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_03_03",
+      "claim": "这顶帽子的帽顶绣有牡丹图案。",
+      "evidence": "帽子分里外两层，里层是手工针线缝制的软质羔皮，外层用黑色羊羔皮做成，帽顶为金黄色织锦缎制成。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_009_04_01",
+      "claim": "文中所述的佩戴方法使用一根大头针固定。",
+      "evidence": "佩戴时用一根大头针固定在头顶右边的白围巾上。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_04_02",
+      "claim": "文中所述的佩戴方法使用三根大头针固定。",
+      "evidence": "佩戴时用一根大头针固定在头顶右边的白围巾上。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_04_03",
+      "claim": "文中所述的佩戴方法使用一根银制大头针固定。",
+      "evidence": "佩戴时用一根大头针固定在头顶右边的白围巾上。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_05_01",
+      "claim": "这种小帽后来逐渐成为已婚妇女的装饰品。",
+      "evidence": "这种小帽刚开始只是当地维吾尔族人在婚丧大事时客人们用来相互赠送的礼物，后来慢慢变成已婚妇女的装饰品。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_009_05_02",
+      "claim": "这种小帽后来始终没有成为已婚妇女的装饰品。",
+      "evidence": "这种小帽刚开始只是当地维吾尔族人在婚丧大事时客人们用来相互赠送的礼物，后来慢慢变成已婚妇女的装饰品。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_009_05_03",
+      "claim": "这种小帽在清代开始成为已婚妇女的装饰品。",
+      "evidence": "这种小帽刚开始只是当地维吾尔族人在婚丧大事时客人们用来相互赠送的礼物，后来慢慢变成已婚妇女的装饰品。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_06_01",
+      "claim": "文中认为，佩戴这种小帽能衬托出维族妇女的典雅之美。",
+      "evidence": "佩戴这种小帽的维族妇女显得内敛、含蓄之余也衬托出一种典雅、神秘之美。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_009_06_02",
+      "claim": "文中认为，佩戴这种小帽完全不能衬托出维族妇女的典雅之美。",
+      "evidence": "佩戴这种小帽的维族妇女显得内敛、含蓄之余也衬托出一种典雅、神秘之美。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_009_06_03",
+      "claim": "文中所述的这种小帽仅在冬季佩戴。",
+      "evidence": "佩戴这种小帽的维族妇女显得内敛、含蓄之余也衬托出一种典雅、神秘之美。",
+      "reference_label": "insufficient",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_009_07_01",
+      "claim": "这件太力拜克完全采用手工制作。",
+      "evidence": "此件太力拜克为纯手工制作，制作细腻精良，外面整体色为黑色绒线织成，外表顶部为锦锻，直径不超过四厘米。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_009_07_02",
+      "claim": "这件太力拜克完全采用机器制作。",
+      "evidence": "此件太力拜克为纯手工制作，制作细腻精良，外面整体色为黑色绒线织成，外表顶部为锦锻，直径不超过四厘米。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_009_07_03",
+      "claim": "这件太力拜克的手工制作耗时两天。",
+      "evidence": "此件太力拜克为纯手工制作，制作细腻精良，外面整体色为黑色绒线织成，外表顶部为锦锻，直径不超过四厘米。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_009_08_01",
+      "claim": "文中所述帽子的里子采用柔软羊皮。",
+      "evidence": "里子为熟好的柔软羊皮，但同时具有一定的挺括度，通常里子单独制作后与外表缝合，帽里针脚清晰可见。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_009_08_02",
+      "claim": "文中所述帽子的里子完全由棉布制成。",
+      "evidence": "里子为熟好的柔软羊皮，但同时具有一定的挺括度，通常里子单独制作后与外表缝合，帽里针脚清晰可见。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_009_08_03",
+      "claim": "文中所述帽子的里子为白色羊皮。",
+      "evidence": "里子为熟好的柔软羊皮，但同时具有一定的挺括度，通常里子单独制作后与外表缝合，帽里针脚清晰可见。",
+      "reference_label": "insufficient",
+      "predicted_label": "supports",
+      "correct": false
+    },
+    {
+      "id": "costume_010_01_01",
+      "claim": "这件长外衣的前身是古代用于打仗和狩猎的箭服。",
+      "evidence": "此件长外衣为生活在于田、民丰一代维吾尔妇女特有的服饰，迥异于其他地区维族妇女服饰，其前身为古代打仗狩猎的一种箭服，当地称作“派里间”。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_01_02",
+      "claim": "这件长外衣的前身并不是古代箭服。",
+      "evidence": "此件长外衣为生活在于田、民丰一代维吾尔妇女特有的服饰，迥异于其他地区维族妇女服饰，其前身为古代打仗狩猎的一种箭服，当地称作“派里间”。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_01_03",
+      "claim": "这件长外衣的样式起源于唐代。",
+      "evidence": "此件长外衣为生活在于田、民丰一代维吾尔妇女特有的服饰，迥异于其他地区维族妇女服饰，其前身为古代打仗狩猎的一种箭服，当地称作“派里间”。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_02_01",
+      "claim": "文中描述的服装采用长袖设计。",
+      "evidence": "服装交领、对襟、长袖。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_02_02",
+      "claim": "文中描述的服装采用无袖设计。",
+      "evidence": "服装交领、对襟、长袖。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_02_03",
+      "claim": "文中描述的服装袖长为六十厘米。",
+      "evidence": "服装交领、对襟、长袖。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_03_01",
+      "claim": "这件服装胸前的条形图案为天蓝色。",
+      "evidence": "胸前两侧装饰有依次排列的七条尖头对称的天蓝色条形图案，领袖及底摆装饰有同样颜色的贴边。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_010_03_02",
+      "claim": "这件服装胸前的条形图案为朱红色。",
+      "evidence": "胸前两侧装饰有依次排列的七条尖头对称的天蓝色条形图案，领袖及底摆装饰有同样颜色的贴边。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_03_03",
+      "claim": "这件服装胸前的每条条形图案长十厘米。",
+      "evidence": "胸前两侧装饰有依次排列的七条尖头对称的天蓝色条形图案，领袖及底摆装饰有同样颜色的贴边。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_04_01",
+      "claim": "搭配穿着的衬衣右侧排列着九条宽条图案。",
+      "evidence": "在这种衣服里面通常会搭配穿着一件合领半开口套头衬衣，衬衣右侧依次排列九条呈扇面形，宽条图案。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_04_02",
+      "claim": "搭配穿着的衬衣右侧只排列着五条宽条图案。",
+      "evidence": "在这种衣服里面通常会搭配穿着一件合领半开口套头衬衣，衬衣右侧依次排列九条呈扇面形，宽条图案。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_04_03",
+      "claim": "搭配穿着的衬衣右侧的宽条图案采用绿色。",
+      "evidence": "在这种衣服里面通常会搭配穿着一件合领半开口套头衬衣，衬衣右侧依次排列九条呈扇面形，宽条图案。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_05_01",
+      "claim": "文中所述衣服领中部的两条绳带颜色相同。",
+      "evidence": "圆领口处有一条宽边，底口绣有羊角纹和碎花纹，领中部有两条相同颜色的绳带。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_05_02",
+      "claim": "文中所述衣服领中部的两条绳带颜色不同。",
+      "evidence": "圆领口处有一条宽边，底口绣有羊角纹和碎花纹，领中部有两条相同颜色的绳带。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_05_03",
+      "claim": "文中所述衣服领中部的两条绳带均为蓝色。",
+      "evidence": "圆领口处有一条宽边，底口绣有羊角纹和碎花纹，领中部有两条相同颜色的绳带。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_06_01",
+      "claim": "这种服装胸部两侧的图案每侧各有七条。",
+      "evidence": "这种服装胸部两侧上的各七条图案，原是箭袋。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_010_06_02",
+      "claim": "这种服装胸部两侧的图案每侧各有九条。",
+      "evidence": "这种服装胸部两侧上的各七条图案，原是箭袋。",
+      "reference_label": "refutes",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_06_03",
+      "claim": "这种服装胸部原有的每个箭袋能容纳三支箭。",
+      "evidence": "这种服装胸部两侧上的各七条图案，原是箭袋。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_07_01",
+      "claim": "按文中描述，穿这种服装之前需举行居宛托依仪式。",
+      "evidence": "内外两件衣服装饰的外七内九的单数，含有吉祥幸福的含义，这种服装只能是结过婚，并且生了小孩的妇女才能穿，在穿之前要举行一种叫“居宛托依”的仪式。",
+      "reference_label": "supports",
+      "predicted_label": "supports",
+      "correct": true
+    },
+    {
+      "id": "costume_010_07_02",
+      "claim": "按文中描述，穿这种服装之前无需举行居宛托依仪式。",
+      "evidence": "内外两件衣服装饰的外七内九的单数，含有吉祥幸福的含义，这种服装只能是结过婚，并且生了小孩的妇女才能穿，在穿之前要举行一种叫“居宛托依”的仪式。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_07_03",
+      "claim": "文中所述的居宛托依仪式持续三天。",
+      "evidence": "内外两件衣服装饰的外七内九的单数，含有吉祥幸福的含义，这种服装只能是结过婚，并且生了小孩的妇女才能穿，在穿之前要举行一种叫“居宛托依”的仪式。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_08_01",
+      "claim": "这件派里间服装的主体颜色是黑色。",
+      "evidence": "此件“派里间”服装主体为黑色，交领、对襟、长袖，挂里子，衣身宽大，衣袖平直。",
+      "reference_label": "supports",
+      "predicted_label": "refutes",
+      "correct": false
+    },
+    {
+      "id": "costume_010_08_02",
+      "claim": "这件派里间服装的主体颜色是白色。",
+      "evidence": "此件“派里间”服装主体为黑色，交领、对襟、长袖，挂里子，衣身宽大，衣袖平直。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_08_03",
+      "claim": "这件派里间服装的主体面料为丝绸。",
+      "evidence": "此件“派里间”服装主体为黑色，交领、对襟、长袖，挂里子，衣身宽大，衣袖平直。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_09_01",
+      "claim": "文中所述的里料采用带小碎花的棉质面料。",
+      "evidence": "黑色主料及天蓝色装饰料上均为织有暗花，里料为小碎花棉质。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_09_02",
+      "claim": "文中所述的里料完全采用羊毛面料。",
+      "evidence": "黑色主料及天蓝色装饰料上均为织有暗花，里料为小碎花棉质。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_09_03",
+      "claim": "文中所述里料上的小碎花为黄色。",
+      "evidence": "黑色主料及天蓝色装饰料上均为织有暗花，里料为小碎花棉质。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    },
+    {
+      "id": "costume_010_10_01",
+      "claim": "这件服装的胸前图案上能看到丝线钉缝。",
+      "evidence": "胸前图案排列紧致细密，浑然一体，其上可见细密同色丝线钉缝。",
+      "reference_label": "supports",
+      "predicted_label": "insufficient",
+      "correct": false
+    },
+    {
+      "id": "costume_010_10_02",
+      "claim": "这件服装的胸前图案上完全看不到丝线钉缝。",
+      "evidence": "胸前图案排列紧致细密，浑然一体，其上可见细密同色丝线钉缝。",
+      "reference_label": "refutes",
+      "predicted_label": "refutes",
+      "correct": true
+    },
+    {
+      "id": "costume_010_10_03",
+      "claim": "这件服装的胸前图案采用双股丝线钉缝。",
+      "evidence": "胸前图案排列紧致细密，浑然一体，其上可见细密同色丝线钉缝。",
+      "reference_label": "insufficient",
+      "predicted_label": "insufficient",
+      "correct": true
+    }
+  ]
+}

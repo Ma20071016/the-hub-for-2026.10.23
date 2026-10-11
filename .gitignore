@@ -7,6 +7,12 @@ __pycache__/
 Thumbs.db
 .DS_Store
 
+# 网站数据库及 SQLite 临时文件留在本地
+data/costume.db
+data/costume.db-journal
+data/costume.db-wal
+data/costume.db-shm
+
 # 数据与权重留在本地，仅保留目录说明
 data/raw/*
 !data/raw/README.md
