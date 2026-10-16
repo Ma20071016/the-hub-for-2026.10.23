@@ -2,6 +2,8 @@
 
 保存资源校验、数据处理、模型快照和训练摘要，保留原始实测日期。
 
+- [evidence_review_2026-10-14.md](evidence_review_2026-10-14.md)：564条待审片段内容审核、精切、入库统计、待核问题及本机逐条审核明细位置。
+
 - [bert_assets.json](bert_assets.json)：BERT 固定版本、本地路径与哈希；诊断脚本读取此文件定位权重。
 - [bert_encoder_check.json](bert_encoder_check.json)：2026-10-06 的 BERT GPU 诊断结果，包括形状、冻结、梯度和显存检查。
 - [data_loader_snapshot_2026-10-06.json](data_loader_snapshot_2026-10-06.json)：加载器完成时的历史环境、数据与参数快照，不控制运行。

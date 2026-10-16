@@ -1,26 +1,28 @@
-const LABEL_TITLES = {
-  supports: '支持',
-  refutes: '反驳',
-  insufficient: '信息不足',
-};
 const REQUEST_TIMEOUT_MS = 120000;
+// 整篇审阅要逐句跑模型，比单条核验慢得多，单独放宽。
+const REVIEW_TIMEOUT_MS = 600000;
 const START_HELP = '请在项目目录运行 python -m backend.serve，再通过服务地址打开页面。';
-// 自拟交互示例，仅在折叠区展示；不作为检索结果或模型预测。
-const examples = {
-  supports: { title: '支持', description: '给定证据支持这条说明。', claim: '这件服饰采用交领设计。', evidence: '这件服饰的领型为交领，衣身为蓝色。' },
-  refutes: { title: '反驳', description: '给定证据与这条说明存在矛盾。', claim: '这件服饰采用圆领设计。', evidence: '这件服饰的领型为交领，并非圆领。' },
-  insufficient: { title: '信息不足', description: '给定证据不足以支持或反驳这条说明。', claim: '这件服饰制作于明代。', evidence: '这件服饰的领型为交领，衣身为蓝色。' },
-};
+
 const $ = (selector) => document.querySelector(selector);
-const form = $('#verify-form');
-const claimField = $('#claim');
+
+/* ---------- 元素引用 ---------- */
+
+const documentFile = $('#document-file');
+const documentStatus = $('#document-status');
+const documentPreviewBox = $('#document-preview-box');
+const documentPreview = $('#document-preview');
 const sourceSelect = $('#source-select');
 const sourceHelp = $('#source-help');
-const resultContent = $('#result-content');
-const resultState = $('#result-state');
-const errorMessage = $('#form-error');
-const submitButton = $('#submit-button');
-let activeRequest = null;
+const reviewButton = $('#review-document');
+const reviewProgress = $('#review-progress');
+const reviewResultBox = $('#review-result-box');
+const reviewResult = $('#review-result');
+const reviewStatus = $('#review-status');
+
+let activeUpload = null;
+let activeReview = null;
+
+/* ---------- 小工具 ---------- */
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -29,30 +31,11 @@ function element(tag, className, text) {
   return node;
 }
 
-function showEmpty(title = '等待一条服饰说明', description = '输入说明后查找相关证据；如果没有写明对象，可先限定一份资料。') {
-  const container = element('div', 'empty-result');
-  const symbol = element('div', 'empty-symbol', '证');
-  symbol.setAttribute('aria-hidden', 'true');
-  container.append(symbol, element('h3', '', title), element('p', '', description));
-  resultContent.replaceChildren(container);
-}
-
-function setBusy(busy) {
-  submitButton.disabled = busy;
-  submitButton.firstElementChild.textContent = busy ? '正在查找…' : '开始核验';
-  $('.result-panel').setAttribute('aria-busy', String(busy));
-}
-
-function invalidateResult() {
-  // 编辑或清空后取消旧请求，避免迟到的响应显示为新文本的结果。
-  if (activeRequest) activeRequest.abort();
-  activeRequest = null;
-  errorMessage.hidden = true;
-  claimField.setCustomValidity('');
-  $('#claim-count').textContent = `${claimField.value.length} / 500`;
-  setBusy(false);
-  resultState.textContent = '等待输入';
-  showEmpty();
+// 服务状态指示：页头那颗小圆点。
+function setServiceState(state, text) {
+  const dot = $('#service-dot');
+  dot.className = `status-dot ${state}`;
+  $('#service-text').textContent = text;
 }
 
 function sourceLink(url, title) {
@@ -69,131 +52,26 @@ function sourceLink(url, title) {
   }
 }
 
-function showSearchResult(data) {
-  const completed = data.status === 'completed';
-  const report = element('div', 'result-report');
-
-  report.append(element('p', 'retrieval-notice',
-    completed ? '模型预测 · 每条结论仅针对对应证据'
-      : '本次尚未运行模型'));
-
-  const claimSection = element('section', 'result-section');
-  claimSection.append(
-    element('h4', '', '本次说明'),
-    element('p', '', data.claim)
-  );
-  report.append(
-    claimSection,
-    element('p', 'search-message', data.message)
-  );
-
-  data.matches.forEach((match, index) => {
-    const section = element('section', 'result-section evidence-card');
-    section.append(element('h4', '',
-      `证据 ${index + 1} · ${match.object_name}`));
-
-    const verdict = element('div', `verdict ${match.label}`);
-    verdict.append(
-      element('h3', '', `模型判断：${LABEL_TITLES[match.label]}`)
-    );
-    section.append(verdict);
-
-    for (const [label, title] of Object.entries(LABEL_TITLES)) {
-      const row = element('div', 'score-row');
-      const bar = element('progress');
-      bar.max = 1;
-      bar.value = match.scores[label];
-      bar.setAttribute('aria-label', `${title}的模型分类分数`);
-
-      row.append(
-        element('span', '', title),
-        bar,
-        element('span', '', `${(match.scores[label] * 100).toFixed(1)}%`)
-      );
-      section.append(row);
-    }
-
-    section.append(
-      element('p', 'model-note', '分类分数不代表说明为真的概率。'),
-      element('h4', '', `原文 · ${match.attribute}`),
-      element('blockquote', '', match.evidence_text)
-    );
-
-    const source = element('p', 'source-text', '来源：');
-    source.append(sourceLink(match.source_url, match.title));
-    source.append(document.createTextNode(` · ${match.publisher}`));
-    section.append(source);
-
-    report.append(section);
-  });
-
-  resultContent.replaceChildren(report);
-  resultState.textContent = {
-    completed: '核验完成',
-    no_evidence: '暂无证据',
-    needs_context: '请选择资料',
-  }[data.status];
-}
-function validateSearchResponse(data) {
-  const fields = [
-    'object_name', 'attribute', 'evidence_text', 'locator',
-    'title', 'publisher', 'source_url',
-  ];
-
-  if (!data || !['completed', 'no_evidence', 'needs_context'].includes(data.status)
-    || typeof data.claim !== 'string' || typeof data.message !== 'string'
-    || !Array.isArray(data.matches)
-    || data.matches.some((match) => !match
-      || !Number.isInteger(match.id) || !Number.isInteger(match.source_id)
-      || fields.some((key) => typeof match[key] !== 'string')
-      || !Array.isArray(match.matched_terms)
-      || match.matched_terms.some((term) => typeof term !== 'string'))) {
-    throw new Error('核验结果格式不正确。');
-  }
-
-  if (data.status === 'completed') {
-    if (data.model_status !== 'completed' || data.matches.length === 0) {
-      throw new Error('模型没有返回完整结果。');
-    }
-
-    for (const match of data.matches) {
-      const scores = Object.keys(LABEL_TITLES).map(
-        (label) => match.scores?.[label]
-      );
-
-      if (!Object.hasOwn(LABEL_TITLES, match.label)
-        || typeof match.claim_input !== 'string'
-        || typeof match.evidence_input !== 'string'
-        || scores.some((n) => !Number.isFinite(n) || n < 0 || n > 1)
-        || Math.abs(scores.reduce((sum, n) => sum + n, 0) - 1) > 0.02) {
-        throw new Error('模型类别或分数格式不正确。');
-      }
-    }
-  } else if (data.model_status !== 'not_run' || data.matches.length !== 0) {
-    throw new Error('未运行模型时不应返回预测结果。');
-  }
-
-  return data;
-}
-
 async function requestJSON(path, options) {
   if (window.location.protocol === 'file:') throw new Error(START_HELP);
   const response = await fetch(path, { ...options, headers: { Accept: 'application/json', ...options.headers } });
-  if ([404, 405, 501].includes(response.status)) throw new Error(`检索服务尚未启动。${START_HELP}`);
+  if ([404, 405, 501].includes(response.status)) throw new Error(`服务尚未启动。${START_HELP}`);
   if (!response.headers.get('content-type')?.toLowerCase().includes('application/json')) {
-    throw new Error(`检索服务没有返回有效数据。${START_HELP}`);
+    throw new Error(`服务没有返回有效数据。${START_HELP}`);
   }
   let data;
   try { data = await response.json(); }
   catch (error) {
     if (options.signal.aborted) throw error;
-    throw new Error('检索服务返回的内容无法读取，请稍后重试。');
+    throw new Error('服务返回的内容无法读取，请稍后重试。');
   }
   if (!response.ok) {
-    throw new Error(typeof data?.error === 'string' ? data.error : `检索服务暂时不可用（${response.status}），请稍后重试。`);
+    throw new Error(typeof data?.error === 'string' ? data.error : `服务暂时不可用（${response.status}），请稍后重试。`);
   }
   return data;
 }
+
+/* ---------- 资料列表 ---------- */
 
 async function loadSources() {
   const controller = new AbortController();
@@ -215,84 +93,271 @@ async function loadSources() {
     sourceHelp.textContent = data.approved_count > 0
       ? `当前有 ${data.approved_count} 条已审核证据，来自 ${data.sources.length} 份资料。`
       : '尚无已审核证据。资料审核通过后，刷新页面即可检索。';
+    setServiceState(
+      data.sources.length ? 'ready' : 'offline',
+      data.sources.length ? `资料库就绪 · ${data.approved_count} 条证据` : '资料库为空'
+    );
   } catch (error) {
     sourceHelp.textContent = controller.signal.aborted ? '读取资料列表超时，请刷新页面重试。'
-      : error instanceof TypeError ? `无法连接检索服务。${START_HELP}` : error.message;
+      : error instanceof TypeError ? `无法连接服务。${START_HELP}` : error.message;
+    setServiceState('offline', '服务未连接');
   } finally {
     clearTimeout(timeout);
   }
 }
 
-document.querySelectorAll('[data-example]').forEach((button) => {
-  button.addEventListener('click', () => {
-    const sample = examples[button.dataset.example];
-    const report = element('div', 'demo-report');
-    report.append(element('p', 'demo-notice', '示例结果 · 预先设定，非模型输出，非正式资料。'));
-    const verdict = element('div', `verdict ${button.dataset.example}`);
-    verdict.append(element('h3', '', sample.title), element('p', '', sample.description));
-    const section = element('section', 'result-section');
-    section.append(element('h4', '', '示例说明'), element('p', '', sample.claim), element('h4', 'demo-evidence-heading', '示例证据'), element('blockquote', '', sample.evidence));
-    report.append(verdict, section);
-    $('#demo-result').replaceChildren(report);
-    document.querySelectorAll('[data-example]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-  });
-});
+/* ---------- 文档上传 ---------- */
 
-claimField.addEventListener('input', invalidateResult);
-sourceSelect.addEventListener('change', invalidateResult);
-$('#clear-button').addEventListener('click', () => {
-  form.reset();
-  invalidateResult();
-  claimField.focus();
-});
+function resetDocumentUpload() {
+  if (activeUpload) activeUpload.abort();
+  activeUpload = null;
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  if (activeRequest) return;
-  const claim = claimField.value.trim();
-  claimField.setCustomValidity(!claim ? '请输入说明，不能只有空格。' : claim.length > 500 ? '说明最多为 500 字符。' : '');
-  if (!form.reportValidity()) return;
-    if (sourceSelect.disabled || !sourceSelect.value) {
-    errorMessage.textContent = '请先加载并选择一份馆藏资料，再开始核验。';
-    errorMessage.hidden = false;
+  documentPreview.value = '';
+  documentPreviewBox.hidden = true;
+  documentStatus.textContent = '';
+  $('#document-count').textContent = '';
+}
+
+async function handleDocumentChange() {
+  const file = documentFile.files[0];
+
+  resetDocumentUpload();
+  resetReview();
+  documentFile.value = ''; // 允许再次选择同一个文件重试。
+
+  if (!file) return;
+
+  const kind = file.name.split('.').pop().toLowerCase();
+
+  if (!['pdf', 'docx'].includes(kind)) {
+    documentStatus.textContent = '仅支持 .pdf 和 .docx；.doc 请先另存为 .docx。';
     return;
   }
-  const snapshot = { claim, source_id: sourceSelect.value ? Number(sourceSelect.value) : null };
+
+  if (!file.size || file.size > 10 * 1024 * 1024) {
+    documentStatus.textContent = '请选择非空且不超过 10 MB 的文件。';
+    return;
+  }
+
   const controller = new AbortController();
-  activeRequest = controller;
-  let timedOut = false;
-  const timeout = setTimeout(() => { timedOut = true; controller.abort(); }, REQUEST_TIMEOUT_MS);
-  errorMessage.hidden = true;
-  setBusy(true);
-  resultState.textContent = '正在核验';
-  showEmpty(
-    '正在检索证据并运行模型',
-    '请稍候。编辑内容后，本次结果将不再显示。'
-  );
+  activeUpload = controller;
+
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  documentStatus.textContent = `正在读取：${file.name}…`;
+
   try {
-    const data = validateSearchResponse(await requestJSON('/api/verify', {
+    const data = await requestJSON('/api/extract', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(snapshot),
+      headers: {
+        'Content-Type': 'application/octet-stream',
+        'X-Document-Type': kind,
+      },
+      body: file,
       signal: controller.signal,
-    }));
-    if (activeRequest !== controller) return;
-    showSearchResult(data);
+    });
+
+    // 清空或重新选择文件后，忽略旧请求的响应。
+    if (activeUpload !== controller) return;
+
+    if (typeof data?.text !== 'string' || !data.text.trim()) {
+      throw new Error('服务未返回有效文字。');
+    }
+
+    documentPreview.value = data.text;
+    documentPreviewBox.hidden = false;
+    $('#document-count').textContent = `${data.text.length} 字符`;
+    documentStatus.textContent = `已读取：${file.name}。${data.warning || ''}`;
+
   } catch (error) {
-    if (activeRequest !== controller) return;
-    errorMessage.textContent = timedOut ? '检索等待超过 120 秒，请稍后重试。'
-      : error instanceof TypeError ? `无法连接检索服务。${START_HELP}` : error.message;
-    errorMessage.hidden = false;
-    resultState.textContent = '未完成';
-    showEmpty('本次核验未完成', '输入内容已保留，服务恢复后可重新提交。');
+    if (activeUpload !== controller) return;
+
+    documentStatus.textContent = controller.signal.aborted
+      ? '读取超时，请重新选择文件。'
+      : error instanceof TypeError
+        ? `无法连接服务。${START_HELP}`
+        : error.message;
+
   } finally {
     clearTimeout(timeout);
-    if (activeRequest === controller) {
-      activeRequest = null;
-      setBusy(false);
+
+    if (activeUpload === controller) {
+      activeUpload = null;
     }
   }
-});
+}
 
-showEmpty();
+/* ---------- 整篇审阅 ---------- */
+
+function resetReview() {
+  if (activeReview) activeReview.abort();
+  activeReview = null;
+
+  reviewProgress.hidden = true;
+  reviewResultBox.hidden = true;
+  reviewResult.replaceChildren();
+  reviewStatus.textContent = '';
+  $('#review-badge').textContent = '';
+  reviewButton.disabled = false;
+  reviewButton.classList.remove('busy');
+  $('#review-button-label').textContent = '整篇审阅';
+}
+
+function validateReviewResponse(data) {
+  if (!data || data.status !== 'completed'
+    || !Array.isArray(data.problems)
+    || !data.stats || !Number.isInteger(data.stats.total_sentences)
+    || !Number.isInteger(data.stats.checked_sentences)
+    || !Number.isInteger(data.stats.problems_found)) {
+    throw new Error('审阅结果格式不正确。');
+  }
+  for (const problem of data.problems) {
+    if (!problem || typeof problem.sentence !== 'string'
+      || typeof problem.evidence !== 'string'
+      || typeof problem.object_name !== 'string') {
+      throw new Error('问题条目格式不正确。');
+    }
+  }
+  return data;
+}
+
+function showReviewResult(data) {
+  const { stats, problems } = data;
+  reviewResultBox.hidden = false;
+  reviewResult.replaceChildren();
+
+  $('#review-badge').textContent = `${stats.problems_found} 处存疑`;
+
+  // 摘要：只报总句数与判定结果，不展示中间过程。
+  const summary = element('div', 'review-summary');
+  const entries = [
+    ['总句数', stats.total_sentences, false],
+    ['逐句比对', stats.checked_sentences, false],
+    ['判为矛盾', stats.problems_found, true],
+  ];
+  for (const [label, value, bad] of entries) {
+    const stat = element('div', `review-stat${bad && value > 0 ? ' bad' : ''}`);
+    stat.append(element('strong', '', String(value)), element('span', '', label));
+    summary.append(stat);
+  }
+
+  if (!problems.length) {
+    const empty = element('div', 'review-empty');
+    const mark = element('span', 'mark', '合');
+    mark.setAttribute('aria-hidden', 'true');
+    empty.append(
+      mark,
+      element('p', '', '没有发现与资料相矛盾的说法。')
+    );
+    reviewResult.append(empty, summary);
+    reviewStatus.textContent = '审阅完成。';
+    return;
+  }
+
+  problems.forEach((problem, index) => {
+    const card = element('article', 'problem-card');
+    card.append(element('span', 'problem-tag', `第 ${index + 1} 处`));
+
+    const claim = element('p', 'problem-claim', problem.sentence);
+    card.append(claim);
+
+    card.append(element('p', 'problem-label', `资料原文 · ${problem.object_name}`));
+    card.append(element('blockquote', '', problem.evidence));
+
+    const source = element('p', 'problem-source', '来源：');
+    source.append(sourceLink(problem.source_url, problem.source_title || '资料'));
+    card.append(source);
+
+    reviewResult.append(card);
+  });
+
+  reviewResult.append(summary);
+  reviewStatus.textContent = `审阅完成，发现 ${stats.problems_found} 处与资料相矛盾。`;
+}
+
+async function handleReviewClick() {
+  if (activeReview) return;
+
+  const text = documentPreview.value.trim();
+  if (!text) {
+    documentStatus.textContent = '请先上传文档并等待文字读取完成。';
+    return;
+  }
+  if (sourceSelect.disabled || !sourceSelect.value) {
+    documentStatus.textContent = '请先在上方选择一份对应资料，再开始整篇审阅。';
+    sourceSelect.focus();
+    return;
+  }
+
+  const controller = new AbortController();
+  activeReview = controller;
+  let timedOut = false;
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, REVIEW_TIMEOUT_MS);
+
+  reviewButton.disabled = true;
+  reviewButton.classList.add('busy');
+  $('#review-button-label').textContent = '正在逐句比对…';
+  reviewProgress.hidden = false;
+  reviewResultBox.hidden = true;
+  reviewStatus.textContent = '';
+  documentStatus.textContent = '正在逐句比对，请勿关闭页面。';
+
+  try {
+    const data = validateReviewResponse(await requestJSON('/api/review', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text,
+        source_id: Number(sourceSelect.value),
+      }),
+      signal: controller.signal,
+    }));
+
+    if (activeReview !== controller) return;
+    showReviewResult(data);
+    documentStatus.textContent = '整篇审阅已完成。';
+    reviewResultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  } catch (error) {
+    if (activeReview !== controller) return;
+    const message = timedOut ? '审阅等待超过 10 分钟，请缩短文稿后重试。'
+      : error instanceof TypeError ? `无法连接服务。${START_HELP}` : error.message;
+    reviewResultBox.hidden = false;
+    reviewResult.replaceChildren();
+    reviewStatus.textContent = message;
+    documentStatus.textContent = '本次审阅未完成。';
+
+  } finally {
+    clearTimeout(timeout);
+    reviewProgress.hidden = true;
+    if (activeReview === controller) {
+      activeReview = null;
+      reviewButton.disabled = false;
+      reviewButton.classList.remove('busy');
+      $('#review-button-label').textContent = '整篇审阅';
+    }
+  }
+}
+
+/* ---------- 清空 ---------- */
+
+// 上传、预览、审阅结果一次复位。表单里的选择一并清掉。
+function handleClear() {
+  resetDocumentUpload();
+  resetReview();
+  documentFile.value = '';
+  documentStatus.textContent = '';
+  sourceSelect.value = '';
+}
+
+/* ---------- 事件监听（统一在最后注册） ---------- */
+
+documentFile.addEventListener('change', handleDocumentChange);
+reviewButton.addEventListener('click', handleReviewClick);
+sourceSelect.addEventListener('change', resetReview);
+$('#clear-button').addEventListener('click', handleClear);
+
 loadSources();

@@ -36,6 +36,8 @@
 
 ## 网站前后端
 
+2026-10-14 已在原数据库完成564条待审片段的首轮内容审查：8条原段直接通过、414条不整段启用、142条待复核，另精切新增83条可用证据。现有655条片段，其中99条 approved 来自43份资料；原有8条人工审核保留。待核与拒绝片段不进入检索，逐条依据和本机明细见[审核记录](reports/evidence_review_2026-10-14.md)。审核的是来源范围内的证据可用性，模型准确率未因此得到验证。
+
 前端仅包含 `frontend/index.html`、`frontend/style.css`、`frontend/app.js`，不需要 npm。本地后端为 `backend/serve.py`，HTTP 服务使用 Python 标准库，模型推理沿用 `escnet` 中的 PyTorch、Transformers 和本地资源。在 WSL 中，从项目根目录运行：
 
 ```bash

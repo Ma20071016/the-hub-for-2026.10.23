@@ -10,9 +10,12 @@ import unicodedata
 from urllib.parse import urlsplit
 
 from backend.init_db import DB_PATH, PROJECT_DIR
+from backend.text_prepare import clean_text, split_sentences
 
 from threading import Lock
 from backend.inference import Verifier
+
+from backend.document_upload import handle_upload
 
 
 FRONTEND = PROJECT_DIR / "frontend"
@@ -23,6 +26,179 @@ STATIC_FILES = {
     "/style.css": ("style.css", "text/css; charset=utf-8"),
 }
 MAX_REQUEST_BYTES = 8192
+# 整篇审阅要传输完整正文，上限单独放宽。
+# 一个中文字符约 3 字节，50000 字符的正文约 150KB。
+MAX_REVIEW_BYTES = 400 * 1024
+
+# 中文虚词与常见连接成分。它们出现在任何句子里，不能用来判断两句是否在谈同一件事。
+STOP_TERMS = frozenset(
+    "此件 这件 该件 一件 此 件 的 了 是 在 与 和 及 或 为 以 由 从 对 被 把 也 都 还 "
+    "这个 那个 一个 各个 这些 那些 其中 以及 并且 而且 但是 不过 因此 所以 同时 "
+    "可以 能够 具有 采用 使用 属于 位于 分为 呈现 形成 进行 较为 十分 非常 比较 "
+    "新疆 维吾尔族 传统 民族 服饰 工艺".split()
+)
+
+# 内容词：连续两个及以上的汉字，或字母数字串。单字不作数——「衣」「色」这类
+# 单字在服饰文本里到处都是，拿它判断相关性等于没判断。
+CONTENT_TERM = re.compile(r"[0-9A-Za-z]+|[一-鿿]{2,}")
+
+# 判定「句子和证据在谈同一件事」的两个门槛。
+# MIN_RELEVANCE 太低会放进大量无关组合，太高会漏掉真矛盾。
+# 这两个值需要结合实际数据调整，当前取值来自一份含已知错误的测试文稿。
+MIN_RELEVANCE = 2
+RELATIVE_THRESHOLD = 0.5
+
+
+def content_terms(text):
+    """提取用于判断「是否在谈同一件事」的实词集合。
+
+    只保留长度 ≥ 2 的词，并去掉虚词与共享主题词。
+    """
+    terms = set()
+    for run in CONTENT_TERM.findall(text):
+        if len(run) <= 1:
+            continue
+        # 长串按二字滑窗拆开，提高与证据用词不一致时的召回：
+        # 「绗缝线迹」与证据里的「绗缝」也能对上。
+        if len(run) == 2:
+            terms.add(run)
+        else:
+            for index in range(len(run) - 1):
+                terms.add(run[index:index + 2])
+    return {term for term in terms if term not in STOP_TERMS}
+
+
+def relevance(sentence, evidence):
+    """句子与证据的相关性：共用的内容词数量。
+
+    用于在跑模型之前挡掉「说的根本不是一回事」的组合。
+    这类组合模型容易误判为 refutes，其实语义上是 neutral。
+    """
+    return len(content_terms(sentence) & content_terms(evidence))
+
+
+def review_document(document_text, source_id, verifier, connection):
+    """
+    审阅整篇文档，返回有问题的句子列表。
+
+    参数:
+        document_text: 文档正文（字符串）
+        source_id: 限定的资料 ID
+        verifier: 模型实例
+        connection: 数据库连接
+
+    返回:
+        {
+            "problems": [...],   # 每句最多一条，按严重程度排序
+            "stats": {...}
+        }
+    """
+    # 第一步：清洗
+    cleaned_text, clean_stats = clean_text(document_text)
+
+    # 第二步：切句
+    sentences = split_sentences(cleaned_text)
+
+    # 第三步：对每句核验
+    problems = []
+    checked_count = 0
+    skipped_count = 0
+
+    for sentence_text, start, end in sentences:
+        # 3.1 这一句要和哪些证据比对？
+        #
+        # 一篇文稿常同时讲多件服饰（如绿棉袍与花帽），只比对用户选定的那一份
+        # 会让另一件服饰的句子全部落空。所以先在全部已审核资料里检索，
+        # 由句子自己提到哪个对象名来决定归属。
+        #
+        # 跨资料检索要求句子含对象名（search_evidence 的既有规则）。
+        # 不含对象名的句子（如「这件服饰属于清代…」）退回用户选定的资料，
+        # 否则这类句子会被整篇跳过，漏掉只说「这件」的说明。
+        found = search_evidence(connection, sentence_text, None)
+        if found["status"] != "found" and source_id is not None:
+            found = search_evidence(connection, sentence_text, source_id)
+
+        # 3.2 没找到证据的句子跳过，不算"有问题"，也不算"检查过"。
+        if found["status"] != "found":
+            continue
+
+        # 3.3 先按相关性筛掉「说的不是一回事」的组合。
+        # search_evidence 内部已把不含对象名的证据过滤掉了，但同一份资料下
+        # 仍可能有多条讲不同部位的证据（形制 / 材质 / 纹样 / 内里）。
+        # 一句只谈内里的说明拿去比形制证据，模型会误判。
+        #
+        # 两个门槛，缺一不可：
+        #   MIN_RELEVANCE      至少要共享这么多个内容词
+        #   RELATIVE_THRESHOLD 至少达到本句最高相关性的一半
+        # 设相对门槛是因为「最高分只有 1，其余全是 0」时，
+        # 那个第一名是碰巧胜出，不代表真的对得上。
+        scored = []
+        for match in found["matches"]:
+            score = relevance(sentence_text, match["evidence_text"])
+            scored.append((score, -match["id"], match))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+
+        if not scored:
+            continue
+
+        top_score = scored[0][0]
+        threshold = max(MIN_RELEVANCE, top_score * RELATIVE_THRESHOLD)
+        candidates = [item[2] for item in scored if item[0] >= threshold]
+
+        # 整句和所有证据都对不上：这句谈的特征资料里没有记载。
+        # 跳过它，不算"已比对"，也不产生结论——模型对无关文本的判断不稳定。
+        if not candidates:
+            skipped_count += 1
+            continue
+
+        checked_count += 1
+
+        # 3.4 逐条证据跑模型，一句最多保留一条结论。
+        best = None
+        for match in candidates:
+            # 给证据补上对象名，和 /api/verify 保持一致。
+            evidence_input = (
+                f"对象：{match['object_name']}。\n"
+                f"{match['evidence_text']}"
+            )
+
+            prediction = verifier.predict(sentence_text, evidence_input)
+
+            if prediction["label"] != "refutes":
+                continue
+
+            # 同一句可能对多条证据都判矛盾，取模型置信度最高的一条。
+            confidence = prediction["scores"]["refutes"]
+            if best is None or confidence > best["scores"]["refutes"]:
+                best = {
+                    "sentence": sentence_text,
+                    "sentence_start": start,
+                    "sentence_end": end,
+                    "evidence": match["evidence_text"],
+                    "object_name": match["object_name"],
+                    "source_title": match["title"],
+                    "source_url": match["source_url"],
+                    "stance": prediction["label"],
+                    "scores": prediction["scores"],
+                    "evidence_id": match["id"],
+                    "relevance": relevance(sentence_text, match["evidence_text"]),
+                }
+
+        if best is not None:
+            problems.append(best)
+
+    # 第四步：按矛盾置信度排序，最确定的排前面。
+    problems.sort(key=lambda item: -item["scores"]["refutes"])
+
+    return {
+        "problems": problems,
+        "stats": {
+            "total_sentences": len(sentences),
+            "checked_sentences": checked_count,
+            "problems_found": len(problems),
+            "low_relevance_sentences": skipped_count,
+        }
+    }
 
 
 def open_database(path=DB_PATH):
@@ -160,7 +336,13 @@ class WebsiteHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         route = urlsplit(self.path).path
-        if route not in ("/api/search", "/api/verify"):
+
+        #文件上传使用独立入口，在现有JSON检查之前处理.
+        if route == "/api/extract":
+            handle_upload(self)
+            return
+
+        if route not in ("/api/search", "/api/verify", "/api/review"):
             self.respond(404, {"error": "接口不存在。"})
             return
         if self.headers.get("Transfer-Encoding"):
@@ -173,8 +355,13 @@ class WebsiteHandler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", "0"))
         except ValueError:
             length = 0
-        if length > MAX_REQUEST_BYTES:
-            self.respond(413, {"error": "请求内容过长，请缩短说明。"})
+        # 整篇审阅要传输完整正文，用单独放宽的上限。
+        limit = MAX_REVIEW_BYTES if route == "/api/review" else MAX_REQUEST_BYTES
+        if length > limit:
+            if route == "/api/review":
+                self.respond(413, {"error": "文档过长，请拆分后分批审阅。"})
+            else:
+                self.respond(413, {"error": "请求内容过长，请缩短说明。"})
             return
         if length <= 0:
             self.respond(400, {"error": "请求内容为空或长度无效。"})
@@ -183,6 +370,59 @@ class WebsiteHandler(BaseHTTPRequestHandler):
             raw = self.rfile.read(length)
             if len(raw) != length:
                 raise ValueError("请求内容不完整。")
+        except TimeoutError:
+            self.respond(408, {"error": "接收请求超时，请重试。"})
+            return
+
+        # 整篇审阅接口：单独处理，不经过 validate_query
+        if route == "/api/review":
+            try:
+                request_data = json.loads(raw.decode("utf-8"))
+            except (ValueError, UnicodeError):
+                self.respond(400, {"error": "请求格式不正确。"})
+                return
+
+            document_text = request_data.get("text", "").strip()
+            review_source_id = request_data.get("source_id")
+
+            if not document_text:
+                self.respond(400, {"error": "缺少文档正文（text 字段）"})
+                return
+            if review_source_id is None:
+                self.respond(400, {"error": "请先选择限定资料（source_id 字段）"})
+                return
+
+            try:
+                with closing(open_database(self.server.db_path)) as connection:
+                    if not self.server.model_lock.acquire(blocking=False):
+                        self.respond(429, {"error": "模型正在处理其他请求，请稍后重试。"})
+                        return
+
+                    try:
+                        result = review_document(
+                            document_text,
+                            review_source_id,
+                            self.server.verifier,
+                            connection
+                        )
+                        self.respond(200, {
+                            "status": "completed",
+                            "problems": result["problems"],
+                            "stats": result["stats"]
+                        })
+                    except ValueError as error:
+                        self.respond(422, {"error": str(error)})
+                    except Exception as error:
+                        self.log_error("Review failed: %s", error)
+                        self.respond(500, {"error": "审阅失败，请查看后端终端。"})
+                    finally:
+                        self.server.model_lock.release()
+            except (sqlite3.Error, ValueError):
+                self.respond(503, {"error": "暂时无法读取资料库。"})
+            return
+
+        # 其他接口（search / verify）：需要校验 claim 长度
+        try:
             claim, source_id = validate_query(json.loads(raw.decode("utf-8")))
         except (ValueError, UnicodeError, RecursionError):
             self.respond(400, {"error": "请求格式不正确：请填写不超过 500 字符的说明，并选择有效的资料编号。"})
