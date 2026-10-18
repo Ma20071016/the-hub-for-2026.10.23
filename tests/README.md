@@ -56,6 +56,7 @@ node --check frontend/app.js
 | 编辑与草稿 | `test_sentence_map.cjs`、`test_draft_store.cjs`、`test_draft_recovery.cjs`：Unicode 定位、改句、草稿保存与恢复 |
 | 选择与引导 | `test_source_picker.cjs`、`test_workspace_guide.cjs`、`test_guide_feedback.cjs`：资料筛选、教学示例、引导与本机反馈 |
 | 展厅交互 | `test_museum_library.cjs`、`test_museum_entry.cjs`、`test_museum_backdrop.cjs`：目录、启幕、环形展台、暂停/恢复及低动态模式 |
+| 使用统计 | `test_usage_report.py`：日志轮转、明细排序、IP 筛选、隐私字段隐藏、只读数据库和命令行参数 |
 
 ## 验证边界
 
