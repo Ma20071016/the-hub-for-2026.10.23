@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="登录传统服饰说明核验，查阅资料、审阅文稿，保存你的审阅档案。"/>
+  <title>登录 · 传统服饰说明核验</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="stylesheet" href="./login.css"/>
+  <script src="./login.js" defer></script>
+</head>
+<body class="login-page">
+<a class="skip-link" href="#auth-title">跳到登录表单</a>
+<header class="login-header">
+  <a class="brand" href="./login.html" aria-label="传统服饰说明核验登录页"><span class="brand-mark" aria-hidden="true">衣</span><span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span></a>
+  <nav class="login-public-nav" aria-label="公开浏览"><a href="./guide.html">使用指南</a><a class="login-library-link" href="./library.html">先逛资料馆 <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main class="login-layout">
+  <section class="login-story" aria-labelledby="story-title">
+    <p class="login-eyebrow"><span></span>传统服饰 · 文稿审阅</p>
+    <h1 id="story-title">衣冠有迹，<br/>言之有据。</h1>
+    <p class="login-story-copy">让每一段服饰说明，<br/>都经得起资料的对读。</p>
+    <div class="login-threadwork" aria-hidden="true"><span class="threadwork-frame"></span><span class="threadwork-seal">考<br/>据</span><span class="threadwork-caption">循其形 · 读其纹 · 考其据</span></div>
+    <ol class="login-workflow" aria-label="登录后的工作流程"><li><span>01</span>查阅资料</li><li><span>02</span>对读文稿</li><li><span>03</span>留存审阅</li></ol>
+  </section>
+  <section class="login-panel" aria-labelledby="auth-title">
+    <div class="login-panel-heading"><p class="login-eyebrow">你的审阅空间</p><h2 id="auth-title" tabindex="-1">欢迎回来</h2><p id="auth-description">登录账号，继续你的资料与文稿审阅。</p></div>
+    <div class="auth-tabs" role="tablist" aria-label="选择登录或注册">
+      <button id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="auth-panel" tabindex="0">登录</button>
+      <button id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="auth-panel" tabindex="-1">注册</button>
+    </div>
+    <div id="auth-panel" role="tabpanel" aria-labelledby="login-tab">
+      <form id="auth-form" novalidate>
+        <div class="auth-field"><label for="auth-username">用户名</label><input id="auth-username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="24" required aria-describedby="username-hint" placeholder="请输入用户名"/><p id="username-hint" class="auth-hint" hidden>3–24 个汉字、字母、数字、下划线或短横线</p></div>
+        <div class="auth-field"><label for="auth-password">密码</label><div class="auth-password-wrap"><input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required aria-describedby="password-hint caps-lock-hint" placeholder="请输入密码"/><button id="password-toggle" class="auth-password-toggle" type="button" aria-label="显示密码" aria-pressed="false">显示</button></div><p id="password-hint" class="auth-hint" hidden>8–128 个字符，建议使用独立且不易猜测的密码</p><p id="caps-lock-hint" class="auth-hint auth-caps" hidden>大写锁定已开启</p></div>
+        <div id="confirm-field" class="auth-field" hidden><label for="auth-confirm">确认密码</label><input id="auth-confirm" name="confirm-password" type="password" autocomplete="new-password" minlength="8" maxlength="128" disabled placeholder="请再次输入密码"/></div>
+        <p id="auth-feedback" class="auth-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+        <button id="auth-submit" class="auth-submit" type="submit"><span id="auth-submit-label">登录</span><span class="auth-submit-arrow" aria-hidden="true">→</span></button>
+        <p id="auth-switch-copy" class="auth-switch"><span id="auth-switch-prompt">还没有账号？</span><button id="auth-switch" type="button">立即注册</button></p>
+      </form>
+    </div>
+    <div class="login-account-note"><span class="login-account-icon" aria-hidden="true">✓</span><p>使用用户名和密码即可登录。<br/>你的审阅档案按账号独立保存。</p></div>
+  </section>
+</main>
+<footer class="login-footer"><span>传统服饰说明核验</span><span>以资料为依据，让文化表达更准确。</span></footer>
+<noscript><p class="noscript">请启用浏览器 JavaScript 以登录或注册账号。</p></noscript>
+</body>
+</html>

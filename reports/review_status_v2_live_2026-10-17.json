@@ -1,0 +1,154 @@
+{
+  "checked_at": "2026-10-17T10:55:42.937480+08:00",
+  "scope": "Exploratory real-model smoke check after review schema v2; not an accuracy evaluation",
+  "elapsed_seconds": 4.364,
+  "events": [
+    {
+      "type": "start",
+      "total": 4,
+      "schema_version": 2
+    },
+    {
+      "type": "sentence",
+      "index": 0,
+      "total": 4,
+      "status": "supported",
+      "sentence": "这件棉袍采用对襟设计。"
+    },
+    {
+      "type": "sentence",
+      "index": 1,
+      "total": 4,
+      "status": "insufficient",
+      "sentence": "这件棉袍的主人喜欢听音乐。"
+    },
+    {
+      "type": "sentence",
+      "index": 2,
+      "total": 4,
+      "status": "supported",
+      "sentence": "这件棉袍衣身宽大、造型简洁,采用套头而非对襟设计。"
+    },
+    {
+      "type": "sentence",
+      "index": 3,
+      "total": 4,
+      "status": "uncovered",
+      "sentence": "MFB999999藏品采用圆领设计。"
+    },
+    {
+      "type": "done",
+      "schema_version": 2,
+      "normalized_text": "这件棉袍采用对襟设计。\n这件棉袍的主人喜欢听音乐。\n这件棉袍衣身宽大、造型简洁,采用套头而非对襟设计。\nMFB999999藏品采用圆领设计。",
+      "offset_basis": "normalized_text_python_chars",
+      "results": [
+        {
+          "index": 0,
+          "sentence": "这件棉袍采用对襟设计。",
+          "sentence_start": 0,
+          "sentence_end": 11,
+          "evidence": [
+            {
+              "evidence_id": 566,
+              "source_id": 1,
+              "evidence": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。",
+              "object_name": "新疆喀什维吾尔族绿棉袍",
+              "source_title": "新疆喀什维吾尔族绿棉袍",
+              "source_url": "http://biftmuseum.com/collection/info?sid=14671&nationSid=5&colCatSid=2&nationName=维吾尔族",
+              "locator": "chars:118:180",
+              "stance": "supports",
+              "scores": {
+                "supports": 0.5421278476715088,
+                "refutes": 0.08374181389808655,
+                "insufficient": 0.37413033843040466
+              },
+              "relevance": 2
+            }
+          ],
+          "status": "supported",
+          "reason": "model_supports",
+          "message": "至少一条证据被模型判为支持，仍需核对对象、属性与适用范围。"
+        },
+        {
+          "index": 1,
+          "sentence": "这件棉袍的主人喜欢听音乐。",
+          "sentence_start": 12,
+          "sentence_end": 25,
+          "evidence": [
+            {
+              "evidence_id": 566,
+              "source_id": 1,
+              "evidence": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。",
+              "object_name": "新疆喀什维吾尔族绿棉袍",
+              "source_title": "新疆喀什维吾尔族绿棉袍",
+              "source_url": "http://biftmuseum.com/collection/info?sid=14671&nationSid=5&colCatSid=2&nationName=维吾尔族",
+              "locator": "chars:118:180",
+              "stance": "insufficient",
+              "scores": {
+                "supports": 0.31018251180648804,
+                "refutes": 0.012858245521783829,
+                "insufficient": 0.6769592761993408
+              },
+              "relevance": 2
+            }
+          ],
+          "status": "insufficient",
+          "reason": "model_insufficient",
+          "message": "模型对所比对证据均判为信息不足，尚不能支持或反驳本句。"
+        },
+        {
+          "index": 2,
+          "sentence": "这件棉袍衣身宽大、造型简洁,采用套头而非对襟设计。",
+          "sentence_start": 26,
+          "sentence_end": 51,
+          "evidence": [
+            {
+              "evidence_id": 2,
+              "source_id": 1,
+              "evidence": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。",
+              "object_name": "新疆喀什维吾尔族绿棉袍",
+              "source_title": "新疆喀什维吾尔族绿棉袍",
+              "source_url": "http://biftmuseum.com/collection/info?sid=14671&nationSid=5&colCatSid=2&nationName=维吾尔族",
+              "locator": "chars:181:257",
+              "stance": "supports",
+              "scores": {
+                "supports": 0.5288008451461792,
+                "refutes": 0.24755129218101501,
+                "insufficient": 0.22364787757396698
+              },
+              "relevance": 7
+            }
+          ],
+          "status": "supported",
+          "reason": "model_supports",
+          "message": "至少一条证据被模型判为支持，仍需核对对象、属性与适用范围。"
+        },
+        {
+          "index": 3,
+          "sentence": "MFB999999藏品采用圆领设计。",
+          "sentence_start": 52,
+          "sentence_end": 70,
+          "evidence": [],
+          "status": "uncovered",
+          "reason": "no_evidence",
+          "message": "未检索到对应的已审核证据，本句未送入模型比对。"
+        }
+      ],
+      "problems": [],
+      "stats": {
+        "total_sentences": 4,
+        "checked_sentences": 3,
+        "problems_found": 0,
+        "supported_sentences": 2,
+        "refuted_sentences": 0,
+        "insufficient_sentences": 1,
+        "conflicting_sentences": 0,
+        "uncovered_sentences": 1,
+        "no_evidence_sentences": 1,
+        "low_relevance_sentences": 0,
+        "noise_sentences": 0,
+        "coverage_ratio": 0.75
+      }
+    }
+  ]
+}

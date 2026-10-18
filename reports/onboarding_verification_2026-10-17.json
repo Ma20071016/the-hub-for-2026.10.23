@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17",
+  "pages": [
+    {
+      "page": "index.html",
+      "unique_ids": 85,
+      "assets_registered": 6
+    },
+    {
+      "page": "guide.html",
+      "unique_ids": 34,
+      "assets_registered": 3
+    },
+    {
+      "page": "library.html",
+      "unique_ids": 17,
+      "assets_registered": 4
+    },
+    {
+      "page": "source.html",
+      "unique_ids": 20,
+      "assets_registered": 4
+    },
+    {
+      "page": "archive.html",
+      "unique_ids": 15,
+      "assets_registered": 3
+    }
+  ],
+  "css_parse": "passed",
+  "sample": {
+    "source_id": 1,
+    "title": "新疆喀什维吾尔族绿棉袍",
+    "approved_quotes": 2,
+    "binding": "verified against read-only real source"
+  },
+  "evidence_database_unchanged": true,
+  "database_sha256": "35238a213ce428a0e0005dfbc78aeee1cdd7a9cb227cf654004bd39208f0da54",
+  "browser_visual_qa": "not performed; prior browser access restriction respected",
+  "real_user_trials": "not performed; feedback remains for actual users",
+  "checks": {
+    "workspace_guide_scenarios": 13,
+    "guide_feedback_tests": 16,
+    "existing_workflow_scenarios": 53,
+    "existing_draft_recovery_scenarios": 26,
+    "existing_library_frontend_scenarios": 10,
+    "library_http_tests": 8,
+    "workflow_http_tests": 15,
+    "review_http_tests": 6,
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed"
+  },
+  "review_http_note": "A pre-existing JSON test checked the model lock before the handler finally block completed; changed to bounded acquisition and all six tests passed. Production review logic unchanged.",
+  "service": {
+    "url": "http://127.0.0.1:5173/",
+    "startup_confirmed": true,
+    "model_device": "cuda"
+  }
+}

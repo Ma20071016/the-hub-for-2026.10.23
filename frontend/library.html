@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="查阅传统服饰资料、对象与已审核证据，了解出处和适用范围，再带着资料审阅文稿。"/>
+  <title>资料馆 · 传统服饰说明核验</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="stylesheet" href="./library.css"/>
+  <link rel="stylesheet" href="./account.css"/>
+  <script src="./account.js" defer></script>
+  <script src="./museum-entry.js"></script>
+  <script src="./source-visuals.js" defer></script>
+  <script src="./museum-backdrop.js" defer></script>
+  <script src="./library.js" defer></script>
+</head>
+<body class="museum-page museum-library">
+<a class="skip-link" href="#library-title">跳到资料馆</a>
+<header class="site-header">
+  <div class="header-inner page-container">
+    <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页"><span class="brand-mark" aria-hidden="true">衣</span><span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span></a>
+    <div class="header-actions"><nav class="site-nav" aria-label="主导航"><a href="./index.html">审阅工作台</a><a href="./library.html" aria-current="page">资料馆</a><a href="./archive.html">审阅档案</a><a href="./guide.html">使用指南</a></nav><div class="account-controls" aria-label="账号"></div></div>
+  </div>
+</header>
+<main class="page-container library-page">
+  <div class="museum-lobby">
+  <div class="museum-entry-curtain" aria-hidden="true"><span class="museum-entry-panel museum-entry-panel-left"></span><span class="museum-entry-panel museum-entry-panel-right"></span><span class="museum-entry-seam"></span></div>
+  <div class="museum-scenery" aria-hidden="true"><div class="museum-ceiling-light"></div><div class="museum-backdrop-wall"></div><div class="museum-backdrop-frame"><div class="museum-orbit-floor"></div><div id="museum-backdrop-stage" class="museum-backdrop-stage"></div></div></div>
+  <section id="museum-intro" class="library-intro" aria-labelledby="library-title">
+    <div class="library-intro-copy"><p class="library-eyebrow"><span class="museum-room-index" aria-hidden="true">01</span> 传统服饰 · 数字资料馆</p><h1 id="library-title" tabindex="-1"><span>衣冠</span><span>有迹<span class="museum-title-seal" aria-hidden="true">藏</span></span></h1><p class="museum-title-translation" aria-hidden="true">THE ART OF ATTIRE</p></div>
+    <div class="museum-intro-aside"><p>走近一件衣冠，读懂一段纹样。<br/>循着织物的经纬，遇见有据可寻的故事。</p><a href="#catalog-title" class="museum-text-link">步入馆藏 <span aria-hidden="true">↓</span></a></div>
+    <div class="museum-scene-caption"><span aria-hidden="true">衣冠 · 入藏</span><small id="museum-backdrop-title">新疆传统服饰 · 馆藏影像</small><a id="museum-backdrop-link" href="#catalog-title" hidden>走近这件藏品 ↗</a><div id="museum-backdrop-controls" class="museum-backdrop-controls" role="group" aria-label="服饰环形展台" hidden><span id="museum-backdrop-position"></span><button id="museum-backdrop-previous" type="button" aria-label="将上一件服饰转到正面">←</button><button id="museum-backdrop-toggle" type="button" aria-pressed="false">暂停旋转</button><button id="museum-backdrop-next" type="button" aria-label="将下一件服饰转到正面">→</button></div></div>
+  </section>
+  <section id="museum-feature" class="museum-feature" aria-labelledby="museum-feature-title" hidden>
+    <div class="museum-exhibit-stage"><div class="museum-stage-heading"><span>馆藏影像</span><span>COLLECTION IN FOCUS</span></div><div id="museum-feature-media" class="museum-feature-media"></div><p class="museum-stage-caption">馆方条目配图 · 保留完整画面与来源</p></div>
+    <div class="museum-exhibit-label">
+      <p class="museum-exhibit-eyebrow">循衣之形<span aria-hidden="true"> / </span><span id="museum-feature-number"></span></p>
+      <h2 id="museum-feature-title"></h2>
+      <p id="museum-feature-publisher" class="museum-feature-publisher"></p>
+      <blockquote id="museum-feature-excerpt" class="museum-feature-excerpt"></blockquote>
+      <a id="museum-feature-link" class="museum-enter" href="#catalog-title">走近这件藏品 <span aria-hidden="true">↗</span></a>
+      <div class="museum-feature-navigation" role="group" aria-label="切换馆藏影像"><span id="museum-feature-position" role="status" aria-live="polite"></span><div><button id="museum-feature-previous" type="button" aria-label="上一件馆藏影像">←</button><button id="museum-feature-next" type="button" aria-label="下一件馆藏影像">→</button></div></div>
+    </div>
+  </section>
+  <div class="museum-collection-strip"><p><span>观其形</span><i aria-hidden="true">—</i><span>读其纹</span><i aria-hidden="true">—</i><span>考其据</span></p><div class="library-ledger" aria-label="可用资料概况"><div><strong id="source-total">—</strong><span>份可用资料</span></div><div><strong id="evidence-total">—</strong><span>条已审核证据</span></div></div></div>
+  </div>
+  <section class="library-catalog" aria-labelledby="catalog-title">
+    <div class="catalog-heading"><div><span class="section-number" aria-hidden="true">目录 /</span><h2 id="catalog-title" tabindex="-1">藏品与文献</h2></div><p>从形制、纹样与工艺，找到你想了解的资料</p></div>
+    <form class="library-filters" id="library-filters" role="search">
+      <div class="library-search"><label for="library-search">名称、编号或关键词</label><input id="library-search" type="search" maxlength="200" autocomplete="off" placeholder="搜索服饰名称、馆藏编号、工艺…" disabled/></div>
+      <div><label for="library-attribute">证据涉及方面</label><select id="library-attribute" disabled><option value="">全部方面</option></select></div>
+      <div><label for="library-publisher">发布机构</label><select id="library-publisher" disabled><option value="">全部机构</option></select></div>
+      <div class="library-image-filter"><label for="library-images"><input id="library-images" type="checkbox" disabled/>只看有图资料</label><span>从实物配图出发，查阅对应原文</span></div>
+    </form>
+    <div class="library-feedback"><p id="library-status" role="status" aria-live="polite">正在读取资料目录…</p><div><button id="library-reset" class="text-button" type="button" hidden>清除筛选</button><button id="library-retry" class="text-button" type="button" hidden>重新读取</button></div></div>
+    <div id="library-empty" class="library-empty" hidden><span aria-hidden="true">册</span><h3 id="library-empty-title">没有找到匹配资料</h3><p id="library-empty-copy">试试更简短的名称，或清除筛选条件。</p></div>
+    <ul id="library-list" class="library-grid" aria-label="资料目录" aria-busy="true"></ul>
+    <div class="library-more"><button id="library-more" class="secondary-button" type="button" hidden>继续浏览资料</button></div>
+    <p class="library-scope-note"><strong>怎样使用资料馆</strong><span>先确认具体对象，再阅读证据与原文。资料中的属性标签用于检索，不代表该类服饰共有的特征。</span></p>
+  </section>
+</main>
+<footer><div class="footer-inner page-container"><span>传统服饰说明核验</span><span>以资料为依据，让文化表达更准确。</span></div><p class="museum-image-credit page-container">首屏服饰影像来自北京服装学院民族服饰博物馆现有藏品条目，保留完整画面与水印；每幅影像可进入对应资料查看原图及出处。展墙与顶光为页面陈列设计。</p></footer>
+<noscript><p class="noscript">请启用浏览器 JavaScript 以读取资料。</p></noscript>
+</body>
+</html>

@@ -1,18 +1,22 @@
 # 报告与快照
 
-保存资源校验、数据处理、模型快照和训练摘要，保留原始实测日期。
+保存有日期的实验、审核和界面验证记录。报告反映记录当天的状态，旧报告中的待办与缺陷不等于当前产品现状。
 
-- [evidence_review_2026-10-14.md](evidence_review_2026-10-14.md)：564条待审片段内容审核、精切、入库统计、待核问题及本机逐条审核明细位置。
+## 模型与数据
 
-- [bert_assets.json](bert_assets.json)：BERT 固定版本、本地路径与哈希；诊断脚本读取此文件定位权重。
-- [bert_encoder_check.json](bert_encoder_check.json)：2026-10-06 的 BERT GPU 诊断结果，包括形状、冻结、梯度和显存检查。
-- [data_loader_snapshot_2026-10-06.json](data_loader_snapshot_2026-10-06.json)：加载器完成时的历史环境、数据与参数快照，不控制运行。
-- [model_snapshot_2026-10-07.json](model_snapshot_2026-10-07.json)：训练前的历史模型快照，记录当时结构、哈希与检查范围。
-- [model_snapshot_2026-10-08.json](model_snapshot_2026-10-08.json)：当前模型、数据路径、源码哈希与已完成训练的状态快照，不控制运行。
-- [ocnli_preprocessing.json](ocnli_preprocessing.json)：3k 数据来源、排除明细、划分统计与文件哈希；最终训练 2,993 条、验证 2,950 条。
-- [ocnli_50k_preprocessing.json](ocnli_50k_preprocessing.json)：50k 预处理记录；训练 37,072 条、验证 2,950 条。`scope` 的旧 3k 名称已纠正并注明，原统计、数据哈希及生成时脚本哈希保留。
-- [training_results_2026-10-07.json](training_results_2026-10-07.json)：两次训练的配置、逐轮指标、最佳结果和权重重载检查，整理自本地实验记录。
-- [costume_eval_001_010.json](costume_eval_001_010.json)：249条服饰原句样本的初步评估，标签尚待人工复核。
-- [costume_eval_atomic_001_010.json](costume_eval_atomic_001_010.json)：当前实际保存20条原句复制诊断结果；原1,398条单事实报告已被覆盖，文件名不代表当前样本构成，详见[实验日志](../docs/experiment_log_2026-10-10.md)。
+- [bert_assets.json](bert_assets.json)：固定 BERT 版本、路径和哈希，也是运行时定位权重的资源清单。
+- [bert_encoder_check.json](bert_encoder_check.json)、`data_loader_snapshot_*`、`model_snapshot_*`：编码器检查及历史实现快照。
+- [ocnli_preprocessing.json](ocnli_preprocessing.json)、[ocnli_50k_preprocessing.json](ocnli_50k_preprocessing.json)：3k / 50k 数据清洗、隔离与哈希记录。
+- [training_results_2026-10-07.json](training_results_2026-10-07.json)：两次训练的配置、逐轮指标和最佳权重重载检查。
+- [costume_eval_001_010.json](costume_eval_001_010.json)：249 条服饰原句的初步评估，标签尚待复核。
+- [costume_eval_atomic_001_010.json](costume_eval_atomic_001_010.json)：现存 20 条原句复制诊断；原 1,398 条报告已被覆盖，详见[实验日志](../docs/experiment_log_2026-10-10.md)。
 
-完整权重与 TensorBoard 事件保留在本地 `runs/`，GitHub 保存训练摘要和轻量评估报告。OCNLI 指标仅适用于当前划分；服饰诊断不代表经过人工标签复核的正式领域测试。
+## 资料与产品验证
+
+- [evidence_review_2026-10-14.md](evidence_review_2026-10-14.md)：证据片段审核、入库统计和待核问题。
+- [library_visual_audit_2026-10-17.json](library_visual_audit_2026-10-17.json)、[library_visual_assets_2026-10-17.json](library_visual_assets_2026-10-17.json)：配图来源、对象绑定、转存方式和哈希。
+- `*_live_2026-10-17.json`、`*_verification_2026-10-17.json`：审阅、修改、资料馆和入门流程的实测记录。
+- `*.jpg`、`*.png`、`*.gif`：桌面及移动布局截图、交互预览；文件名保留测试日期。
+- [project_audit_2026-10-17.md](project_audit_2026-10-17.md)、[competition_gap_analysis_2026-10-17.md](competition_gap_analysis_2026-10-17.md)：当时的实现审计和参赛差距分析；调研出处见 [competition_research_2026-10-17.md](competition_research_2026-10-17.md)。
+
+完整权重和 TensorBoard 事件只保存在本地 `runs/`。OCNLI 验证成绩及服饰诊断均不能视为正式服饰领域测试结果。

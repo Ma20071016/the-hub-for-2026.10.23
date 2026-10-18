@@ -1,71 +1,109 @@
-# backend
+# 后端
 
-2026-10-14 数据库更新：50份来源、655条证据（99 approved / 142 pending / 414 rejected），可用证据来自43份资料。564条原待审片段均有首轮审核决定和理由，另新增83条精切可用证据；本轮为助手按原文进行内容审核，原有8条人工记录保留，详见[审核记录](../reports/evidence_review_2026-10-14.md)。
+Python 标准库 HTTP 服务，负责账号、资料检索、模型核验、审阅留档和报告导出。前端位于 [`frontend/`](../frontend/)，模型训练脚本位于 [`scripts/`](../scripts/)。
 
-网站后端与数据库管理入口。从项目根目录以 `python -m backend.<脚本名>` 运行，脚本名省略 `.py`。网页文件位于 `frontend/`，数据库仍保存在 `data/costume.db`，本目录不保存模型训练脚本。
+## 启动
 
-- [init_db.py](init_db.py)：创建 `data/costume.db` 及资料来源、证据片段、核验记录、判断明细四张表；不导入资料、不运行模型，重复执行保留数据。
-- [import_sources.py](import_sources.py)：从精选资料目录导入 `sources`，使用 `--split` 生成证据草稿，或使用 `--review ID` 人工审核片段；导入时相同记录跳过，发现冲突则整批停止。
-- [serve.py](serve.py)：使用 Python 标准库提供本地网页、已审核来源列表、证据检索和逐证据模型核验；启动时加载一次模型，只读数据库，暂不写核验记录。
-- [inference.py](inference.py)：加载本地分词器、冻结 BERT 和最佳训练权重，使用 `Verifier.predict(claim, evidence)` 返回三分类结果及分数；直接运行时执行示例，导入时不执行示例。
-
-初始化网站数据库（WSL 中激活 `escnet` 后，在 `/mnt/d/cmit-2026-costume-verifier` 运行）：
+从项目根目录运行；现有开发环境为 WSL 的 `escnet`：
 
 ```bash
-python -m backend.init_db
-```
-
-第一次运行应显示四张表均为 0 条记录。数据库是本地运行数据，不提交到 Git。表中默认时间使用 UTC；前端展示时转换为本地时间。`sources.case_id` 对应原始资料的 `case_id`，`archive_path` 记录资料目录；`evidence_chunks.locator` 保存稳定的原文位置（如段落及片段编号），`aliases` 和 `keywords` 暂约定用空格分隔。`preprocessing_config` 由后端保存 JSON 文本，记录分词器版本、长度上限等实际设置。模型权重、冻结 BERT、分词器的版本需与 `model_version` 对应保存。每个后续数据库连接都需开启 `PRAGMA foreign_keys = ON`，并使用参数绑定读写用户文本。
-
-导入现有 50 份精选资料（在同一 WSL 环境和项目目录运行）：
-
-```bash
-python -m backend.import_sources "/mnt/d/Uyghur_Costume_Raw_Archive/服饰图文精选_50条"
-```
-
-命令末尾加 `--check` 可以只检查而不写入。首次导入应新增 50 条，相同资料重复导入新增 0 条、跳过 50 条。此步骤仅填充 `sources`，其他三张表保持原状；资料入库不代表证据已审核或图文对应关系已确认。图片及原始来源记录仍保留在原资料目录，不复制；`archive_path` 保存导入环境下的绝对目录路径，在 WSL 中为 `/mnt/d/...`，更换运行环境或移动原资料时需对应调整。正文、来源和采集时间按原始记录保存，不导入人为构造的测试样本。
-
-从已导入的原文生成证据草稿，可先预览，再写入：
-
-```bash
-python -m backend.import_sources --split --check
-python -m backend.import_sources --split
-```
-
-分段按原文行边界进行：连续不带句末标点的短行与后续段落合并，在句末标点或空行处结束片段，不在长段中强行截断。`locator` 为 `chars:起点:终点`，使用数据库 `original_text` 的 Python 字符下标，从 0 开始、含起点不含终点；片段必须等于 `original_text[起点:终点]`。300 字符仅用于报告长片段，不是模型 token 上限。全部新增片段为 `pending`，对象、别名、属性、关键词留空，后续人工核对主题与上下文后再填写和启用。来源中包含多对象合集、图片说明、新闻和编辑信息，因此草稿不能视为已审核事实或完整的单事实证据。
-
-同一来源的原始草稿“定位＋原文”集合完整一致才会跳过，跳过时保留已有审核状态和人工标注；允许下方首批精选命令生成的已知精确子串与原草稿共存。其余范围变化、缺失草稿或文字冲突均停止整批操作，不覆盖人工修改。后续调整分段规则或原文时需另行处理已有片段。这一步不修改原始资料、核验记录或模型判断。
-
-按编号查看或审核一条证据，例如片段 2：
-
-```bash
-python -m backend.import_sources --review 2 --check
-python -m backend.import_sources --review 2
-```
-
-第一条命令只读显示片段、来源和已有标签。第二条命令进入人工审核：输入 `c` 查看完整原文，`a` 填写对象、别名、属性和关键词并通过，`r` 拒绝，`q` 退出。对象、属性、关键词在通过时必填，别名可留空；多项用空格分隔，回车保留已有值，`-` 清空别名。最后展示待保存内容，输入 `y` 才写入；其他输入取消。一次只更新指定片段的标签和状态，保持正文及定位不变；纯编辑信息、导航等可拒绝，夹杂有用证据但需要重新切分的片段暂时保持 `pending`。已有审核也可用同一命令修正。保存前核对原文定位，并检测查看后片段及来源是否变化，避免覆盖同时发生的修改。
-
-片段 2 的来源是“新疆喀什维吾尔族绿棉袍”（馆藏编号 MFB002865），描述该件棉袍的形制和边饰。对象名称可填写来源标题；别名可填写 `新疆喀什维吾尔族棉袍 喀什棉袍 MFB002865`，属性填写 `形制 装饰 工艺`，关键词填写 `棉袍 对襟 短衩 绗缝 袖口 门襟 底摆 毛线 编结 黄 白 黑`。别名用于检索扩展，不保证唯一对应藏品；后续检索需结合来源识别具体对象。颜色、民族、年代等可能正是 claim 中有误的部分，标签用于候选匹配，不能要求这些属性全部相同才检索。此片段本身省略对象名，后续送给模型时需附带对象或标题上下文；不能把单件藏品事实用于所有同类服饰。`approved` 仅表示已审核、可供后续检索，不代表模型已经完成核验。
-
-先用少量资料跑通网站时，可批量审核首批 5 份馆藏资料中的 8 条精选证据，无需逐条输入标签：
-
-```bash
-python -m backend.import_sources --starter --check
-python -m backend.import_sources --starter
-```
-
-首批为棉袍 2 条、花帽 2 条、头巾 2 条、皮帽 1 条、女靴 1 条。建议清单保存在原导入脚本中，逐条校验 case_id、标题和唯一连续原文，生成精确字符定位。命令展示原文、出处和标签后，输入 `y` 才整批保存为 `approved`，其他输入取消。以未经人工修改的 565 条草稿为起点，首次会新增 7 条精确子串、标注原有第 2 条，共 572 条（8 条 approved、564 条 pending）；其他原草稿保留用于后续整理。重复运行不重复插入，任何已有人工标签或审核状态均保留，不自动覆盖；已有记录若仍为 pending/rejected，则仍不会进入检索。预览后来源或相关片段发生变化会停止，本批写入发生错误会整体回滚。
-
-这些标签是本批人工整理建议，并非模型自动审核结果。片段只描述对应的具体藏品；女靴原文“收购于新疆喀什”记录的是采集地点，不代表制作地点。本批避开了泛化习俗、编辑信息和皮帽尺寸问题。图片与藏品的关联尚未审核。
-
-启动带检索和模型核验接口的网站：
-
-```bash
+conda activate escnet
 python -m backend.serve
 ```
 
-启动需要 `escnet` 中的 PyTorch、Transformers，以及本地 `data/processed/bert-base-chinese-tokenizer/`、`reports/bert_assets.json` 指向的冻结 BERT、`runs/ocnli_50k_20261007_01/best.pt`。这些资源和数据库未上传 GitHub，仅克隆仓库不足以启动模型服务。推理优先使用 CUDA，不可用时使用 CPU。
+模型加载后访问 `http://localhost:5173/`，首次使用先注册账号。默认仅监听 `127.0.0.1`；端口占用可加 `--port 5174`，按 Ctrl+C 停止。
 
-等模型加载完成后，浏览器打开 <http://localhost:5173/>；端口占用可先关闭原服务，或加 `--port 5174`。先选择对应资料，确认说明属于同一服饰对象或工艺主题，再输入一条说明进行核验。检索按对象/别名发现候选，再按关键词排序，只使用 approved 片段；选择皮帽资料后，`MFB007307这顶皮帽的里子是棉布。` 仍可找回“羊毛皮为里子”的相反证据。
+**仅克隆仓库不能直接运行模型服务**，还需要以下本地资源：
 
-核验将每条证据附上对象名后单独预测，分别返回标签、三类分数及实际输入。claim 和 evidence 各限160 token，超长返回422，不截断；同时只运行一组预测，忙时返回429。缺少资料或证据时不运行模型。首批五份馆藏资料各描述一件藏品；后续证据也包括限定工艺、地方类型和具体报道个案，需按对象与时间范围使用。现有来源选择不能区分同文的多个对象，相关候选仍待审核/对象细分后启用。检索接口仍可独立使用，但网站启动依赖模型资源。完整接口说明见[项目 README](../README.md)。
+- PyTorch、Transformers；文档上传另需 `pypdf`、`python-docx`，安装见 [部署说明](../deploy/README.md)。
+- `data/costume.db`：已导入来源并审核证据的数据库。
+- `data/processed/bert-base-chinese-tokenizer/`：本地分词器。
+- `reports/bert_assets.json` 中 `snapshot_directory` 指向的冻结 BERT。
+- `runs/ocnli_50k_20261007_01/best.pt`：与当前模型结构匹配的训练权重。
+
+模型启动时加载一次，优先使用 CUDA，否则使用 CPU。账号、HTTPS 和反向代理参数见 [账号说明](../docs/accounts.md)；当前服务使用 `ThreadingHTTPServer`，公网部署还需 HTTPS、资源限制和数据备份。
+
+## 代码与数据
+
+| 文件 | 职责 |
+| --- | --- |
+| [`serve.py`](serve.py) | 页面路由、检索、逐句/整篇核验及 HTTP 接口 |
+| [`auth.py`](auth.py) | 用户名密码、会话、CSRF 与登录限流 |
+| [`init_db.py`](init_db.py)、[`import_sources.py`](import_sources.py) | 建库、导入来源、切分和审核证据 |
+| [`inference.py`](inference.py) | 加载模型，逐对预测说明与证据的关系 |
+| [`text_prepare.py`](text_prepare.py)、[`document_upload.py`](document_upload.py) | 文字清洗、切句及 PDF/DOCX 文字提取 |
+| [`library.py`](library.py)、[`library_visuals.py`](library_visuals.py) | 资料馆、原文定位、图片与证据热点 |
+| [`review_history.py`](review_history.py) | 审阅快照、人工意见、版本与 HTML 报告 |
+
+网站只读 `data/costume.db`；启动时自动初始化独立的 `data/accounts.db` 和 `data/review_history.db`。账号、会话和审阅记录不提交 Git，已保存档案按账号隔离。旧的无账号记录不会自动归给新账号；浏览器草稿仅存于本机浏览器。
+
+## 准备证据库
+
+将示例路径替换为包含 `资料清单.jsonl` 的实际资料目录：
+
+```bash
+python -m backend.init_db
+python -m backend.import_sources "/path/to/source-archive" --check
+python -m backend.import_sources "/path/to/source-archive"
+python -m backend.import_sources --split --check
+python -m backend.import_sources --split
+python -m backend.import_sources --review 2
+```
+
+建库不会清空已有数据；`--check` 仅预览。切分生成 `pending` 草稿，审核时核对原文、对象及适用范围后才能标为 `approved`。`--review ID --check` 只读查看指定片段；已有精选归档也可用 `--starter --check` 预览首批 5 份资料的 8 条建议证据，再用 `--starter` 人工确认保存。资料导入和审核不运行模型。
+
+只有 `approved` 片段进入检索及资料馆证据列表。`locator` 使用 `chars:起点:终点`，必须精确对应来源原文；按 Python Unicode 字符计数，从 0 开始、含起点不含终点。完整原文用于核对上下文，不表示每句话均已审核。迁移原资料时须核对 `archive_path`。历史审核见 [证据审核记录](../reports/evidence_review_2026-10-14.md)。
+
+## HTTP 接口
+
+资料馆、资料详情、指南及只读资料 API 公开；工作台、档案、提取、检索和核验需要登录。写请求检查同源 `Origin` 与 `X-CSRF-Token`，前端另附 `X-Account-ID` 防止切换账号后误写。登录/注册及 Cookie 约定见 [账号接口](../docs/accounts.md#http-接口)。
+
+| 接口 | 用途 |
+| --- | --- |
+| `GET /api/sources` | 含已审核证据的来源与片段数 |
+| `GET /api/library`、`GET /api/library/{id}` | 目录、筛选项、来源详情、对象、证据与全文 |
+| `POST /api/extract` | 提取文字型 PDF/DOCX；文件上限 10 MiB、正文上限 50,000 字符 |
+| `POST /api/search` | JSON `{claim, source_id}`；来源可省略，仅检索候选 |
+| `POST /api/verify` | 同上，但要求选定来源；逐条返回模型标签和分数 |
+| `POST /api/review` | 整篇审阅并保存新快照，约定见下文 |
+| `GET /api/reviews?limit=50` | 当前账号的档案摘要，`limit` 范围 1–100 |
+| `GET /api/reviews/{review_id}` | 重开完整快照及人工意见，不重新推理 |
+| `POST /api/reviews/{review_id}/decisions` | 按修订号保存完整逐句人工意见 |
+| `GET /api/reviews/{review_id}/report?revision=N` | 导出 HTML 报告，可打印为 PDF；修订号不匹配返回 409 |
+
+上传请求使用 `Content-Type: application/octet-stream`、`X-Document-Type: pdf` 或 `docx`，正文直接发送文件字节；不是 multipart 表单。其余业务 POST 接口使用 JSON。
+
+检索按对象名、别名或馆藏编号找候选，再按关键词和原文重合排序，最多返回 5 条；颜色、材质不是必须相同的筛选条件。`/api/search` 的 `model_status: not_connected` 仅表示本次没有运行模型。`/api/verify` 缺少资料或证据时返回 `needs_context` / `no_evidence`，不作预测。
+
+资料馆不返回本地归档路径。图片清单位于 [`data/library_visuals.json`](../data/library_visuals.json)，出处与署名见 [图片说明](../frontend/img/library/README.md)。图片须匹配来源和已审核对象，热点引用当前唯一匹配的已审核原文；无图或清单错误时保留文字资料。图片不作为模型输入。
+
+## 整篇审阅接口
+
+`POST /api/review` 接收 `{"text":"正文","source_id":1,"title":"文稿名称"}`。正文非空且最多 50,000 个 Python 字符；来源必须存在；标题可省略，提供时为 1–120 字符。复核时附 `parent_id`，须指向当前账号已有的 32 位小写十六进制记录编号。句中明确对象先跨资料检索，未找到时再使用所选资料。
+
+响应 `schema_version: 2`；`results` 按正文顺序保留每句及其位置、原因、证据和模型分数：
+
+| `status` | 含义 |
+| --- | --- |
+| `supported` | 至少一条支持预测，且无反驳预测 |
+| `refute` | 至少一条反驳预测，且无支持预测；界面显示疑似矛盾 |
+| `insufficient` | 入选证据均被模型判为信息不足 |
+| `conflicting` | 同时出现支持和反驳预测 |
+| `uncovered` | 没有证据或字面相关性不足，未送入模型 |
+
+`sentence_start` / `sentence_end` 基于 `normalized_text` 的 Python 字符位置，含起点不含终点；前端须转换成 UTF-16 下标，不能直接用于原文件定位。`coverage_ratio` 是送入模型句数占正文句数的比例，不是准确率；无正文时为 `null`。兼容字段 `problems` 仅含疑似矛盾，不能代替完整 `results`。
+
+普通请求返回 JSON；设置 `Accept: application/x-ndjson` 后依次返回 `start`、`sentence`、`done`，失败为 `error`。只有快照保存成功才报告完成，并返回 `review_id`、`parent_id`、`created_at`、`model_version` 和人工意见字段。断开浏览器连接不保证取消服务端推理，可从档案确认结果。
+
+## 人工意见与版本
+
+每次审阅保存正文、证据和模型结果的新快照，复核用 `parent_id` 关联，不覆盖旧版。修改正文后须重新审阅；未复核草稿不会混入旧报告。
+
+保存意见的请求只能包含 `expected_revision` 和完整 `decisions` 列表；每项为 `{index,state,note}`，须完整覆盖正文句子且索引唯一。状态为 `unreviewed`（未处理）、`confirmed`（确认有误）、`dismissed`（保留原句）、`pending`（待补证），备注最多 2,000 字符。保存成功增加 `decisions_revision`，旧修订号返回 409。人工意见不会修改模型判断；复核新版本的意见重新初始化。
+
+## 使用边界
+
+- 扫描 PDF、图片 OCR 和旧版 `.doc` 暂不支持；请上传文字型 PDF 或 `.docx`。
+- 当前为小规模字面检索，句中对象不明确、多对象来源和否定表达仍可能误检或误判。单件藏品证据不能推广到整类服饰。
+- 单句说明上限 500 个 UTF-16 代码单元；模型的说明与补充对象后的证据分别限 160 token，超长返回 422，不静默截断。推理串行，忙时返回 429。
+- 模型标签和分数仅供核对线索；未检出矛盾、覆盖率和流程测试都不证明稿件正确或领域准确率达标。测试入口见 [`tests/`](../tests/README.md)。

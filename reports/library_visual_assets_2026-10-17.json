@@ -1,0 +1,101 @@
+[
+  {
+    "file": "frontend/img/library/robe-front.jpg",
+    "sha256": "c241c3eaae20f31ff9f96dde961154875188b3ae1b7f0c48a061c4c94289cb67",
+    "original_sha256": "018a6edec72e24f478ce3ffc3254c974f45f20e74da3cb6e540324b586404ef6",
+    "original_image_url": "http://101.201.53.226/ZS/2016/03/21/001/001/20160321001001003_TB.jpg",
+    "size": [
+      1600,
+      1202
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/robe-sleeve.jpg",
+    "sha256": "9f1b7fd7756f009b35c2e199e407e352a472f1a541878e4c141b05d3f49928e2",
+    "original_sha256": "06e398918b0b14d716a299c2f6bf7024cc47fa6c2dc6c483f3ce42a815ccdc65",
+    "original_image_url": "http://101.201.53.226/XJ/2016/03/21/001/001/20160321001001015_TB.jpg",
+    "size": [
+      1600,
+      1202
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/cap-top.jpg",
+    "sha256": "3a992034afd520d4295239cecd176dcd75e0d0eb02e415a478a3d7409517fbd4",
+    "original_sha256": "0da44bb87adf9647d6bd9a7e93e676ceddb8e57eca4b0cfc72d5d9e230f872e1",
+    "original_image_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001049_TB.jpg",
+    "size": [
+      1507,
+      1600
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/cap-side.jpg",
+    "sha256": "4322339ee0391f5d3b1915cc62d92949a310587e08432447c486db7e7e26b5d3",
+    "original_sha256": "15b324d79f75325a45dab9a337b18c7de11577bcd516a8ae389f5fd4e53d0556",
+    "original_image_url": "http://101.201.53.226/DJD/2015/11/02/001/001/20151102001001002_TB.jpg",
+    "size": [
+      1600,
+      1230
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/ikat-scarf.jpg",
+    "sha256": "b10125cae11dd7974bc13cb3aa342610f297b28778e87d711fc2ead44c3dc45a",
+    "original_sha256": "894eac2aef257127140115dc36f58da0e2c54ddeca89a92538cbf7bcbb80c094",
+    "original_image_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001060_TB.jpg",
+    "size": [
+      1600,
+      342
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/ikat-detail.jpg",
+    "sha256": "9f941e96c86c3233ee931e1c80957d549e2498534308090ef1ca1a05df28e29e",
+    "original_sha256": "dc23cf00c7835651d41c4665b09728fa8ee7f166891bc596d81a009f61655324",
+    "original_image_url": "http://101.201.53.226/XJ/2015/10/12/001/001/20151012001001044_TB.jpg",
+    "size": [
+      1600,
+      810
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/print-block.jpg",
+    "sha256": "bfce4cfd6d8b1a36bc089c25d05a9827b222ebda5a03427bf37766c13a7b3251",
+    "original_sha256": "9fad84783024bd597ba9829f088fb1a23e5424a346c17534df6e39415f3459ed",
+    "original_image_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001055_TB.jpg",
+    "size": [
+      1600,
+      1363
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/leather-boots.jpg",
+    "sha256": "f0913ddb40956af83d97b4171e1e586366535758f13a0561115ee9c30a574b1f",
+    "original_sha256": "4f338bf10a0e97966357d6457500811908d88ba87934132dc5fb58aba6413efb",
+    "original_image_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001053_TB.jpg",
+    "size": [
+      1298,
+      1600
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  },
+  {
+    "file": "frontend/img/library/boots-sole.jpg",
+    "sha256": "49e94f42dccc11a2abe0095ba6ca46af193a9456497accf9b7163758129ca9ce",
+    "original_sha256": "3724af18770bc3956c37e456a1c1a38f5a13e65af810afa7a9a39561970ed3e7",
+    "original_image_url": "http://101.201.53.226/DJD/2015/10/12/001/001/20151012001001011_TB.jpg",
+    "size": [
+      1600,
+      1207
+    ],
+    "processing": "Preserved full frame and watermark; resized longest side to 1600 px; JPEG quality 92, no chroma subsampling."
+  }
+]

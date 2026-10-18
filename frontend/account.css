@@ -1,0 +1,28 @@
+.account-controls { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; font-size: var(--font-meta); }
+.account-controls a, .account-controls button { color: var(--ink-2); text-decoration: none; }
+.account-controls button { padding: 6px 0; background: transparent; border: 0; text-decoration: underline; text-underline-offset: 4px; }
+.account-name { max-width: 8em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+.header-actions { gap: 20px; }
+.museum-page .account-controls a, .museum-page .account-controls button, .museum-page .account-name { color: #e1e3d7; }
+.account-session-dialog { max-width: min(520px, calc(100% - 32px)); padding: 32px; border: 1px solid var(--rule); border-radius: 12px; color: var(--ink); background: var(--paper); box-shadow: 0 24px 100px #0004; }
+.account-session-dialog::backdrop { background: #12251eab; backdrop-filter: blur(7px); }
+.account-session-dialog h2 { margin: 0 0 16px; font: 600 1.5rem/1.5 var(--serif); }
+.account-session-dialog p { font-size: 1rem; line-height: 1.8; }
+.account-session-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.account-session-actions a { text-decoration: none; }
+@media (max-width: 1180px) and (min-width: 901px) {
+  .header-inner { flex-wrap: wrap; gap: 0 20px; padding-top: 10px; }
+  .header-actions { display: contents; }
+  .account-controls { margin-left: auto; }
+  .header-readout { order: 4; margin-left: auto; }
+  .site-nav { order: 3; }
+}
+@media (max-width: 900px) {
+  .account-controls { margin-left: auto; }
+  .header-readout { order: 4; flex-basis: 100%; max-width: none; margin-bottom: 8px; text-align: left; }
+}
+@media (max-width: 540px) {
+  .account-name { max-width: 5em; }
+  .account-controls { gap: 8px; }
+  .account-session-dialog { padding: 24px; }
+}

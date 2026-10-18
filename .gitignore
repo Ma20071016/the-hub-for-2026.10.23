@@ -4,6 +4,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+dist/
 Thumbs.db
 .DS_Store
 
@@ -12,6 +13,14 @@ data/costume.db
 data/costume.db-journal
 data/costume.db-wal
 data/costume.db-shm
+data/review_history.db
+data/review_history.db-journal
+data/review_history.db-wal
+data/review_history.db-shm
+data/accounts.db
+data/accounts.db-journal
+data/accounts.db-wal
+data/accounts.db-shm
 
 # 数据与权重留在本地，仅保留目录说明
 data/raw/*
@@ -31,3 +40,17 @@ data/processed/bert-base-chinese-tokenizer/*
 # 每次训练的权重、优化器状态与 TensorBoard 日志留在本地
 runs/*
 !runs/README.md
+
+# 本地备份、额外 SQLite 数据库及私钥
+backups/
+data/*.db
+data/*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.pem
+*.key
+*.p12
+*.pfx
+.pytest_cache/

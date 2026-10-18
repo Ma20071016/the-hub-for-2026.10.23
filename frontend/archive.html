@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="查找传统服饰说明文稿的历次审阅记录，回看原文、证据与人工意见，继续处理未完成的审阅。"/>
+    <title>审阅档案 · 传统服饰说明核验</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="./archive.css"/>
+    <link rel="stylesheet" href="./account.css"/>
+    <script src="./account.js" defer></script>
+    <script src="./archive.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#archive-title">跳到审阅档案</a>
+
+<header class="site-header">
+    <div class="header-inner page-container">
+        <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页">
+            <span class="brand-mark" aria-hidden="true">衣</span>
+            <span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span>
+        </a>
+        <div class="header-actions">
+            <nav class="site-nav" aria-label="主导航">
+                <a href="./index.html">审阅工作台</a>
+                <a href="./library.html">资料馆</a>
+                <a href="./archive.html" aria-current="page">审阅档案</a>
+                <a href="./guide.html">使用指南</a>
+            </nav>
+            <div class="account-controls" aria-label="账号"></div>
+        </div>
+    </div>
+</header>
+
+<main class="page-container archive-page">
+    <section class="intro archive-intro" aria-labelledby="archive-title">
+        <div class="intro-text">
+            <p class="archive-eyebrow">文稿留档 · 版本可循</p>
+            <h1 id="archive-title" tabindex="-1">审阅档案</h1>
+            <p class="intro-copy">回看原文、证据与人工意见，接着完成每一次审阅。修改后复核会生成新版本，原版记录仍可查阅。</p>
+        </div>
+        <a class="primary-button archive-new" href="./index.html">开始新审阅 <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="panel archive-panel" aria-labelledby="archive-list-title">
+        <div class="archive-panel-heading">
+            <div>
+                <h2 id="archive-list-title">历次记录 <span id="archive-count" class="counter"></span></h2>
+                <p class="archive-scope" id="archive-scope">按审阅时间从新到旧展示最近 100 条；搜索与筛选仅针对已载入记录。</p>
+            </div>
+            <button id="refresh-archive" class="secondary-button" type="button">刷新记录</button>
+        </div>
+
+        <div class="archive-filters">
+            <div class="archive-search-field">
+                <label for="archive-search">查找文稿</label>
+                <input id="archive-search" type="search" maxlength="120" placeholder="搜索标题或记录号" autocomplete="off" aria-describedby="archive-scope" disabled/>
+            </div>
+            <div class="archive-filter-field">
+                <label for="archive-filter">人工处理状态</label>
+                <select id="archive-filter" disabled>
+                    <option value="all">全部记录</option>
+                    <option value="unreviewed">含未处理句子</option>
+                    <option value="pending">含待补证句子</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="archive-feedback">
+            <p id="archive-status" role="status" aria-live="polite">正在读取审阅档案…</p>
+            <button id="retry-archive" class="text-button" type="button" hidden>重新读取</button>
+        </div>
+
+        <div id="archive-empty" class="archive-empty" hidden>
+            <span class="archive-empty-mark" aria-hidden="true">档</span>
+            <h3 id="archive-empty-title">还没有审阅记录</h3>
+            <p id="archive-empty-copy">完成一次整篇审阅后，文稿和结果会自动保存在这里。</p>
+            <a id="archive-empty-start" class="secondary-button" href="./index.html">前往审阅工作台</a>
+            <button id="archive-reset-filters" class="text-button" type="button" hidden>清除搜索与筛选</button>
+        </div>
+
+        <ul id="archive-list" class="archive-list" aria-label="审阅记录" aria-busy="true"></ul>
+
+        <p class="archive-note">点击记录回到工作台，可继续人工复核、修改后复核或导出本版报告。“已记意见”包含待补证句子，不代表问题已解决。</p>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-inner page-container">
+        <span>传统服饰说明核验</span>
+        <span>以资料为依据，让文化表达更准确。</span>
+    </div>
+</footer>
+<noscript><p class="noscript">请启用浏览器 JavaScript 以读取审阅档案。</p></noscript>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# CPU torch is installed separately from the official PyTorch CPU index.
+transformers==4.37.2
+tokenizers==0.15.2
+safetensors==0.8.0
+pypdf==6.20.1
+python-docx==1.2.0

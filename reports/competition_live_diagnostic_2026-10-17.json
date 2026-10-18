@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-10-17T10:37:07.098171+08:00",
+  "scope": "Three exploratory diagnostic sentences; not a formal test set or aggregate quality score",
+  "request": {
+    "text": "这件棉袍采用对襟设计。\n这件棉袍的主人喜欢听音乐。\n这件棉袍衣身宽大、造型简洁，采用套头而非对襟设计。",
+    "source_id": 1
+  },
+  "elapsed_seconds": 0.299,
+  "events": [
+    {
+      "type": "start",
+      "total": 3
+    },
+    {
+      "type": "sentence",
+      "index": 0,
+      "total": 3,
+      "status": "pass",
+      "sentence": "这件棉袍采用对襟设计。"
+    },
+    {
+      "type": "sentence",
+      "index": 1,
+      "total": 3,
+      "status": "pass",
+      "sentence": "这件棉袍的主人喜欢听音乐。"
+    },
+    {
+      "type": "sentence",
+      "index": 2,
+      "total": 3,
+      "status": "pass",
+      "sentence": "这件棉袍衣身宽大、造型简洁,采用套头而非对襟设计。"
+    },
+    {
+      "type": "done",
+      "problems": [],
+      "stats": {
+        "total_sentences": 3,
+        "checked_sentences": 3,
+        "problems_found": 0,
+        "low_relevance_sentences": 0,
+        "noise_sentences": 0
+      }
+    }
+  ]
+}

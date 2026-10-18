@@ -1,4 +1,4 @@
-# ocnli：3k 实验数据
+# OCNLI 3k 历史实验数据
 
 保留首次预处理生成的 UTF-8 JSONL，对应已完成的 `ocnli_3k_20261007_01` 实验；当前加载器使用相邻的 `ocnli_50k/`。
 
@@ -7,4 +7,4 @@
 
 每条包含 `id / claim / evidence / label / source_id / source_locator / group_id`。文件保留英文标签，加载时转换为 `supports=0 / refutes=1 / insufficient=2`。
 
-划分规则见[数据说明](../../../docs/data_preparation.md)，排除明细及哈希见[预处理报告](../../../reports/ocnli_preprocessing.json)。
+划分规则见[数据说明](../../../docs/data_preparation.md)，排除明细及哈希见[预处理报告](../../../reports/ocnli_preprocessing.json)。仅本说明纳入 Git，JSONL 留在本地；当前预处理脚本不会重新生成此 3k 目录。

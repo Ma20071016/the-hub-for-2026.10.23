@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-17",
+  "method": "Read-only SQLite queries, real API serializers and local image decoding. No browser access or model inference.",
+  "library_stats": {
+    "available_sources": 43,
+    "approved_evidence": 99
+  },
+  "visual_sources": [
+    {
+      "source_id": 1,
+      "title": "新疆喀什维吾尔族绿棉袍",
+      "images": 2,
+      "hotspots": 4
+    },
+    {
+      "source_id": 2,
+      "title": "新疆喀什维吾尔族花帽",
+      "images": 2,
+      "hotspots": 5
+    },
+    {
+      "source_id": 4,
+      "title": "新疆维吾尔族艾德莱斯绸头巾",
+      "images": 2,
+      "hotspots": 3
+    },
+    {
+      "source_id": 5,
+      "title": "新疆维吾尔族印花模戳",
+      "images": 1,
+      "hotspots": 2
+    },
+    {
+      "source_id": 7,
+      "title": "新疆喀什牛皮女靴",
+      "images": 2,
+      "hotspots": 4
+    }
+  ],
+  "total_images": 9,
+  "total_hotspots": 18,
+  "evidence_database_unchanged": true,
+  "database_sha256": "35238a213ce428a0e0005dfbc78aeee1cdd7a9cb227cf654004bd39208f0da54",
+  "browser_visual_qa": "not performed; prior local browser URL restriction respected"
+}

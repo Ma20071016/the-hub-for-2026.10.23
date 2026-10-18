@@ -1,0 +1,33 @@
+# IP/HTTP temporary testing. Add domain + TLS before real account use.
+limit_req_zone $binary_remote_addr zone=costume_auth:10m rate=5r/m;
+limit_conn_zone $binary_remote_addr zone=costume_ip:10m;
+limit_conn_zone $server_name zone=costume_total:10m;
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name __PUBLIC_IP__;
+    server_tokens off;
+    client_max_body_size 10m;
+    client_body_timeout 30s;
+    client_header_timeout 15s;
+    keepalive_timeout 15s;
+    send_timeout 60s;
+    limit_conn costume_ip 16;
+    limit_conn costume_total 32;
+    limit_conn_status 429;
+    limit_req_status 429;
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+    access_log /var/log/nginx/costume-access.log;
+    error_log /var/log/nginx/costume-error.log warn;
+
+    location ~ ^/api/auth/(login|register)$ {
+        limit_req zone=costume_auth burst=10 nodelay;
+        include /etc/nginx/snippets/costume-proxy.conf;
+    }
+    location / {
+        include /etc/nginx/snippets/costume-proxy.conf;
+    }
+}

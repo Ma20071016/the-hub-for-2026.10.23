@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "case_id": "import:bift:08382a052b16b1c2",
+      "source_url": "http://biftmuseum.com/collection/info?sid=14671&nationSid=5&colCatSid=2&nationName=维吾尔族",
+      "title": "新疆喀什维吾尔族绿棉袍",
+      "object_name": "新疆喀什维吾尔族绿棉袍",
+      "images": [
+        {
+          "id": "robe-front",
+          "file": "robe-front.jpg",
+          "original_url": "http://101.201.53.226/ZS/2016/03/21/001/001/20160321001001003_TB.jpg",
+          "caption": "正面展开 · MFB002865",
+          "alt": "新疆喀什维吾尔族绿棉袍，正面展开，馆方藏品条目配图",
+          "width": 1600,
+          "height": 1202,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "robe-front-1",
+              "label": "对襟与门襟",
+              "x": 49.5,
+              "y": 57,
+              "evidence_quote": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。"
+            },
+            {
+              "id": "robe-front-2",
+              "label": "袖口装饰",
+              "x": 89.6,
+              "y": 21.5,
+              "evidence_quote": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。"
+            },
+            {
+              "id": "robe-front-3",
+              "label": "蓝绿色衣身",
+              "x": 59,
+              "y": 49,
+              "evidence_quote": "此件棉袍质地为棉质色织布，衣身蓝绿色兼织黄、紫、红色。衣里为木戳印花工艺印制的碎花棉布，里子衣襟贴边为黄绿色艾德莱斯绸面料。"
+            }
+          ]
+        },
+        {
+          "id": "robe-sleeve",
+          "file": "robe-sleeve.jpg",
+          "original_url": "http://101.201.53.226/XJ/2016/03/21/001/001/20160321001001015_TB.jpg",
+          "caption": "衣袖细节 · MFB002865",
+          "alt": "新疆喀什维吾尔族绿棉袍，衣袖细节，馆方藏品条目配图",
+          "width": 1600,
+          "height": 1202,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "robe-sleeve-1",
+              "label": "袖口窄线条",
+              "x": 94.2,
+              "y": 28,
+              "evidence_quote": "衣身宽大、造型简洁，对襟，两侧缝开短衩，衣身可见明显绗缝线迹，门襟处由于线迹紧密而出轻微褶皱。袖口、门襟、底摆均装饰有黄、白、黑色毛线编结的窄线条装饰。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "import:bift:7ba9c89ca1dbdeb8",
+      "source_url": "http://biftmuseum.com/collection/info?sid=3000&nationSid=5&colCatSid=4&nationName=维吾尔族",
+      "title": "新疆喀什维吾尔族花帽",
+      "object_name": "新疆喀什维吾尔族花帽",
+      "images": [
+        {
+          "id": "cap-top",
+          "file": "cap-top.jpg",
+          "original_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001049_TB.jpg",
+          "caption": "帽面纹样 · MFB007301",
+          "alt": "新疆喀什维吾尔族花帽，帽面纹样，馆方藏品条目配图",
+          "width": 1507,
+          "height": 1600,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "cap-top-1",
+              "label": "米字骨架",
+              "x": 52,
+              "y": 49,
+              "evidence_quote": "此件花帽以米字为骨架，花枝叶交错，花纹以枝杆连结或线条分隔，成多个正反三角、菱形格局，帽面图案似地毯排列，也称奇曼塔什干朵帕。"
+            },
+            {
+              "id": "cap-top-2",
+              "label": "植物枝叶纹饰",
+              "x": 71,
+              "y": 34,
+              "evidence_quote": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。"
+            },
+            {
+              "id": "cap-top-3",
+              "label": "黄色网状底纹",
+              "x": 38,
+              "y": 64,
+              "evidence_quote": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。"
+            }
+          ]
+        },
+        {
+          "id": "cap-side",
+          "file": "cap-side.jpg",
+          "original_url": "http://101.201.53.226/DJD/2015/11/02/001/001/20151102001001002_TB.jpg",
+          "caption": "帽身与帽檐 · MFB007301",
+          "alt": "新疆喀什维吾尔族花帽，帽身与帽檐，馆方藏品条目配图",
+          "width": 1600,
+          "height": 1230,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "cap-side-1",
+              "label": "黑色绒布边",
+              "x": 46,
+              "y": 93,
+              "evidence_quote": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。"
+            },
+            {
+              "id": "cap-side-2",
+              "label": "分区装饰线",
+              "x": 50,
+              "y": 48,
+              "evidence_quote": "此件花帽分为四瓣，以手工平绣纹样装饰，装饰繁盛，底纹为黄色几何网状结构，帽身有红褐色装饰线分成菱形或三角形区域，各区域内填充有黑色植物枝叶纹饰，帽檐镶有黑色绒布边。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "import:bift:a14632b9ad5f86c7",
+      "source_url": "http://biftmuseum.com/collection/info?sid=2990&nationSid=5&colCatSid=6&nationName=维吾尔族",
+      "title": "新疆维吾尔族艾德莱斯绸头巾",
+      "object_name": "新疆维吾尔族艾德莱斯绸头巾",
+      "images": [
+        {
+          "id": "ikat-scarf",
+          "file": "ikat-scarf.jpg",
+          "original_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001060_TB.jpg",
+          "caption": "头巾展开 · MFB007315",
+          "alt": "新疆维吾尔族艾德莱斯绸头巾，头巾展开，馆方藏品条目配图",
+          "width": 1600,
+          "height": 342,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "ikat-scarf-1",
+              "label": "条状重复排列",
+              "x": 35,
+              "y": 51,
+              "evidence_quote": "纹样有带把的木梳纹、石榴纹、龛座纹，成条状有规则地重复排列，形成一种有间隔的多色组合彩条式样、呈现出跳荡韵律，宛如熊熊燃烧的火焰。"
+            },
+            {
+              "id": "ikat-scarf-2",
+              "label": "整体配色",
+              "x": 62,
+              "y": 48,
+              "evidence_quote": "此件艾德莱斯绸收集于新疆库尔勒地区，整体色调为红色，点缀有象征维吾尔族生存环境的黄色，以及伊斯兰教中崇尚的绿色，以及象征着蓝天的蓝色。"
+            }
+          ]
+        },
+        {
+          "id": "ikat-detail",
+          "file": "ikat-detail.jpg",
+          "original_url": "http://101.201.53.226/XJ/2015/10/12/001/001/20151012001001044_TB.jpg",
+          "caption": "纹样细节 · MFB007315",
+          "alt": "新疆维吾尔族艾德莱斯绸头巾，纹样细节，馆方藏品条目配图",
+          "width": 1600,
+          "height": 810,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "ikat-detail-1",
+              "label": "重复纹样局部",
+              "x": 60,
+              "y": 47,
+              "evidence_quote": "纹样有带把的木梳纹、石榴纹、龛座纹，成条状有规则地重复排列，形成一种有间隔的多色组合彩条式样、呈现出跳荡韵律，宛如熊熊燃烧的火焰。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "import:bift:ae4b98da910e9975",
+      "source_url": "http://biftmuseum.com/collection/info?sid=2992&nationSid=5&colCatSid=8&nationName=维吾尔族",
+      "title": "新疆维吾尔族印花模戳",
+      "object_name": "新疆维吾尔族印花模戳",
+      "images": [
+        {
+          "id": "print-block",
+          "file": "print-block.jpg",
+          "original_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001055_TB.jpg",
+          "caption": "模戳刻纹面 · MFB007903",
+          "alt": "新疆维吾尔族印花模戳，模戳刻纹面，馆方藏品条目配图",
+          "width": 1600,
+          "height": 1363,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "print-block-1",
+              "label": "模戳刻纹",
+              "x": 52,
+              "y": 51,
+              "evidence_quote": "将纹样覆画于梨木或核桃木上，以木模立槎制纹，雕刻成凹凸分明的图案，然后用此模戳蘸黑色染液(面汤浸泡铁锈着液)印出黑色纹样。一个模戳就是一个单独纹样。"
+            },
+            {
+              "id": "print-block-2",
+              "label": "印花用模戳",
+              "x": 24,
+              "y": 26,
+              "evidence_quote": "此件模戳为印制新疆印花布的专用器具。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "import:bift:c1d29fe49bd76655",
+      "source_url": "http://biftmuseum.com/collection/info?sid=2993&nationSid=5&colCatSid=3&nationName=维吾尔族",
+      "title": "新疆喀什牛皮女靴",
+      "object_name": "新疆喀什牛皮女靴",
+      "images": [
+        {
+          "id": "leather-boots",
+          "file": "leather-boots.jpg",
+          "original_url": "http://101.201.53.226/ZS/2015/10/12/001/001/20151012001001053_TB.jpg",
+          "caption": "女靴整体 · MFB006819",
+          "alt": "新疆喀什牛皮女靴，女靴整体，馆方藏品条目配图",
+          "width": 1298,
+          "height": 1600,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "leather-boots-1",
+              "label": "圆头",
+              "x": 31,
+              "y": 89,
+              "evidence_quote": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。"
+            },
+            {
+              "id": "leather-boots-2",
+              "label": "靴面与靴筒接缝",
+              "x": 62,
+              "y": 76,
+              "evidence_quote": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。"
+            },
+            {
+              "id": "leather-boots-3",
+              "label": "方跟",
+              "x": 83,
+              "y": 91,
+              "evidence_quote": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。"
+            }
+          ]
+        },
+        {
+          "id": "boots-sole",
+          "file": "boots-sole.jpg",
+          "original_url": "http://101.201.53.226/DJD/2015/10/12/001/001/20151012001001011_TB.jpg",
+          "caption": "鞋底视角 · MFB006819",
+          "alt": "新疆喀什牛皮女靴，鞋底视角，馆方藏品条目配图",
+          "width": 1600,
+          "height": 1207,
+          "credit": "图片来源：北京服装学院民族服饰博物馆",
+          "hotspots": [
+            {
+              "id": "boots-sole-1",
+              "label": "后跟区域",
+              "x": 83,
+              "y": 36,
+              "evidence_quote": "此件维族女靴收购于新疆喀什，圆头方跟，靴面与靴筒有一明显接缝，两部分呈现出不同光泽；整体造型轻巧、工艺精致、皮质细软，从中可以窥出维吾尔族制靴工艺的水平之高。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

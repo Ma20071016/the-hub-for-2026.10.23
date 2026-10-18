@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="阅读传统服饰资料原文、对象与已审核证据，核对出处后进入文稿审阅。"/>
+  <title>资料详情 · 传统服饰说明核验</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="stylesheet" href="./library.css"/>
+  <link rel="stylesheet" href="./account.css"/>
+  <script src="./account.js" defer></script>
+  <script src="./source-visuals.js" defer></script>
+  <script src="./source.js" defer></script>
+</head>
+<body class="museum-page museum-source">
+<a class="skip-link" href="#source-title">跳到资料详情</a>
+<header class="site-header"><div class="header-inner page-container">
+  <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页"><span class="brand-mark" aria-hidden="true">衣</span><span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span></a>
+    <div class="header-actions"><nav class="site-nav" aria-label="主导航"><a href="./index.html">审阅工作台</a><a href="./library.html" aria-current="page">资料馆</a><a href="./archive.html">审阅档案</a><a href="./guide.html">使用指南</a></nav><div class="account-controls" aria-label="账号"></div></div>
+</div></header>
+<main class="page-container source-page">
+  <a id="source-back" class="source-back" href="./library.html">← 返回资料馆</a>
+  <div id="source-feedback" class="source-feedback"><p id="source-status" role="status" aria-live="polite">正在读取资料与证据…</p><button id="source-retry" type="button" class="secondary-button" hidden>重新读取</button></div>
+  <article id="source-content" hidden aria-busy="true">
+    <header class="source-heading"><p class="library-eyebrow" id="source-reference">资料详情</p><h1 id="source-title" tabindex="-1"></h1><div id="source-metadata" class="source-metadata"></div></header>
+    <section class="source-visual-section museum-object-room" aria-labelledby="source-visual-title"><div class="source-section-heading"><div><span class="section-number" aria-hidden="true">01 /</span><h2 id="source-visual-title">近观藏品</h2></div><span id="source-visual-kind">馆藏影像 · 图文对读</span></div><p id="source-visual-intro" class="source-section-copy">选择图片上的编号，细看一处纹样，再读它在资料原文中的描述。</p><div id="source-visuals"></div><p id="source-visual-note" class="museum-annotation-note">编号是辅助阅读的导览标注，图片与文字均可回溯至来源。</p></section>
+    <div class="source-layout">
+      <aside class="source-sidebar" aria-label="对象与使用范围">
+        <section class="source-index"><p class="library-eyebrow">本资料涉及</p><h2>服饰对象</h2><ul id="source-objects" class="source-objects"></ul><div id="source-numbers" class="source-numbers" hidden></div></section>
+        <section class="source-use"><h2>带着依据去审阅</h2><p>将本份资料设为备用资料，核对你的讲解词、展签或服饰说明。审阅先在全部资料中查找已审核证据，未找到时再使用本份资料。</p><a id="source-review" class="primary-button" href="./index.html">设为备用资料并去审阅 <span aria-hidden="true">↗</span></a></section>
+        <section class="source-scope"><h2>适用范围</h2><p>证据描述的是本资料中的具体对象与报道时期，不能直接推广为整类服饰的共同特征。</p><p>未被资料记载的内容，需要另找依据。</p></section>
+      </aside>
+      <div class="source-reading">
+        <section aria-labelledby="source-evidence-title"><div class="source-section-heading"><div><span class="section-number" aria-hidden="true">02 /</span><h2 id="source-evidence-title">可用证据</h2></div><span id="source-evidence-count"></span></div><p class="source-section-copy">已审核的原文摘录。可定位的证据，可在下方全文中核对上下文。</p><div id="source-evidence"></div></section>
+        <section class="source-original-section" aria-labelledby="original-title"><div class="source-section-heading"><div><span class="section-number" aria-hidden="true">03 /</span><h2 id="original-title">资料原文</h2></div><span>保留上下文</span></div><p class="source-section-copy">这里展示已采集的原文，不代表其中每句话都已审核或可作为核验依据。</p><details id="source-original-details" class="source-original-details"><summary>展开阅读原文</summary><p id="source-locator-status" class="source-locator-status" role="status" aria-live="polite"></p><div id="source-original" class="source-original" tabindex="-1"></div></details></section>
+      </div>
+    </div>
+  </article>
+</main>
+<footer><div class="footer-inner page-container"><span>传统服饰说明核验</span><span>以资料为依据，让文化表达更准确。</span></div></footer>
+<noscript><p class="noscript">请启用浏览器 JavaScript 以读取资料。</p></noscript>
+</body>
+</html>

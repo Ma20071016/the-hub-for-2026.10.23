@@ -3,135 +3,287 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="上传传统服饰说明文稿，逐句对照已审核资料，找出与资料相矛盾的说法。"/>
+    <meta name="description" content="上传传统服饰说明文稿，逐句对照已审核资料，查看模型判定、证据原文与未覆盖范围。"/>
     <title>传统服饰说明核验</title>
     <link rel="stylesheet" href="./style.css"/>
+    <link rel="stylesheet" href="./source-picker.css"/>
+    <link rel="stylesheet" href="./account.css"/>
+    <script src="./account.js" defer></script>
+    <script src="./sentence-map.js" defer></script>
+    <script src="./draft-store.js" defer></script>
+    <script src="./workspace-drafts.js" defer></script>
+    <script src="./workspace-guide.js" defer></script>
+    <script src="./source-picker.js" defer></script>
     <script src="./app.js" defer></script>
 </head>
-<body>
-<a class="skip-link" href="#input-title">跳到上传区</a>
+<body class="workbench-page">
+<a class="skip-link" href="#choose-document">跳到文稿上传</a>
 
 <header class="site-header">
-    <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页">
-        <span class="brand-mark" aria-hidden="true">衣</span>
-        <span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span>
-    </a>
-    <span class="header-readout">
-        <span id="service-dot" class="status-dot" aria-hidden="true"></span>
-        <span id="service-text">正在连接资料库…</span>
-    </span>
+    <div class="header-inner page-container">
+        <a class="brand" href="./index.html" aria-label="传统服饰说明核验首页">
+            <span class="brand-mark" aria-hidden="true">衣</span>
+            <span>传统服饰说明核验<small>服饰文化 · 有据可查</small></span>
+        </a>
+        <div class="header-actions">
+            <nav class="site-nav" aria-label="主导航">
+                <a href="./index.html" aria-current="page">审阅工作台</a>
+                <a href="./library.html">资料馆</a>
+                <a href="./archive.html">审阅档案</a>
+                <a href="./guide.html">使用指南</a>
+            </nav>
+            <div class="account-controls" aria-label="账号"></div>
+            <span class="header-readout">
+                <span id="service-dot" class="status-dot pulse" aria-hidden="true"></span>
+                <span id="service-text">正在连接资料库…</span>
+            </span>
+        </div>
+    </div>
 </header>
 
-<main>
+<main class="page-container">
     <section class="intro" aria-labelledby="page-title">
-        <div>
-            <h1 id="page-title">让服饰说明，有据可循。</h1>
-            <p class="intro-copy">
-                上传一篇传统服饰说明文稿。系统会逐句对照已审核的资料原文，
-                只列出与资料相矛盾的说法，并把资料原文一并呈现。
-            </p>
+        <div class="intro-text">
+            <h1 id="page-title">凡有出入，必有出处。</h1>
+            <p class="intro-copy">上传服饰说明文稿，对读资料原文，完成修改、复核与留档。</p>
         </div>
         <ol class="steps" aria-label="核验流程">
             <li><span>壹</span>上传文稿</li>
-            <li><span>贰</span>选择资料</li>
-            <li><span>叁</span>查看矛盾</li>
+            <li><span>贰</span>对读复核</li>
+            <li><span>叁</span>留档交付</li>
         </ol>
     </section>
 
-    <div class="notice">
-        <span aria-hidden="true">i</span>
-        <p>系统逐句比对已审核的资料原文，只列出与资料相矛盾的说法。请结合资料原文自行判断。</p>
-    </div>
-
     <div class="workspace">
-        <section class="panel" aria-labelledby="input-title">
-            <div class="panel-heading">
-                <h2 id="input-title">整篇审阅</h2>
-                <button id="clear-button" class="text-button" type="button">清空内容</button>
-            </div>
-            <p class="panel-description">
-                上传文稿并选择对应资料，系统会逐句比对，只列出与资料相矛盾的说法。
-            </p>
-
-            <div class="field">
-                <div class="field-heading">
-                    <label for="document-file">
-                        <span class="step-num" aria-hidden="true">壹</span>上传文稿
-                    </label>
+        <section class="panel reading-panel" aria-label="文稿与审阅结果">
+            <div class="reading-toolbar">
+                <div class="reading-tabs" role="tablist" aria-label="查看文稿或审阅结果">
+                    <button id="preview-tab" class="reading-tab" type="button" role="tab" aria-selected="true" aria-controls="preview-view" tabindex="0">文稿准备</button>
+                    <button id="results-tab" class="reading-tab" type="button" role="tab" aria-selected="false" aria-controls="results-view" tabindex="-1">审阅结果</button>
                 </div>
-
-                <input
-                        id="document-file"
-                        type="file"
-                        accept=".pdf,.docx"
-                        aria-describedby="document-help document-status"
-                />
-
-                <p id="document-help" class="field-help">
-                    支持文字型 PDF 和 Word .docx，最大 10 MB。
-                    扫描件或图片需先自行 OCR。
-                </p>
-
-                <p id="document-status" class="field-help" role="status"></p>
+                <span id="workspace-status" class="workspace-status" role="status">准备新文稿</span>
             </div>
 
-            <div class="field source-field">
-                <label for="source-select">
-                    <span class="step-num" aria-hidden="true">贰</span>选择对应资料
-                    <span class="required">*</span>
-                </label>
-                <select id="source-select" name="source_id" aria-describedby="source-help" disabled>
-                    <option value="">请选择本次核验的资料</option>
-                </select>
-                <p id="source-help" class="field-help" role="status">正在读取可用资料…</p>
-            </div>
-
-            <div id="document-preview-box" hidden>
-                <div class="field-heading">
-                    <label for="document-preview">提取文字</label>
-                    <span id="document-count" class="counter"></span>
+            <div class="reading-scroll" role="region" aria-label="文稿与审阅结果内容" tabindex="0">
+                <div id="workflow-notice" class="workflow-notice" hidden>
+                    <p id="workflow-status" role="status"></p>
+                    <button id="retry-history" class="text-button" type="button" hidden>重新打开记录</button>
                 </div>
 
-                <textarea
-                        id="document-preview"
-                        rows="10"
-                        readonly
-                        aria-describedby="document-preview-help"
-                ></textarea>
+                <div id="preview-view" class="reading-view" role="tabpanel" aria-labelledby="preview-tab" tabindex="0">
+                    <p id="guide-example-notice" class="guide-example-notice" hidden>教学示例 · 自拟练习文稿，包含故意设置的疑点。请对照资料原文核对，不将模型输出视作标准答案。</p>
+                    <section id="document-import" class="document-import" aria-label="上传文稿" data-has-document="false">
+                        <div id="preview-empty" class="import-intro">
+                            <svg class="import-icon" viewBox="0 0 64 72" fill="none" aria-hidden="true"><path d="M13 3h25l14 14v50H13z"/><path d="M38 3v15h14M23 29h19M23 37h12M32 58V44m-6 6 6-6 6 6"/></svg>
+                            <p class="import-eyebrow">从一份 Word 文稿开始</p>
+                            <h2>上传文稿，开始有据可循的审阅</h2>
+                            <p class="import-description">自动提取说明文字，保留完整正文供你检查与修改。</p>
+                        </div>
+                        <input id="document-file" type="file" accept=".docx,.pdf" aria-label="上传 Word 或 PDF 文稿" aria-describedby="document-help document-status" hidden/>
+                        <div class="import-actions">
+                            <button id="choose-document" class="primary-button" type="button" aria-describedby="document-help document-status" disabled>选择 Word 文件</button>
+                            <button id="manual-entry" class="text-button" type="button" aria-expanded="false" aria-controls="document-preview-box" disabled>手动输入或粘贴文本</button>
+                        </div>
+                        <p id="document-help" class="field-help">支持 Word .docx 和文字型 PDF · 最大 10 MB</p>
+                        <p class="import-format-help">旧版 .doc 请另存为 .docx；扫描件需先转为文字。</p>
+                        <p class="import-format-help">第一次使用？<a href="./guide.html">下载测试 Word，跟着三步试一遍 →</a></p>
+                        <p id="document-status" class="document-status" role="status" aria-live="polite"></p>
+                    </section>
 
-                <p id="document-preview-help" class="field-help">
-                    审阅会逐句比对：句子提到服饰名称时，自动匹配对应的资料；
-                    没有提到名称的句子，使用上方选定的资料。
-                </p>
+                    <section id="sentence-focus" class="sentence-focus" aria-labelledby="sentence-focus-title" hidden>
+                        <div class="sentence-focus-heading">
+                            <div>
+                                <p class="sentence-focus-eyebrow">对照修改</p>
+                                <h2 id="sentence-focus-title" tabindex="-1">本句修改</h2>
+                            </div>
+                            <span id="sentence-focus-state" class="sentence-edit-state"></span>
+                        </div>
+                        <p id="sentence-focus-message" class="sentence-focus-message" role="status" aria-live="polite"></p>
+                        <div class="sentence-context-box">
+                            <p class="sentence-field-caption">正文中的位置</p>
+                            <div id="sentence-context" class="sentence-context" aria-label="当前句子及前后文"></div>
+                        </div>
+                        <details id="sentence-reference" class="sentence-reference">
+                            <summary>本版判定与证据</summary>
+                            <div class="sentence-reference-content">
+                                <p class="sentence-field-caption">审阅时的原句</p>
+                                <p id="sentence-original" class="sentence-original"></p>
+                                <div id="sentence-evidence" class="sentence-evidence"></div>
+                            </div>
+                        </details>
+                        <div class="sentence-editor-field">
+                            <label for="sentence-editor">修改这一句</label>
+                            <textarea id="sentence-editor" rows="3" maxlength="50000" aria-describedby="sentence-focus-message sentence-edit-help"></textarea>
+                        </div>
+                        <div class="sentence-edit-actions">
+                            <button id="apply-sentence-edit" class="primary-button" type="button">应用到正文</button>
+                            <button id="cancel-sentence-edit" class="text-button" type="button">撤销本次输入</button>
+                            <button id="return-to-result" class="text-button" type="button">返回本句审阅</button>
+                        </div>
+                        <p id="sentence-edit-help" class="sentence-edit-help">应用后只更新当前草稿。完成修改后，请点击「修改后复核」生成新的审阅版本。</p>
+                        <nav id="sentence-navigation" class="sentence-navigation" aria-label="逐句修改导航">
+                            <button id="previous-sentence" class="secondary-button" type="button">← 上一句</button>
+                            <button id="next-sentence" class="secondary-button" type="button">下一句 →</button>
+                        </nav>
+                    </section>
 
-                <div class="form-actions">
-                    <button
-                            id="review-document"
-                            class="primary-button"
-                            type="button"
-                    >
-                        <span id="review-button-label">整篇审阅</span>
-                    </button>
-                </div>
-
-                <div id="review-progress" class="progress-track" hidden><i></i></div>
-
-                <div id="review-result-box" hidden>
-                    <div class="field-heading">
-                        <label>审阅结果</label>
-                        <span id="review-badge" class="counter"></span>
+                    <div id="document-preview-box" hidden>
+                        <div class="field-heading">
+                            <label for="document-preview">文稿正文</label>
+                            <span id="document-count" class="counter"></span>
+                        </div>
+                        <textarea id="document-preview" rows="14" maxlength="50000" placeholder="在这里粘贴或撰写传统服饰说明文字…" aria-describedby="document-preview-help draft-status"></textarea>
+                        <p id="document-preview-help" class="field-help">审阅先从全部资料中查找已审核证据，未找到时再使用所选的备用资料。请按每条参考句标明的出处核对原文。</p>
+                        <div id="draft-state" class="draft-state" hidden>
+                            <p id="draft-status" role="status"></p>
+                            <button id="restore-draft" class="text-button" type="button">恢复本版文稿</button>
+                        </div>
                     </div>
-                    <p id="review-status" class="field-help" role="status"></p>
-                    <div id="review-result"></div>
+                </div>
+
+                <div id="results-view" class="reading-view" role="tabpanel" aria-labelledby="results-tab" tabindex="0" hidden>
+                    <div id="review-empty" class="reading-empty">
+                        <svg class="empty-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 12v28M6 9c8-1 13 1 18 5 5-4 10-6 18-5v27c-8-1-13 0-18 4-5-4-10-5-18-4V9Z"/><path d="m12 17 6 2m-6 5 6 2m12-7 6-2m-6 9 6-2"/></svg>
+                        <h2 id="review-empty-title">审阅结果将在这里呈现</h2>
+                        <p id="review-empty-copy">准备文稿、选好资料后，点击「整篇审阅」。<br/>对读原文后逐句留下人工意见，保存处理并导出报告。</p>
+                    </div>
+                    <div id="review-progress-box" aria-live="polite" hidden>
+                        <div class="scan-head">
+                            <span class="scan-title">正在逐句比对</span>
+                            <span class="scan-counter">已处理 <b id="scan-count">0</b> / <span id="scan-total">0</span></span>
+                        </div>
+                        <ul id="scan-list" class="sent-list"></ul>
+                        <div class="progress-track" role="progressbar" aria-label="逐句比对进度" aria-valuemin="0" aria-valuemax="100"><i id="progress-fill"></i></div>
+                    </div>
+                    <div id="review-result-box" hidden>
+                        <div id="record-heading" class="record-heading" hidden>
+                            <p id="record-meta" class="record-meta"></p>
+                            <p id="stale-result-notice" class="stale-result-notice" hidden>正文或审阅设置已修改。下方仍是本版原文的结果，请点击「修改后复核」生成新版本。</p>
+                        </div>
+                        <div class="field-heading">
+                            <h2 id="result-heading" class="result-title">本次审阅</h2>
+                            <span id="review-badge" class="counter"></span>
+                        </div>
+                        <p id="review-status" class="field-help" role="status"></p>
+                        <div id="decision-workbench" class="decision-workbench" tabindex="-1" hidden>
+                            <div class="decision-workbench-heading">
+                                <h3>人工复核</h3>
+                                <span id="decision-summary" class="counter"></span>
+                            </div>
+                            <p class="field-help">填写后，点击句子下方「保存」，或在此保存全部人工处理。显示「已保存」后，可从审阅档案重新查看；人工意见不改变模型判定。</p>
+                            <div class="record-actions">
+                                <button id="save-decisions" class="secondary-button" type="button" disabled>保存全部人工处理</button>
+                                <button id="export-report" class="secondary-button" type="button">导出本版报告</button>
+                                <button id="discard-decisions" class="text-button" type="button" hidden>撤销未保存处理</button>
+                                <a class="text-button" href="./archive.html">查看审阅档案</a>
+                            </div>
+                            <p id="decision-save-status" class="field-help" role="status"></p>
+                            <p class="report-help">报告包含本版原文、模型证据与已保存的人工意见；下载后可打开并打印为 PDF。</p>
+                        </div>
+                        <div id="review-result"></div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <div class="setup-column" role="region" aria-label="审阅设置与说明" tabindex="0">
+            <section class="panel setup-panel" aria-labelledby="input-title">
+                <div class="panel-heading">
+                    <h2 id="input-title" tabindex="-1">审阅设置</h2>
+                    <button id="clear-button" class="text-button" type="button">清空内容</button>
+                </div>
+
+                <div class="field title-field">
+                    <label for="document-title">文稿标题</label>
+                    <input id="document-title" type="text" maxlength="120" placeholder="上传后自动填写，可修改" autocomplete="off"/>
+                </div>
+
+                <div class="field source-field">
+                    <p id="source-field-label" class="source-field-label"><span class="step-num" aria-hidden="true">贰</span>选择备用资料 <span class="required">*</span></p>
+                    <p id="source-scope-help" class="field-help">审阅时先在全部资料的已审核证据中，按句子提到的服饰名称、别名或馆藏编号查找；未找到时，再使用你选择的资料。参考句可能来自其他资料，每条都会标明出处。</p>
+                    <div id="source-picker-summary" class="source-picker-summary" aria-live="polite" hidden></div>
+                    <button id="source-picker-open" class="source-picker-open" type="button" aria-haspopup="dialog" aria-controls="source-picker-dialog" aria-describedby="source-scope-help source-help" hidden disabled>查找并选择资料 ↗</button>
+                    <div id="source-native-field"><label for="source-select" class="field-help">资料目录</label>
+                    <select id="source-select" name="source_id" aria-describedby="source-scope-help source-help" disabled>
+                        <option value="">请选择全库未匹配时使用的备用资料</option>
+                    </select>
+                    </div>
+                    <p id="source-help" class="field-help" role="status">正在读取可用资料…</p>
+                    <p class="source-browse"><a href="./library.html">浏览资料馆</a><a id="selected-source-link" hidden>查看所选资料详情 ↗</a></p>
+                </div>
+
+                <div class="form-actions">
+                    <button id="review-document" class="primary-button" type="button" aria-describedby="review-hint" disabled>
+                        <span id="review-button-label">整篇审阅</span>
+                    </button>
+                    <p id="review-hint" class="field-help">粘贴或导入文稿，选择资料后开始</p>
+                </div>
+            </section>
+
+            <section class="panel local-draft-panel" aria-labelledby="local-draft-title">
+                <div class="local-draft-heading">
+                    <h2 id="local-draft-title" tabindex="-1">本机草稿</h2>
+                    <span class="local-draft-label">自动暂存</span>
+                </div>
+                <p id="local-draft-status" class="local-draft-status" role="status" aria-live="polite">输入后自动暂存</p>
+                <div id="local-draft-recovery" class="local-draft-recovery" hidden>
+                    <p id="local-draft-detail"></p>
+                    <div class="local-draft-actions">
+                        <button id="recover-local-draft" class="secondary-button" type="button">恢复草稿</button>
+                        <button id="discard-local-draft" class="text-button" type="button">舍弃旧草稿</button>
+                        <button id="export-pending-draft" class="text-button" type="button" hidden>导出上次草稿</button>
+                        <button id="recover-draft-text" class="text-button" type="button" hidden>导出备份并仅恢复文稿</button>
+                    </div>
+                </div>
+                <div class="local-draft-actions">
+                    <button id="retry-local-draft" class="text-button" type="button" hidden>重试暂存</button>
+                    <button id="export-local-draft" class="text-button" type="button" hidden>导出草稿备份</button>
+                </div>
+                <details class="local-draft-help">
+                    <summary>保存位置与范围</summary>
+                    <p class="field-help">按账号保存在当前浏览器中，重新登录同一账号可恢复；清理浏览器数据后会丢失。人工意见仍需点击“保存”才会进入审阅档案。</p>
+                </details>
+            </section>
+
+            <details id="workspace-guide" class="panel workspace-guide">
+                <summary>首次使用与操作提示</summary>
+                <p id="guide-current-step" class="guide-current-step" role="status" aria-live="polite">先准备文稿，再选择全库未匹配时使用的备用资料。</p>
+                <div class="guide-quick-actions"><button id="guide-next" class="text-button" type="button" disabled>查看下一步</button><a href="./guide.html">三步体验指南 ↗</a></div>
+                <div class="guide-sample-entry">
+                    <strong>没有文稿？从教学示例开始</strong>
+                    <p>用三句话练习核对形制、颜色和资料覆盖范围。示例含故意设置的疑点，结果由模型实际运行产生。</p>
+                    <button id="load-guide-example" class="secondary-button" type="button" aria-describedby="guide-example-status" disabled>载入教学示例</button>
+                    <p id="guide-example-status" class="field-help" role="status">资料加载完成后，可在空白工作台载入。</p>
+                </div>
+                <a class="guide-feedback-link" href="./guide.html#trial">完成试用后，记录遇到的问题 →</a>
+            </details>
+            <div class="notice">
+                <span aria-hidden="true">i</span>
+                <p>系统保留每句的模型判定与证据。未发现矛盾不等于内容准确，证据不足与未覆盖的句子需人工补核。</p>
+            </div>
+
+        </div>
+
     </div>
 </main>
 
+<dialog id="source-picker-dialog" class="source-picker-dialog" aria-labelledby="source-picker-title" aria-describedby="source-picker-description">
+    <div class="source-picker-heading"><div><p class="source-picker-eyebrow">找资料 · 确认对象 · 开始审阅</p><h2 id="source-picker-title">选择一份备用资料</h2></div><button id="source-picker-close" type="button" class="source-picker-close" aria-label="关闭资料选择">关闭 <span aria-hidden="true">×</span></button></div>
+    <p id="source-picker-description" class="source-picker-description">先按服饰名称、常用叫法或馆藏编号查找，也可以按类别浏览。选中的资料将在审阅未从全库找到对应证据时使用；审阅结果仍可能引用其他资料。</p>
+    <div class="source-picker-search-field"><label for="source-picker-search">查找资料</label><input id="source-picker-search" type="search" maxlength="200" autocomplete="off" placeholder="如：棉袍、花帽、MFB002865" aria-controls="source-picker-list"/></div>
+    <div id="source-picker-categories" class="source-picker-categories" role="group" aria-label="按服饰与工艺类别浏览"></div>
+    <div class="source-picker-feedback"><p id="source-picker-status" role="status" aria-live="polite"></p><div><button id="source-picker-reset" class="text-button" type="button" hidden>清除筛选</button><button id="source-picker-retry" class="text-button" type="button" hidden>重新读取详情</button></div></div>
+    <p id="source-picker-empty" class="source-picker-empty" hidden>没有找到匹配资料。试试更简短的名称，或清除筛选条件。</p>
+    <ul id="source-picker-list" class="source-picker-list" aria-label="可选择资料"></ul>
+    <div class="source-picker-more"><button id="source-picker-more" class="secondary-button" type="button" hidden>继续查看资料</button></div>
+    <p class="source-picker-scope">“可核对方面”仅表示现有证据涉及的内容。相近名称可能对应不同对象，请结合资料详情确认；搜索和浏览不会改变当前选择。</p>
+</dialog>
+
 <footer>
-    <span>传统服饰说明核验</span>
-    <span>以资料为依据，让文化表达更准确。</span>
+    <div class="footer-inner page-container">
+        <span>传统服饰说明核验</span>
+        <span>以资料为依据，让文化表达更准确。</span>
+    </div>
 </footer>
 <noscript><p class="noscript">请启用浏览器 JavaScript 以使用整篇审阅。</p></noscript>
 </body>
